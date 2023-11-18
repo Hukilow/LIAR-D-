@@ -363,7 +363,7 @@ class Game():
             if HEIGHT - closest_multiple2 > 16:
                 closest_multiple2 += 32 
             WIDTH,HEIGHT = closest_multiple,closest_multiple2
-
+            self.text = f'{self.WIN_WIDTH}x{self.WIN_HEIGHT}' 
             self.screen = pygame.display.set_mode((WIDTH, HEIGHT),pygame.RESIZABLE)
             self.screen_size = (WIDTH,HEIGHT)
         
