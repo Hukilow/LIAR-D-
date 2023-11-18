@@ -1,0 +1,24 @@
+self.right_attacksanimation = [self.game.bossprojectile_spritesheet.get_sprite(0, 0, 210, 64),
+self.game.bossprojectile_spritesheet.get_sprite(210, 0, 210, 64),
+self.game.bossprojectile_spritesheet.get_sprite(420, 0, 210, 64),
+self.game.bossprojectile_spritesheet.get_sprite(630, 0, 210, 64),
+self.game.bossprojectile_spritesheet.get_sprite(840, 0, 210, 64),]
+
+self.down_attacksanimation = [self.game.bossprojectile_spritesheet.get_sprite(0, 64, 64, 210),
+self.game.bossprojectile_spritesheet.get_sprite(64, 64, 64, 210),
+self.game.bossprojectile_spritesheet.get_sprite(128, 64, 64, 210),
+self.game.bossprojectile_spritesheet.get_sprite(192, 64, 64, 210),
+self.game.bossprojectile_spritesheet.get_sprite(256, 64, 64, 210),]
+
+self.left_attacksanimation = [self.game.bossprojectile_spritesheet.get_sprite(0, 274, 210, 64),
+self.game.bossprojectile_spritesheet.get_sprite(210, 274, 210, 64),
+self.game.bossprojectile_spritesheet.get_sprite(420, 274, 210, 64),
+self.game.bossprojectile_spritesheet.get_sprite(630, 274, 210, 64),
+self.game.bossprojectile_spritesheet.get_sprite(840, 274, 210, 64),]
+
+self.up_attacksanimation = [self.game.bossprojectile_spritesheet.get_sprite(0, 338, 64, 210),
+self.game.bossprojectile_spritesheet.get_sprite(64, 338, 64, 210),
+self.game.bossprojectile_spritesheet.get_sprite(128, 338, 64, 210),
+self.game.bossprojectile_spritesheet.get_sprite(192, 338, 64, 210),
+self.game.bossprojectile_spritesheet.get_sprite(256, 338, 64, 210),]
+

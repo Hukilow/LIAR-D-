@@ -1,0 +1,14 @@
+
+MUR = B
+Espace libre = .
+Player = P
+Enemy = E
+Trap = L
+Echelle pour monter = M
+Echelle pour descendre = D
+Coffre = C
+Escalier = N
+Escaliercasse = J
+COFFRE = 1,2,3,4
+Lave solo = Q
+Laves = 1,2,3,4,5,6

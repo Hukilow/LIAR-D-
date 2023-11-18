@@ -1,0 +1,22 @@
+Cahier de charges : JEU LABYRINTHE 2D
+
+    - OBLIGATOIRE 
+    -- CE SERAIT BIEN 
+    --- COMPLIQUE 
+
+    
+    - MENU OPTION
+        -- TAILLE ECRAN
+        -- VOLUME SON
+    - SON
+    - Sauvegarde
+    - LOSE SCREEN
+        -- LORE
+        -- TOTAL DES STATS (ENEMY TUER,COFFRE OUVERT)
+        
+    --Améliorer IA
+    -- Faire glitch animation fight boss
+
+    --- SYSTEME SHOP + PIECES
+
+

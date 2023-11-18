@@ -1,0 +1,32 @@
+        self.right_attacksanimations = [self.game.beetleattacks_spritesheet.get_sprite(0, 0, 64, 32),
+                                    self.game.beetleattacks_spritesheet.get_sprite(64, 0, 64, 32),
+                                    self.game.beetleattacks_spritesheet.get_sprite(128, 0, 64, 32),
+                                    self.game.beetleattacks_spritesheet.get_sprite(192, 0, 64, 32),
+                                    self.game.beetleattacks_spritesheet.get_sprite(256, 0, 64, 32),
+                                    self.game.beetleattacks_spritesheet.get_sprite(320, 0, 64, 32),
+                                    self.game.beetleattacks_spritesheet.get_sprite(384, 0, 64, 32),]
+
+        self.down_attacksanimations = [self.game.beetleattacks_spritesheet.get_sprite(0, 32, 32, 64),
+                                    self.game.beetleattacks_spritesheet.get_sprite(32, 32, 32, 64),
+                                    self.game.beetleattacks_spritesheet.get_sprite(64, 32, 32, 64),
+                                    self.game.beetleattacks_spritesheet.get_sprite(96, 32, 32, 64),
+                                    self.game.beetleattacks_spritesheet.get_sprite(128, 32, 32, 64),
+                                    self.game.beetleattacks_spritesheet.get_sprite(160, 32, 32, 64),
+                                    self.game.beetleattacks_spritesheet.get_sprite(192, 32, 32, 64),]
+
+        self.left_attacksanimations = [self.game.beetleattacks_spritesheet.get_sprite(0, 96, 64, 32),
+                                    self.game.beetleattacks_spritesheet.get_sprite(64, 96, 64, 32),
+                                    self.game.beetleattacks_spritesheet.get_sprite(128, 96, 64, 32),
+                                    self.game.beetleattacks_spritesheet.get_sprite(192, 96, 64, 32),
+                                    self.game.beetleattacks_spritesheet.get_sprite(256, 96, 64, 32),
+                                    self.game.beetleattacks_spritesheet.get_sprite(320, 96, 64, 32),
+                                    self.game.beetleattacks_spritesheet.get_sprite(384, 96, 64, 32),]
+
+
+        self.up_attacksanimations = [self.game.beetleattacks_spritesheet.get_sprite(0, 128, 32, 64),
+                                    self.game.beetleattacks_spritesheet.get_sprite(32, 128, 32, 64),
+                                    self.game.beetleattacks_spritesheet.get_sprite(64, 128, 32, 64),
+                                    self.game.beetleattacks_spritesheet.get_sprite(96, 128, 32, 64),
+                                    self.game.beetleattacks_spritesheet.get_sprite(128, 128, 32, 64),
+                                    self.game.beetleattacks_spritesheet.get_sprite(160, 128, 32, 64),
+                                    self.game.beetleattacks_spritesheet.get_sprite(192, 128, 32, 64),]
