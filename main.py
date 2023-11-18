@@ -829,7 +829,7 @@ class Game():
 
     def win_screen(self):
         if self.win == True:
-            text = self.font.render('You won', True, WHITE)
+            text = self.font.render('You won lol', True, WHITE)
             text_rect = text.get_rect(center=(self.WIN_WIDTH/2, 100))
 
             hp_multiplicateur_button = Button(50,self.WIN_HEIGHT/2, 300,50, WHITE, BLUE, 'HP decrease for Player', 16)
