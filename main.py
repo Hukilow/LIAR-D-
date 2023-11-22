@@ -7,6 +7,8 @@ import pickle
 from PIL import Image
 
 
+
+
 class Game():
     def __init__(self):
         pygame.init()
