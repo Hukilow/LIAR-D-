@@ -110,15 +110,15 @@ class AttackEnemy(pygame.sprite.Sprite):
             DROPCHEST = [Boots_leather,Boots_iron,Potion]
             return random.choice(DROPCHEST)
         elif DROPCHEST == "DROPCHEST2": # couloir peu commun
-            DROPCHEST = [Epee02,Helmet_chainmail,Chest_chainmail,Boots_chainmail,Pants_chainmail,Potion,Scythe]
+            DROPCHEST = [Helmet_chainmail,Chest_chainmail,Boots_chainmail,Pants_chainmail,Potion,Scythe]
             return random.choice(DROPCHEST)
         elif DROPCHEST == "DROPCHEST3": # couloir rare
-            DROPCHEST = [Epee03,Boots_iron,Chest_iron,Helmet_iron,Pants_iron,Scythe]
+            DROPCHEST = [Boots_iron,Chest_iron,Helmet_iron,Pants_iron,Scythe]
             return random.choice(DROPCHEST)
         elif DROPCHEST == "DROPCHEST4": # couloir epic
             DROPCHEST = [SnakeSword]
             return random.choice(DROPCHEST)
-        elif DROPCHEST == "DROPCHEST5": # salle rare
+        elif DROPCHEST == "DROPCHEST5": # salle rares
             DROPCHEST = [Necklace_copper,Ring_copper]
             return random.choice(DROPCHEST)
         elif DROPCHEST == "DROPCHEST6": # couloir légendaire
