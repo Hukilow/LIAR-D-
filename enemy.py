@@ -3,7 +3,6 @@ import math
 from HUD import *
 from Item import *
 from Blocks import *
-
 class AttackEnemy(pygame.sprite.Sprite):
     def __init__(self, game ,x ,y,width, height, number, facing,right_animations,left_animations,up_animations,down_animations):
         self.game = game
