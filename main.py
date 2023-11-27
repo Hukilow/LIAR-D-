@@ -103,6 +103,7 @@ class Game():
         self.boss_spritesheet = Spritesheet('img/Enemy/Mage/Mage-Sheet.png')
         self.bosscircle_spritesheet = Spritesheet('img/Attacks/bossbluecircle.png')
         self.bossprojectile_spritesheet = Spritesheet('img/Attacks/bossprojectile.png')
+        self.bloodslash_spritesheet = Spritesheet('img/Attacks/crimsonattacks.png')
 
     def createTilemap(self,tilemap):
         self.player = Player(self, 0, 0)

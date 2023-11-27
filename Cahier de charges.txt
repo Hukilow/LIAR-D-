@@ -6,10 +6,8 @@ Cahier de charges : JEU LABYRINTHE 2D
 
     
     - MENU OPTION
-        -- TAILLE ECRAN
         -- VOLUME SON
     - SON
-    - Sauvegarde
     - LOSE SCREEN
         -- LORE
         -- TOTAL DES STATS (ENEMY TUER,COFFRE OUVERT)

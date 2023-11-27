@@ -2837,3 +2837,194 @@ class Flamestrike_Mallet(pygame.sprite.Sprite):
                     self.game.player.afficheequipped.trueorfalse = False
                     self.kill()
                     self.game.player.lasttaketimer = pygame.time.get_ticks() 
+
+
+
+class Crimson_Blade(pygame.sprite.Sprite):
+    nom = "Crimson Blade"
+    attribut = "Puissance : 6"
+    IDimage = "self.weapon3_spritesheet.get_sprite(116,102,13,31)"
+    IDattack = ("self.bloodslash_spritesheet.get_sprite(0, 24, 24, 64)",
+"self.bloodslash_spritesheet.get_sprite(24, 24, 24, 64)",
+"self.bloodslash_spritesheet.get_sprite(48, 24, 24, 64)",
+"self.bloodslash_spritesheet.get_sprite(72, 24, 24, 64)",
+"self.bloodslash_spritesheet.get_sprite(96, 24, 24, 64)",
+"self.bloodslash_spritesheet.get_sprite(120, 24, 24, 64)",
+"self.bloodslash_spritesheet.get_sprite(144, 24, 24, 64)",
+"self.bloodslash_spritesheet.get_sprite(168, 24, 24, 64)",
+"self.bloodslash_spritesheet.get_sprite(192, 24, 24, 64)",
+"self.bloodslash_spritesheet.get_sprite(216, 24, 24, 64)",
+"self.bloodslash_spritesheet.get_sprite(0, 88, 64, 24)",
+"self.bloodslash_spritesheet.get_sprite(64, 88, 64, 24)",
+"self.bloodslash_spritesheet.get_sprite(128, 88, 64, 24)",
+"self.bloodslash_spritesheet.get_sprite(192, 88, 64, 24)",
+"self.bloodslash_spritesheet.get_sprite(256, 88, 64, 24)",
+"self.bloodslash_spritesheet.get_sprite(320, 88, 64, 24)",
+"self.bloodslash_spritesheet.get_sprite(384, 88, 64, 24)",
+"self.bloodslash_spritesheet.get_sprite(448, 88, 64, 24)",
+"self.bloodslash_spritesheet.get_sprite(512, 88, 64, 24)",
+"self.bloodslash_spritesheet.get_sprite(576, 88, 64, 24)",
+"self.bloodslash_spritesheet.get_sprite(0, 112, 24, 64)",
+"self.bloodslash_spritesheet.get_sprite(24, 112, 24, 64)",
+"self.bloodslash_spritesheet.get_sprite(48, 112, 24, 64)",
+"self.bloodslash_spritesheet.get_sprite(72, 112, 24, 64)",
+"self.bloodslash_spritesheet.get_sprite(96, 112, 24, 64)",
+"self.bloodslash_spritesheet.get_sprite(120, 112, 24, 64)",
+"self.bloodslash_spritesheet.get_sprite(144, 112, 24, 64)",
+"self.bloodslash_spritesheet.get_sprite(168, 112, 24, 64)",
+"self.bloodslash_spritesheet.get_sprite(192, 112, 24, 64)",
+"self.bloodslash_spritesheet.get_sprite(216, 112, 24, 64)",
+"self.bloodslash_spritesheet.get_sprite(0, 0, 64, 24)",
+"self.bloodslash_spritesheet.get_sprite(64, 0, 64, 24)",
+"self.bloodslash_spritesheet.get_sprite(128, 0, 64, 24)",
+"self.bloodslash_spritesheet.get_sprite(192, 0, 64, 24)",
+"self.bloodslash_spritesheet.get_sprite(256, 0, 64, 24)",
+"self.bloodslash_spritesheet.get_sprite(320, 0, 64, 24)",
+"self.bloodslash_spritesheet.get_sprite(384, 0, 64, 24)",
+"self.bloodslash_spritesheet.get_sprite(448, 0, 64, 24)",
+"self.bloodslash_spritesheet.get_sprite(512, 0, 64, 24)",
+"self.bloodslash_spritesheet.get_sprite(576, 0, 64, 24)",)
+    IDpos = (
+        "self.player.rect.x - 60",
+        "self.player.rect.y - 20",
+        "self.player.rect.x - 15",
+        "self.player.rect.y + 55",
+        "self.player.rect.x + 60",
+        "self.player.rect.y - 20",
+        "self.player.rect.x - 15",
+        "self.player.rect.y - 55",
+    )
+    
+    def __init__(self,game, x, y):
+
+        self.game = game 
+        self._layer = ITEM_LAYER
+
+        self.groups = self.game.all_sprites, self.game.item
+        pygame.sprite.Sprite.__init__(self, self.groups)
+
+        self.ID = Crimson_Blade
+        self.image = self.game.weapon3_spritesheet.get_sprite(116,102,13,31)
+
+        self.x = x
+        self.y = y
+        self.x_change = 0
+        self.y_change = 0
+
+        self.puissance = 8
+
+        self.rect = self.image.get_rect() 
+        self.rect.x = self.x
+        self.rect.y = self.y
+        self.pos = (x,y)
+
+        self.right_attacksanimation = [self.game.bloodslash_spritesheet.get_sprite(0, 0, 64, 24),
+self.game.bloodslash_spritesheet.get_sprite(64, 0, 64, 24),
+self.game.bloodslash_spritesheet.get_sprite(128, 0, 64, 24),
+self.game.bloodslash_spritesheet.get_sprite(192, 0, 64, 24),
+self.game.bloodslash_spritesheet.get_sprite(256, 0, 64, 24),
+self.game.bloodslash_spritesheet.get_sprite(320, 0, 64, 24),
+self.game.bloodslash_spritesheet.get_sprite(384, 0, 64, 24),
+self.game.bloodslash_spritesheet.get_sprite(448, 0, 64, 24),
+self.game.bloodslash_spritesheet.get_sprite(512, 0, 64, 24),
+self.game.bloodslash_spritesheet.get_sprite(576, 0, 64, 24),]
+
+        self.down_attacksanimation = [self.game.bloodslash_spritesheet.get_sprite(0, 24, 24, 64),
+self.game.bloodslash_spritesheet.get_sprite(24, 24, 24, 64),
+self.game.bloodslash_spritesheet.get_sprite(48, 24, 24, 64),
+self.game.bloodslash_spritesheet.get_sprite(72, 24, 24, 64),
+self.game.bloodslash_spritesheet.get_sprite(96, 24, 24, 64),
+self.game.bloodslash_spritesheet.get_sprite(120, 24, 24, 64),
+self.game.bloodslash_spritesheet.get_sprite(144, 24, 24, 64),
+self.game.bloodslash_spritesheet.get_sprite(168, 24, 24, 64),
+self.game.bloodslash_spritesheet.get_sprite(192, 24, 24, 64),
+self.game.bloodslash_spritesheet.get_sprite(216, 24, 24, 64),]
+
+        self.left_attacksanimation = [self.game.bloodslash_spritesheet.get_sprite(0, 88, 64, 24),
+self.game.bloodslash_spritesheet.get_sprite(64, 88, 64, 24),
+self.game.bloodslash_spritesheet.get_sprite(128, 88, 64, 24),
+self.game.bloodslash_spritesheet.get_sprite(192, 88, 64, 24),
+self.game.bloodslash_spritesheet.get_sprite(256, 88, 64, 24),
+self.game.bloodslash_spritesheet.get_sprite(320, 88, 64, 24),
+self.game.bloodslash_spritesheet.get_sprite(384, 88, 64, 24),
+self.game.bloodslash_spritesheet.get_sprite(448, 88, 64, 24),
+self.game.bloodslash_spritesheet.get_sprite(512, 88, 64, 24),
+self.game.bloodslash_spritesheet.get_sprite(576, 88, 64, 24),]
+
+        self.up_attacksanimation = [self.game.bloodslash_spritesheet.get_sprite(0, 112, 24, 64),
+self.game.bloodslash_spritesheet.get_sprite(24, 112, 24, 64),
+self.game.bloodslash_spritesheet.get_sprite(48, 112, 24, 64),
+self.game.bloodslash_spritesheet.get_sprite(72, 112, 24, 64),
+self.game.bloodslash_spritesheet.get_sprite(96, 112, 24, 64),
+self.game.bloodslash_spritesheet.get_sprite(120, 112, 24, 64),
+self.game.bloodslash_spritesheet.get_sprite(144, 112, 24, 64),
+self.game.bloodslash_spritesheet.get_sprite(168, 112, 24, 64),
+self.game.bloodslash_spritesheet.get_sprite(192, 112, 24, 64),
+self.game.bloodslash_spritesheet.get_sprite(216, 112, 24, 64),]
+
+
+        self.scythe_x_left = self.game.player.rect.x - 60
+        self.scythe_y_left = self.game.player.rect.y - 20
+        self.scythe_x_down = self.game.player.rect.x - 15
+        self.scythe_y_down = self.game.player.rect.y + 55
+        self.scythe_x_right = self.game.player.rect.x + 60
+        self.scythe_y_right = self.game.player.rect.y - 20
+        self.scythe_x_up = self.game.player.rect.x - 15
+        self.scythe_y_up = self.game.player.rect.y - 55
+        self.animation_number = 10
+
+
+    def update(self):
+        self.game.screen.blit(self.image,self.pos)
+        self.collide()
+
+        self.rect.x += self.x_change
+        self.rect.y += self.y_change
+
+        self.x_change = 0
+        self.y_change = 0
+
+
+    def collide(self):
+            hits = pygame.sprite.spritecollide(self, self.game.playerhitbox, False)
+            keys = pygame.key.get_pressed()
+            if hits:
+                self.game.player.afficheitem.trueorfalse = True
+                self.game.player.afficheitem.nom = self.nom
+                self.game.player.afficheitem.attribut1 = self.attribut
+            if (hits) and (self.game.player.epee.ID != None):
+                self.game.player.afficheequipped.trueorfalse = True
+                self.game.player.afficheequipped.nom = self.game.player.epee.ID.nom
+                self.game.player.afficheequipped.attribut1 = self.game.player.epee.ID.attribut
+            if not hits:
+                self.game.player.afficheitem.trueorfalse = False
+                self.game.player.afficheequipped.trueorfalse = False
+
+
+            if hits and keys[pygame.K_e]:
+                if self.game.player.take_timer() == False:
+                    if self.game.player.epee.ID != None:
+                        epee_instance = self.game.player.epee.ID(self.game,self.game.player.rect.x,self.game.player.rect.y)
+                        self.game.player.puissance -= epee_instance.puissance
+                    self.game.player.puissance += self.puissance
+                    self.game.player.epee.ID = Crimson_Blade
+                    self.game.player.widthattack = 64
+                    self.game.player.heightattack = 24
+                    self.game.player.epee.image = self.image
+                    self.game.player.rightattack_animations = self.down_attacksanimation
+                    self.game.player.downattack_animations = self.left_attacksanimation
+                    self.game.player.leftattack_animations = self.up_attacksanimation
+                    self.game.player.upattack_animations = self.right_attacksanimation
+                    self.game.player.arme_x_up = self.scythe_x_up
+                    self.game.player.arme_y_up = self.scythe_y_up
+                    self.game.player.arme_x_down = self.scythe_x_down
+                    self.game.player.arme_y_down = self.scythe_y_down
+                    self.game.player.arme_x_left = self.scythe_x_left
+                    self.game.player.arme_y_left = self.scythe_y_left
+                    self.game.player.arme_x_right = self.scythe_x_right
+                    self.game.player.arme_y_right = self.scythe_y_right
+                    self.game.player.animation_number = self.animation_number
+                    self.game.player.afficheitem.trueorfalse = False
+                    self.game.player.afficheequipped.trueorfalse = False
+                    self.kill()
+                    self.game.player.lasttaketimer = pygame.time.get_ticks() 
