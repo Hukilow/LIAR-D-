@@ -341,6 +341,7 @@ class Enemy(pygame.sprite.Sprite):
                 self.derniertemps = pygame.time.get_ticks()
                 print(self.healthbar.health)
             if self.healthbar.health <= 0:
+                self.game.totalenemykill += 1
                 self.modify_tilemap()
                 self.kill()
 
@@ -635,6 +636,7 @@ class Knight(pygame.sprite.Sprite):
                 self.derniertemps = pygame.time.get_ticks()
                 print(self.healthbar.health)
             if self.healthbar.health <= 0:
+                self.game.totalenemykill += 1
                 self.modify_tilemap()
                 self.kill()
 
@@ -948,6 +950,7 @@ class AngryMaid(pygame.sprite.Sprite):
                 self.derniertemps = pygame.time.get_ticks()
                 print(self.healthbar.health)
             if self.healthbar.health <= 0:
+                self.game.totalenemykill += 1
                 self.modify_tilemap()
                 self.kill()
 
@@ -1264,6 +1267,8 @@ class Slime(pygame.sprite.Sprite):
                 self.derniertemps = pygame.time.get_ticks()
                 print(self.healthbar.health)
             if self.healthbar.health <= 0:
+                self.game.totalenemykill += 1
+                print(self.game.totalenemykill)
                 self.modify_tilemap()
                 self.kill()
 
@@ -1639,6 +1644,7 @@ self.game.greencircle_spritesheet.get_sprite(600, 560, 200, 160),]
                 self.derniertemps = pygame.time.get_ticks()
                 print(self.healthbar.health)
             if self.healthbar.health <= 0:
+                self.game.totalenemykill += 1
                 self.modify_tilemap()
                 self.kill()
 
@@ -2217,6 +2223,7 @@ self.game.impactpurple_spritesheet.get_sprite(320, 704, 64, 64),]
                     self.phase2 = False
 
             if self.healthbar.health <= 0:
+                self.game.totalenemykill += 1
                 self.kill()
                 self.game.win = True
 

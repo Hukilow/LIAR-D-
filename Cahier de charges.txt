@@ -11,10 +11,11 @@ Cahier de charges : JEU LABYRINTHE 2D
     - LOSE SCREEN
         -- LORE
         -- TOTAL DES STATS (ENEMY TUER,COFFRE OUVERT)
+            WIN_SCREEN
+            LOSE_SCREEN
+            CHANGER POLICE
         
-    --Améliorer IA
+    --Améliorer IA/BOSS
     -- Faire glitch animation fight boss
-
-    --- SYSTEME SHOP + PIECES
 
 

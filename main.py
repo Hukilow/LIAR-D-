@@ -12,8 +12,8 @@ class Game():
     def __init__(self):
         pygame.init()
         if os.stat("Saves/config.dat").st_size == 0:   
-            self.WIN_WIDTH = 640
-            self.WIN_HEIGHT = 480
+            self.WIN_WIDTH = 1200
+            self.WIN_HEIGHT = 800
             self.screen_size = (self.WIN_WIDTH,self.WIN_HEIGHT)
             self.screen = pygame.display.set_mode((self.screen_size[0],self.screen_size[1]),pygame.RESIZABLE)
             self.fullscreen = False
@@ -35,6 +35,8 @@ class Game():
         self.win = False
 
         self.nombre_de_win = 0
+        self.totalenemykill = 0
+        self.totalchestopen = 0
         self.multiplicateur_difficulte_hp = 1
         self.multiplicateur_difficulte_hp_enemies = 1
         self.multiplicateur_difficulte_attack_enemies = 1
@@ -338,7 +340,8 @@ class Game():
         data = (self.player.etage.etageici, self.all_maps.tilemap1, self.all_maps.tilemap2, self.all_maps.tilemap3, self.all_maps.tilemap4, self.all_maps.tilemap5, self.all_maps.tilemap6,
                  self.player.healthbar.health, self.player.healthbar.maxhealth, self.player.helmet.ID, self.player.chest.ID, self.player.pants.ID, self.player.boots.ID, self.player.light.light_radius, self.player.light.couleur_rgb_et_intensite
                  ,self.player.vitesse,self.player.vitesse2,self.player.vitesse3,self.player.potion.nbrpotion,self.player.necklace.ID,self.player.ring.ID,self.player.puissance,
-                 self.player.widthattack,self.player.heightattack,self.player.epee.ID,self.player.animation_number)
+                 self.player.widthattack,self.player.heightattack,self.player.epee.ID,self.player.animation_number,self.nombre_de_win,self.totalenemykill,self.totalchestopen,
+                 self.multiplicateur_difficulte_hp,self.multiplicateur_difficulte_attack_enemies,self.multiplicateur_difficulte_hp_enemies)
 
         with open("Saves/save1.dat", 'wb') as fichier:
             pickle.dump(data, fichier)
@@ -410,6 +413,12 @@ class Game():
         self.light = pygame.sprite.LayeredUpdates()
         self.escaliercasse = pygame.sprite.LayeredUpdates()
         self.lave = pygame.sprite.LayeredUpdates()
+        self.totalenemykill = load_data[27]
+        self.totalchestopen = load_data[28]
+        self.multiplicateur_difficulte_hp_enemies = load_data[31]
+        self.multiplicateur_difficulte_hp = load_data[29]
+        self.multiplicateur_difficulte_attack_enemies = load_data[30]
+        self.nombre_de_win = load_data[26]
 
         if EtageSave == 1:
             self.createTilemap(tilemap)
@@ -472,6 +481,7 @@ class Game():
             self.player.leftattack_animations = leftattack
             self.player.upattack_animations = upattack
             self.player.animation_number = load_data[25]
+            
 
 
     def new(self):
@@ -723,12 +733,35 @@ class Game():
                         self.confirmation = False
 
                 if os.stat("Saves/save1.dat").st_size != 0:
-                    self.screen.blit(continue_button.image, continue_button.rect) 
-
-                if os.stat("Saves/save1.dat").st_size != 0:
+                    Stats = pygame.Surface((self.WIN_WIDTH/5,self.WIN_HEIGHT/2),pygame.SRCALPHA)
+                    pygame.draw.rect(Stats, GREY, pygame.Rect(0, 0, self.WIN_WIDTH/5, self.WIN_HEIGHT/2))
+                    Stats_rect = title.get_rect(x = self.WIN_WIDTH-self.WIN_WIDTH/5-10, y = self.WIN_HEIGHT/4)
+                    self.screen.blit(Stats, Stats_rect) 
+                    self.screen.blit(continue_button.image, continue_button.rect)
+                    with open('Saves/save1.dat', 'rb') as fichier:
+                        load_data = pickle.load(fichier)
+                        NUMWIN = self.font.render(f"WIN : {load_data[26]}", True, BLACK)
+                        NUMWIN_rect = title.get_rect(x = self.WIN_WIDTH-self.WIN_WIDTH/5, y = self.WIN_HEIGHT/4+90 )
+                        NUMFLOOR = self.font.render(f"FLOOR : {load_data[0]}",True, BLACK)
+                        NUMFLOOR_rect = title.get_rect(x = self.WIN_WIDTH-self.WIN_WIDTH/5, y = self.WIN_HEIGHT/4+10 )
+                        NUMHP = self.font.render(f"HP : {load_data[7]}/{load_data[8]}", True, BLACK)
+                        NUMHP_rect = title.get_rect(x = self.WIN_WIDTH-self.WIN_WIDTH/5, y = self.WIN_HEIGHT/4+50 )
+                        self.screen.blit(NUMWIN, NUMWIN_rect)
+                        self.screen.blit(NUMFLOOR, NUMFLOOR_rect)
+                        self.screen.blit(NUMHP, NUMHP_rect)
+                        if load_data[26] > 0:
+                            MULTHP = self.font.render(f"*HP : {load_data[29]}", True, BLACK)
+                            MULTHP_rect = title.get_rect(x = self.WIN_WIDTH-self.WIN_WIDTH/5, y = self.WIN_HEIGHT/4+130 )                     
+                            MULTHPENEMY = self.font.render(f"*HP NMY : {load_data[31]}", True, BLACK)
+                            MULTHPENEMY_rect = title.get_rect(x = self.WIN_WIDTH-self.WIN_WIDTH/5, y = self.WIN_HEIGHT/4+170 )
+                            MULTATKENEMY = self.font.render(f"*ATK NMY : {load_data[30]}", True, BLACK)
+                            MULTATKENEMY_rect = title.get_rect(x = self.WIN_WIDTH-self.WIN_WIDTH/5, y = self.WIN_HEIGHT/4+210 )
+                            self.screen.blit(MULTHP, MULTHP_rect)
+                            self.screen.blit(MULTHPENEMY, MULTHPENEMY_rect)
+                            self.screen.blit(MULTATKENEMY, MULTATKENEMY_rect)
+                                                    
                     if continue_button.is_pressed(mouse_pos, mouse_pressed):
                         intro = False
-                        
                         self.loadsave()
                         self.continueanimation = True
 

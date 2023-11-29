@@ -557,6 +557,8 @@ class Attack(pygame.sprite.Sprite):
 
 
     def dropchest(self,DROPCHEST):
+        self.game.totalchestopen += 1
+        print(self.game.totalchestopen)
         if DROPCHEST == "DROPCHEST1": # couloir commun
             DROPCHEST = [Crimson_Blade,Flamestrike_Mallet]
             return random.choice(DROPCHEST)
