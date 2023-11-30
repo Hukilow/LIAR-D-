@@ -1,11 +1,6 @@
-import pygame
 from config import *
 from sprites import *
-import sys
-import os
-import pickle
-from PIL import Image
-
+from install_dependencies import verify_requirements
 
 
 class Game():
@@ -925,15 +920,22 @@ class Game():
 
 
 
+if __name__ == "__main__":
+    verify_requirements()
+    import pygame
+    import pickle
+    from PIL import Image
+    import sys
+    import os
+    os.system('cls')
+    g = Game()
+    g.intro_screen()
 
-g = Game()
-g.intro_screen()
+    while g.running:
+        g.main()
+        g.game_over()
+        
 
-while g.running:
-    g.main()
-    g.game_over()
-    
-
-pygame.quit()
-sys.exit()
+    pygame.quit()
+    sys.exit()
 
