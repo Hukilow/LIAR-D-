@@ -589,10 +589,11 @@ class Game():
                 if restart_button.is_pressed(mouse_pos, mouse_pressed):
                     self.new()
                     self.main()
-
+                
                 self.screen.blit(self.game_overbackground, (0,0))
                 self.screen.blit(text, text_rect)
                 self.screen.blit(restart_button.image, restart_button.rect)
+                self.all_stats_screen()
                 self.clock.tick(FPS)
                 pygame.display.update()
 
@@ -733,32 +734,8 @@ class Game():
                         self.confirmation = False
 
                 if os.stat("Saves/save1.dat").st_size != 0:
-                    Stats = pygame.Surface((self.WIN_WIDTH/5,self.WIN_HEIGHT/2),pygame.SRCALPHA)
-                    pygame.draw.rect(Stats, GREY, pygame.Rect(0, 0, self.WIN_WIDTH/5, self.WIN_HEIGHT/2))
-                    Stats_rect = title.get_rect(x = self.WIN_WIDTH-self.WIN_WIDTH/5-10, y = self.WIN_HEIGHT/4)
-                    self.screen.blit(Stats, Stats_rect) 
+                    self.all_stats_screen()
                     self.screen.blit(continue_button.image, continue_button.rect)
-                    with open('Saves/save1.dat', 'rb') as fichier:
-                        load_data = pickle.load(fichier)
-                        NUMWIN = self.font.render(f"WIN : {load_data[26]}", True, BLACK)
-                        NUMWIN_rect = title.get_rect(x = self.WIN_WIDTH-self.WIN_WIDTH/5, y = self.WIN_HEIGHT/4+90 )
-                        NUMFLOOR = self.font.render(f"FLOOR : {load_data[0]}",True, BLACK)
-                        NUMFLOOR_rect = title.get_rect(x = self.WIN_WIDTH-self.WIN_WIDTH/5, y = self.WIN_HEIGHT/4+10 )
-                        NUMHP = self.font.render(f"HP : {load_data[7]}/{load_data[8]}", True, BLACK)
-                        NUMHP_rect = title.get_rect(x = self.WIN_WIDTH-self.WIN_WIDTH/5, y = self.WIN_HEIGHT/4+50 )
-                        self.screen.blit(NUMWIN, NUMWIN_rect)
-                        self.screen.blit(NUMFLOOR, NUMFLOOR_rect)
-                        self.screen.blit(NUMHP, NUMHP_rect)
-                        if load_data[26] > 0:
-                            MULTHP = self.font.render(f"*HP : {load_data[29]}", True, BLACK)
-                            MULTHP_rect = title.get_rect(x = self.WIN_WIDTH-self.WIN_WIDTH/5, y = self.WIN_HEIGHT/4+130 )                     
-                            MULTHPENEMY = self.font.render(f"*HP NMY : {load_data[31]}", True, BLACK)
-                            MULTHPENEMY_rect = title.get_rect(x = self.WIN_WIDTH-self.WIN_WIDTH/5, y = self.WIN_HEIGHT/4+170 )
-                            MULTATKENEMY = self.font.render(f"*ATK NMY : {load_data[30]}", True, BLACK)
-                            MULTATKENEMY_rect = title.get_rect(x = self.WIN_WIDTH-self.WIN_WIDTH/5, y = self.WIN_HEIGHT/4+210 )
-                            self.screen.blit(MULTHP, MULTHP_rect)
-                            self.screen.blit(MULTHPENEMY, MULTHPENEMY_rect)
-                            self.screen.blit(MULTATKENEMY, MULTATKENEMY_rect)
                                                     
                     if continue_button.is_pressed(mouse_pos, mouse_pressed):
                         intro = False
@@ -857,6 +834,35 @@ class Game():
                 self.clock.tick(FPS)
                 pygame.display.update()
 
+    def all_stats_screen(self):
+        title = self.font.render('Lost In A Random (dungeon)', True, BLACK)
+        Stats = pygame.Surface((self.WIN_WIDTH/5,self.WIN_HEIGHT/2),pygame.SRCALPHA)
+        pygame.draw.rect(Stats, GREY, pygame.Rect(0, 0, self.WIN_WIDTH/5, self.WIN_HEIGHT/2))
+        Stats_rect = title.get_rect(x = self.WIN_WIDTH-self.WIN_WIDTH/5-10, y = self.WIN_HEIGHT/4)
+        self.screen.blit(Stats, Stats_rect) 
+        
+        with open('Saves/save1.dat', 'rb') as fichier:
+            load_data = pickle.load(fichier)
+            NUMWIN = self.font.render(f"WIN : {load_data[26]}", True, BLACK)
+            NUMWIN_rect = title.get_rect(x = self.WIN_WIDTH-self.WIN_WIDTH/5, y = self.WIN_HEIGHT/4+90 )
+            NUMFLOOR = self.font.render(f"FLOOR : {load_data[0]}",True, BLACK)
+            NUMFLOOR_rect = title.get_rect(x = self.WIN_WIDTH-self.WIN_WIDTH/5, y = self.WIN_HEIGHT/4+10 )
+            NUMHP = self.font.render(f"HP : {load_data[7]}/{load_data[8]}", True, BLACK)
+            NUMHP_rect = title.get_rect(x = self.WIN_WIDTH-self.WIN_WIDTH/5, y = self.WIN_HEIGHT/4+50 )
+            self.screen.blit(NUMWIN, NUMWIN_rect)
+            self.screen.blit(NUMFLOOR, NUMFLOOR_rect)
+            self.screen.blit(NUMHP, NUMHP_rect)
+            if load_data[26] > 0:
+                MULTHP = self.font.render(f"*HP : {load_data[29]}", True, BLACK)
+                MULTHP_rect = title.get_rect(x = self.WIN_WIDTH-self.WIN_WIDTH/5, y = self.WIN_HEIGHT/4+130 )                     
+                MULTHPENEMY = self.font.render(f"*HP NMY : {load_data[31]}", True, BLACK)
+                MULTHPENEMY_rect = title.get_rect(x = self.WIN_WIDTH-self.WIN_WIDTH/5, y = self.WIN_HEIGHT/4+170 )
+                MULTATKENEMY = self.font.render(f"*ATK NMY : {load_data[30]}", True, BLACK)
+                MULTATKENEMY_rect = title.get_rect(x = self.WIN_WIDTH-self.WIN_WIDTH/5, y = self.WIN_HEIGHT/4+210 )
+                self.screen.blit(MULTHP, MULTHP_rect)
+                self.screen.blit(MULTHPENEMY, MULTHPENEMY_rect)
+                self.screen.blit(MULTATKENEMY, MULTATKENEMY_rect)
+
     def delete_time(self):
         return self.derniertemps1 > pygame.time.get_ticks() - 150
         
@@ -903,11 +909,13 @@ class Game():
                         self.new()
                         self.main()
                         
+                    
                     self.screen.blit(self.game_overbackground, (0,0))
                     self.screen.blit(text, text_rect)
                     self.screen.blit(hp_multiplicateur_button.image, hp_multiplicateur_button.rect)
                     self.screen.blit(hpenemy_multiplicateur_button.image, hpenemy_multiplicateur_button.rect)
                     self.screen.blit(attackenemy_multiplicateur_button.image, attackenemy_multiplicateur_button.rect)
+                    self.all_stats_screen()
                     self.clock.tick(FPS)
                     pygame.display.update()
                     self.win = False
