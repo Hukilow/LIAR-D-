@@ -45,7 +45,8 @@ class Game():
         self.confirmation = False
         self.continueanimation = False
         self.writing = False
-        
+        self.screen_credits = False
+
         self.derniertemps = pygame.time.get_ticks()
         self.derniertemps1 = pygame.time.get_ticks()
         
@@ -100,6 +101,13 @@ class Game():
         self.bosscircle_spritesheet = Spritesheet('img/Attacks/bossbluecircle.png')
         self.bossprojectile_spritesheet = Spritesheet('img/Attacks/bossprojectile.png')
         self.bloodslash_spritesheet = Spritesheet('img/Attacks/crimsonattacks.png')
+        self.fallingstar_spritesheet = Spritesheet('img/Attacks/falling_star.png')
+        self.nebulaattacks_spritesheet = Spritesheet('img/Attacks/nebula_attacks.png')
+        self.yellowcircle_spritesheet = Spritesheet('img/Attacks/yellowattacks.png')
+        self.whitecircleattacks_spritesheet = Spritesheet('img/Attacks/whiteattacks.png')
+        self.bluecircleattacks_spritesheet = Spritesheet('img/Attacks/blueattacks.png')
+        self.bluething_spritesheet = Spritesheet('img/Attacks/bluefloosh.png')
+
 
     def createTilemap(self,tilemap):
         self.player = Player(self, 0, 0)
@@ -621,6 +629,7 @@ class Game():
             Warning3_rect = title.get_rect(x = self.WIN_WIDTH/2-350, y = self.WIN_HEIGHT/2+50)
             Fullscreen = self.font.render("Fullscreen :", True, WHITE)
             Fullscreen_rect = title.get_rect(x = self.WIN_WIDTH/2-225, y = self.WIN_HEIGHT/2-220 )
+            credits_button = Button(self.WIN_WIDTH/2-75, self.WIN_HEIGHT/1.5+20 ,150 ,50 ,WHITE ,BLACK ,'Credits' ,32)
             save_button = Button(self.WIN_WIDTH-150, self.WIN_HEIGHT-75 ,100 ,50 ,WHITE ,BLACK ,'SAVE' ,32)
             reset_button = Button(self.WIN_WIDTH-300, self.WIN_HEIGHT-75 ,100 ,50 ,WHITE ,BLACK ,'RESET' ,32)
             new_button = Button(self.WIN_WIDTH/2-50, self.WIN_HEIGHT/2-100 ,100 ,50 ,WHITE ,BLACK ,'New' ,32)
@@ -637,6 +646,15 @@ class Game():
             pygame.draw.rect(ConfirmationRectangle, WHITE, pygame.Rect(0, 0, 110, 60))
             ConfirmationRectangleYes_rect = title.get_rect(x = self.WIN_WIDTH/2-130, y = self.WIN_HEIGHT/2+65)
             ConfirmationRectangleNo_rect = title.get_rect(x = self.WIN_WIDTH/2+30, y = self.WIN_HEIGHT/2+65)
+
+            #Crédits
+            Credits = self.font.render("Crédits", True, WHITE)
+            Credits_rect = title.get_rect(x = self.WIN_WIDTH/2-50, y = self.WIN_HEIGHT/4)
+            MainDevelopper = self.font.render("Main Developper : Hukilow", True, WHITE)
+            MainDevelopper_rect = title.get_rect(x = self.WIN_WIDTH/3, y = self.WIN_HEIGHT/3)
+            SideDevelopper = self.font.render("Side Developper : Midori", True, WHITE)
+            SideDevelopper_rect = title.get_rect(x = self.WIN_WIDTH/3, y = self.WIN_HEIGHT/3+50)
+
             Rectangle = pygame.Surface((210,60),pygame.SRCALPHA)
             pygame.draw.rect(Rectangle, WHITE, pygame.Rect(0, 0, 210, 60))
             Screen_size_button = Button(self.WIN_WIDTH/2, self.WIN_HEIGHT/3-8 , 200,50 ,WHITE ,WHITE ,'' ,32)
@@ -713,6 +731,7 @@ class Game():
                 self.screen.blit(self.blackscreen,(0,0))
                 self.screen.blit(self.intro_background, (0,0))
                 self.screen.blit(title, title_rect)
+                self.screen.blit(credits_button.image, credits_button.rect)
                 self.screen.blit(new_button.image, new_button.rect)
                 self.screen.blit(option_button.image, option_button.rect)
                 self.screen.blit(quitgame_button.image, quitgame_button.rect)
@@ -754,8 +773,28 @@ class Game():
                 if quitgame_button.is_pressed(mouse_pos, mouse_pressed):
                     self.running = False
                     intro = False
+
+                if credits_button.is_pressed(mouse_pos, mouse_pressed):
+                    if self.clicktime() == False:
+                        self.screen_intro = False
+                        self.screen_credits = True
+                        self.derniertemps = pygame.time.get_ticks()
                 self.clock.tick(FPS)
                 pygame.display.update()
+
+            if self.screen_credits:
+                if quit_button.is_pressed(mouse_pos, mouse_pressed):
+                    if self.clicktime() == False:
+                        self.screen_intro = True
+                        self.screen_credits = False
+                        self.derniertemps = pygame.time.get_ticks()
+                self.screen.blit(self.blackscreen,(0,0))
+                self.screen.blit(Credits, Credits_rect)
+                self.screen.blit(quit_button.image, quit_button.rect)
+                self.screen.blit(MainDevelopper, MainDevelopper_rect)
+                self.screen.blit(SideDevelopper, SideDevelopper_rect)
+
+
             if self.screen_option:
                 if Fullscreen_button.is_pressed(mouse_pos, mouse_pressed):
                     if self.clicktime() == False:

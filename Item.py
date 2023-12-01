@@ -2911,7 +2911,7 @@ class Crimson_Blade(pygame.sprite.Sprite):
         self.x_change = 0
         self.y_change = 0
 
-        self.puissance = 8
+        self.puissance = 6
 
         self.rect = self.image.get_rect() 
         self.rect.x = self.x
@@ -3010,6 +3010,1098 @@ self.game.bloodslash_spritesheet.get_sprite(216, 112, 24, 64),]
                     self.game.player.epee.ID = Crimson_Blade
                     self.game.player.widthattack = 64
                     self.game.player.heightattack = 24
+                    self.game.player.epee.image = self.image
+                    self.game.player.rightattack_animations = self.down_attacksanimation
+                    self.game.player.downattack_animations = self.left_attacksanimation
+                    self.game.player.leftattack_animations = self.up_attacksanimation
+                    self.game.player.upattack_animations = self.right_attacksanimation
+                    self.game.player.arme_x_up = self.scythe_x_up
+                    self.game.player.arme_y_up = self.scythe_y_up
+                    self.game.player.arme_x_down = self.scythe_x_down
+                    self.game.player.arme_y_down = self.scythe_y_down
+                    self.game.player.arme_x_left = self.scythe_x_left
+                    self.game.player.arme_y_left = self.scythe_y_left
+                    self.game.player.arme_x_right = self.scythe_x_right
+                    self.game.player.arme_y_right = self.scythe_y_right
+                    self.game.player.animation_number = self.animation_number
+                    self.game.player.afficheitem.trueorfalse = False
+                    self.game.player.afficheequipped.trueorfalse = False
+                    self.kill()
+                    self.game.player.lasttaketimer = pygame.time.get_ticks() 
+
+
+
+class Celestial_Scepter(pygame.sprite.Sprite):
+    nom = "Celestial Scepter"
+    attribut = "Puissance : 6"
+    IDimage = "self.weapon4_spritesheet.get_sprite(58,54,22,40)"
+    IDattack = ("self.fallingstar_spritesheet.get_sprite(0, 170, 60, 110)",
+"self.fallingstar_spritesheet.get_sprite(60, 170, 60, 110)",
+"self.fallingstar_spritesheet.get_sprite(120, 170, 60, 110)",
+"self.fallingstar_spritesheet.get_sprite(180, 170, 60, 110)",
+"self.fallingstar_spritesheet.get_sprite(240, 170, 60, 110)",
+"self.fallingstar_spritesheet.get_sprite(300, 170, 60, 110)",
+"self.fallingstar_spritesheet.get_sprite(360, 170, 60, 110)",
+"self.fallingstar_spritesheet.get_sprite(420, 170, 60, 110)",
+"self.fallingstar_spritesheet.get_sprite(480, 170, 60, 110)",
+"self.fallingstar_spritesheet.get_sprite(540, 170, 60, 110)",
+"self.fallingstar_spritesheet.get_sprite(600, 170, 60, 110)",
+"self.fallingstar_spritesheet.get_sprite(660, 170, 60, 110)",
+"self.fallingstar_spritesheet.get_sprite(720, 170, 60, 110)",
+"self.fallingstar_spritesheet.get_sprite(780, 170, 60, 110)",
+"self.fallingstar_spritesheet.get_sprite(840, 170, 60, 110)",
+"self.fallingstar_spritesheet.get_sprite(0, 170, 60, 110)",
+"self.fallingstar_spritesheet.get_sprite(60, 170, 60, 110)",
+"self.fallingstar_spritesheet.get_sprite(120, 170, 60, 110)",
+"self.fallingstar_spritesheet.get_sprite(180, 170, 60, 110)",
+"self.fallingstar_spritesheet.get_sprite(240, 170, 60, 110)",
+"self.fallingstar_spritesheet.get_sprite(300, 170, 60, 110)",
+"self.fallingstar_spritesheet.get_sprite(360, 170, 60, 110)",
+"self.fallingstar_spritesheet.get_sprite(420, 170, 60, 110)",
+"self.fallingstar_spritesheet.get_sprite(480, 170, 60, 110)",
+"self.fallingstar_spritesheet.get_sprite(540, 170, 60, 110)",
+"self.fallingstar_spritesheet.get_sprite(600, 170, 60, 110)",
+"self.fallingstar_spritesheet.get_sprite(660, 170, 60, 110)",
+"self.fallingstar_spritesheet.get_sprite(720, 170, 60, 110)",
+"self.fallingstar_spritesheet.get_sprite(780, 170, 60, 110)",
+"self.fallingstar_spritesheet.get_sprite(840, 170, 60, 110)",
+"self.fallingstar_spritesheet.get_sprite(0, 0, 60, 110)",
+"self.fallingstar_spritesheet.get_sprite(60, 0, 60, 110)",
+"self.fallingstar_spritesheet.get_sprite(120, 0, 60, 110)",
+"self.fallingstar_spritesheet.get_sprite(180, 0, 60, 110)",
+"self.fallingstar_spritesheet.get_sprite(240, 0, 60, 110)",
+"self.fallingstar_spritesheet.get_sprite(300, 0, 60, 110)",
+"self.fallingstar_spritesheet.get_sprite(360, 0, 60, 110)",
+"self.fallingstar_spritesheet.get_sprite(420, 0, 60, 110)",
+"self.fallingstar_spritesheet.get_sprite(480, 0, 60, 110)",
+"self.fallingstar_spritesheet.get_sprite(540, 0, 60, 110)",
+"self.fallingstar_spritesheet.get_sprite(600, 0, 60, 110)",
+"self.fallingstar_spritesheet.get_sprite(660, 0, 60, 110)",
+"self.fallingstar_spritesheet.get_sprite(720, 0, 60, 110)",
+"self.fallingstar_spritesheet.get_sprite(780, 0, 60, 110)",
+"self.fallingstar_spritesheet.get_sprite(840, 0, 60, 110)",
+"self.fallingstar_spritesheet.get_sprite(0, 0, 60, 110)",
+"self.fallingstar_spritesheet.get_sprite(60, 0, 60, 110)",
+"self.fallingstar_spritesheet.get_sprite(120, 0, 60, 110)",
+"self.fallingstar_spritesheet.get_sprite(180, 0, 60, 110)",
+"self.fallingstar_spritesheet.get_sprite(240, 0, 60, 110)",
+"self.fallingstar_spritesheet.get_sprite(300, 0, 60, 110)",
+"self.fallingstar_spritesheet.get_sprite(360, 0, 60, 110)",
+"self.fallingstar_spritesheet.get_sprite(420, 0, 60, 110)",
+"self.fallingstar_spritesheet.get_sprite(480, 0, 60, 110)",
+"self.fallingstar_spritesheet.get_sprite(540, 0, 60, 110)",
+"self.fallingstar_spritesheet.get_sprite(600, 0, 60, 110)",
+"self.fallingstar_spritesheet.get_sprite(660, 0, 60, 110)",
+"self.fallingstar_spritesheet.get_sprite(720, 0, 60, 110)",
+"self.fallingstar_spritesheet.get_sprite(780, 0, 60, 110)",
+"self.fallingstar_spritesheet.get_sprite(840, 0, 60, 110)",)
+    IDpos = (
+        "self.player.rect.x - 80",
+        "self.player.rect.y - 80",
+        "self.player.rect.x - 15",
+        "self.player.rect.y + 35",
+        "self.player.rect.x + 60",
+        "self.player.rect.y - 80",
+        "self.player.rect.x - 15",
+        "self.player.rect.y - 155",
+    )
+    
+    def __init__(self,game, x, y):
+
+        self.game = game 
+        self._layer = ITEM_LAYER
+
+        self.groups = self.game.all_sprites, self.game.item
+        pygame.sprite.Sprite.__init__(self, self.groups)
+
+        self.ID = Celestial_Scepter
+        self.image = self.game.weapon4_spritesheet.get_sprite(58,54,22,40)
+
+        self.x = x
+        self.y = y
+        self.x_change = 0
+        self.y_change = 0
+
+        self.puissance = 6
+
+        self.rect = self.image.get_rect() 
+        self.rect.x = self.x
+        self.rect.y = self.y
+        self.pos = (x,y)
+
+        self.right_attacksanimation = [self.game.fallingstar_spritesheet.get_sprite(0, 0, 60, 110),
+self.game.fallingstar_spritesheet.get_sprite(60, 0, 60, 110),
+self.game.fallingstar_spritesheet.get_sprite(120, 0, 60, 110),
+self.game.fallingstar_spritesheet.get_sprite(180, 0, 60, 110),
+self.game.fallingstar_spritesheet.get_sprite(240, 0, 60, 110),
+self.game.fallingstar_spritesheet.get_sprite(300, 0, 60, 110),
+self.game.fallingstar_spritesheet.get_sprite(360, 0, 60, 110),
+self.game.fallingstar_spritesheet.get_sprite(420, 0, 60, 110),
+self.game.fallingstar_spritesheet.get_sprite(480, 0, 60, 110),
+self.game.fallingstar_spritesheet.get_sprite(540, 0, 60, 110),
+self.game.fallingstar_spritesheet.get_sprite(600, 0, 60, 110),
+self.game.fallingstar_spritesheet.get_sprite(660, 0, 60, 110),
+self.game.fallingstar_spritesheet.get_sprite(720, 0, 60, 110),
+self.game.fallingstar_spritesheet.get_sprite(780, 0, 60, 110),
+self.game.fallingstar_spritesheet.get_sprite(840, 0, 60, 110),]
+
+        self.down_attacksanimation = [self.game.fallingstar_spritesheet.get_sprite(0, 170, 60, 110),
+self.game.fallingstar_spritesheet.get_sprite(60, 170, 60, 110),
+self.game.fallingstar_spritesheet.get_sprite(120, 170, 60, 110),
+self.game.fallingstar_spritesheet.get_sprite(180, 170, 60, 110),
+self.game.fallingstar_spritesheet.get_sprite(240, 170, 60, 110),
+self.game.fallingstar_spritesheet.get_sprite(300, 170, 60, 110),
+self.game.fallingstar_spritesheet.get_sprite(360, 170, 60, 110),
+self.game.fallingstar_spritesheet.get_sprite(420, 170, 60, 110),
+self.game.fallingstar_spritesheet.get_sprite(480, 170, 60, 110),
+self.game.fallingstar_spritesheet.get_sprite(540, 170, 60, 110),
+self.game.fallingstar_spritesheet.get_sprite(600, 170, 60, 110),
+self.game.fallingstar_spritesheet.get_sprite(660, 170, 60, 110),
+self.game.fallingstar_spritesheet.get_sprite(720, 170, 60, 110),
+self.game.fallingstar_spritesheet.get_sprite(780, 170, 60, 110),
+self.game.fallingstar_spritesheet.get_sprite(840, 170, 60, 110),]
+
+        self.left_attacksanimation = [self.game.fallingstar_spritesheet.get_sprite(0, 170, 60, 110),
+self.game.fallingstar_spritesheet.get_sprite(60, 170, 60, 110),
+self.game.fallingstar_spritesheet.get_sprite(120, 170, 60, 110),
+self.game.fallingstar_spritesheet.get_sprite(180, 170, 60, 110),
+self.game.fallingstar_spritesheet.get_sprite(240, 170, 60, 110),
+self.game.fallingstar_spritesheet.get_sprite(300, 170, 60, 110),
+self.game.fallingstar_spritesheet.get_sprite(360, 170, 60, 110),
+self.game.fallingstar_spritesheet.get_sprite(420, 170, 60, 110),
+self.game.fallingstar_spritesheet.get_sprite(480, 170, 60, 110),
+self.game.fallingstar_spritesheet.get_sprite(540, 170, 60, 110),
+self.game.fallingstar_spritesheet.get_sprite(600, 170, 60, 110),
+self.game.fallingstar_spritesheet.get_sprite(660, 170, 60, 110),
+self.game.fallingstar_spritesheet.get_sprite(720, 170, 60, 110),
+self.game.fallingstar_spritesheet.get_sprite(780, 170, 60, 110),
+self.game.fallingstar_spritesheet.get_sprite(840, 170, 60, 110),]
+
+        self.up_attacksanimation = [self.game.fallingstar_spritesheet.get_sprite(0, 0, 60, 110),
+self.game.fallingstar_spritesheet.get_sprite(60, 0, 60, 110),
+self.game.fallingstar_spritesheet.get_sprite(120, 0, 60, 110),
+self.game.fallingstar_spritesheet.get_sprite(180, 0, 60, 110),
+self.game.fallingstar_spritesheet.get_sprite(240, 0, 60, 110),
+self.game.fallingstar_spritesheet.get_sprite(300, 0, 60, 110),
+self.game.fallingstar_spritesheet.get_sprite(360, 0, 60, 110),
+self.game.fallingstar_spritesheet.get_sprite(420, 0, 60, 110),
+self.game.fallingstar_spritesheet.get_sprite(480, 0, 60, 110),
+self.game.fallingstar_spritesheet.get_sprite(540, 0, 60, 110),
+self.game.fallingstar_spritesheet.get_sprite(600, 0, 60, 110),
+self.game.fallingstar_spritesheet.get_sprite(660, 0, 60, 110),
+self.game.fallingstar_spritesheet.get_sprite(720, 0, 60, 110),
+self.game.fallingstar_spritesheet.get_sprite(780, 0, 60, 110),
+self.game.fallingstar_spritesheet.get_sprite(840, 0, 60, 110),]
+
+
+        self.scythe_x_left = self.game.player.rect.x - 80
+        self.scythe_y_left = self.game.player.rect.y - 80
+        self.scythe_x_down = self.game.player.rect.x - 15
+        self.scythe_y_down = self.game.player.rect.y + 35
+        self.scythe_x_right = self.game.player.rect.x + 60
+        self.scythe_y_right = self.game.player.rect.y -80
+        self.scythe_x_up = self.game.player.rect.x - 15
+        self.scythe_y_up = self.game.player.rect.y - 155
+        self.animation_number = 15
+
+
+    def update(self):
+        self.game.screen.blit(self.image,self.pos)
+        self.collide()
+
+        self.rect.x += self.x_change
+        self.rect.y += self.y_change
+
+        self.x_change = 0
+        self.y_change = 0
+
+
+    def collide(self):
+            hits = pygame.sprite.spritecollide(self, self.game.playerhitbox, False)
+            keys = pygame.key.get_pressed()
+            if hits:
+                self.game.player.afficheitem.trueorfalse = True
+                self.game.player.afficheitem.nom = self.nom
+                self.game.player.afficheitem.attribut1 = self.attribut
+            if (hits) and (self.game.player.epee.ID != None):
+                self.game.player.afficheequipped.trueorfalse = True
+                self.game.player.afficheequipped.nom = self.game.player.epee.ID.nom
+                self.game.player.afficheequipped.attribut1 = self.game.player.epee.ID.attribut
+            if not hits:
+                self.game.player.afficheitem.trueorfalse = False
+                self.game.player.afficheequipped.trueorfalse = False
+
+
+            if hits and keys[pygame.K_e]:
+                if self.game.player.take_timer() == False:
+                    if self.game.player.epee.ID != None:
+                        epee_instance = self.game.player.epee.ID(self.game,self.game.player.rect.x,self.game.player.rect.y)
+                        self.game.player.puissance -= epee_instance.puissance
+                    self.game.player.puissance += self.puissance
+                    self.game.player.epee.ID = Celestial_Scepter
+                    self.game.player.widthattack = 60
+                    self.game.player.heightattack = 110
+                    self.game.player.epee.image = self.image
+                    self.game.player.rightattack_animations = self.down_attacksanimation
+                    self.game.player.downattack_animations = self.left_attacksanimation
+                    self.game.player.leftattack_animations = self.up_attacksanimation
+                    self.game.player.upattack_animations = self.right_attacksanimation
+                    self.game.player.arme_x_up = self.scythe_x_up
+                    self.game.player.arme_y_up = self.scythe_y_up
+                    self.game.player.arme_x_down = self.scythe_x_down
+                    self.game.player.arme_y_down = self.scythe_y_down
+                    self.game.player.arme_x_left = self.scythe_x_left
+                    self.game.player.arme_y_left = self.scythe_y_left
+                    self.game.player.arme_x_right = self.scythe_x_right
+                    self.game.player.arme_y_right = self.scythe_y_right
+                    self.game.player.animation_number = self.animation_number
+                    self.game.player.afficheitem.trueorfalse = False
+                    self.game.player.afficheequipped.trueorfalse = False
+                    self.kill()
+                    self.game.player.lasttaketimer = pygame.time.get_ticks() 
+
+
+class Nebula_GreatSword(pygame.sprite.Sprite):
+    nom = "Nebula Greatsword"
+    attribut = "Puissance : 8"
+    IDimage = "self.weapon_spritesheet.get_sprite(148,33,16,40)"
+    IDattack = ("self.nebulaattacks_spritesheet.get_sprite(0, 0, 32, 32)",
+"self.nebulaattacks_spritesheet.get_sprite(32, 0, 32, 32)",
+"self.nebulaattacks_spritesheet.get_sprite(64, 0, 32, 32)",
+"self.nebulaattacks_spritesheet.get_sprite(96, 0, 32, 32)",
+"self.nebulaattacks_spritesheet.get_sprite(0, 0, 32, 32)",
+"self.nebulaattacks_spritesheet.get_sprite(32, 0, 32, 32)",
+"self.nebulaattacks_spritesheet.get_sprite(64, 0, 32, 32)",
+"self.nebulaattacks_spritesheet.get_sprite(96, 0, 32, 32)",
+"self.nebulaattacks_spritesheet.get_sprite(0, 0, 32, 32)",
+"self.nebulaattacks_spritesheet.get_sprite(32, 0, 32, 32)",
+"self.nebulaattacks_spritesheet.get_sprite(64, 0, 32, 32)",
+"self.nebulaattacks_spritesheet.get_sprite(96, 0, 32, 32)",
+"self.nebulaattacks_spritesheet.get_sprite(0, 0, 32, 32)",
+"self.nebulaattacks_spritesheet.get_sprite(32, 0, 32, 32)",
+"self.nebulaattacks_spritesheet.get_sprite(64, 0, 32, 32)",
+"self.nebulaattacks_spritesheet.get_sprite(96, 0, 32, 32)",
+"self.nebulaattacks_spritesheet.get_sprite(0, 0, 32, 32)",
+"self.nebulaattacks_spritesheet.get_sprite(32, 0, 32, 32)",
+"self.nebulaattacks_spritesheet.get_sprite(64, 0, 32, 32)",
+"self.nebulaattacks_spritesheet.get_sprite(96, 0, 32, 32)",
+"self.nebulaattacks_spritesheet.get_sprite(0, 0, 32, 32)",
+"self.nebulaattacks_spritesheet.get_sprite(32, 0, 32, 32)",
+"self.nebulaattacks_spritesheet.get_sprite(64, 0, 32, 32)",
+"self.nebulaattacks_spritesheet.get_sprite(96, 0, 32, 32)",
+"self.nebulaattacks_spritesheet.get_sprite(0, 0, 32, 32)",
+"self.nebulaattacks_spritesheet.get_sprite(32, 0, 32, 32)",
+"self.nebulaattacks_spritesheet.get_sprite(64, 0, 32, 32)",
+"self.nebulaattacks_spritesheet.get_sprite(96, 0, 32, 32)",
+"self.nebulaattacks_spritesheet.get_sprite(0, 0, 32, 32)",
+"self.nebulaattacks_spritesheet.get_sprite(32, 0, 32, 32)",
+"self.nebulaattacks_spritesheet.get_sprite(64, 0, 32, 32)",
+"self.nebulaattacks_spritesheet.get_sprite(96, 0, 32, 32)",
+"self.nebulaattacks_spritesheet.get_sprite(0, 0, 32, 32)",
+"self.nebulaattacks_spritesheet.get_sprite(32, 0, 32, 32)",
+"self.nebulaattacks_spritesheet.get_sprite(64, 0, 32, 32)",
+"self.nebulaattacks_spritesheet.get_sprite(96, 0, 32, 32)",
+"self.nebulaattacks_spritesheet.get_sprite(0, 0, 32, 32)",
+"self.nebulaattacks_spritesheet.get_sprite(32, 0, 32, 32)",
+"self.nebulaattacks_spritesheet.get_sprite(64, 0, 32, 32)",
+"self.nebulaattacks_spritesheet.get_sprite(96, 0, 32, 32)",
+"self.nebulaattacks_spritesheet.get_sprite(0, 0, 32, 32)",
+"self.nebulaattacks_spritesheet.get_sprite(32, 0, 32, 32)",
+"self.nebulaattacks_spritesheet.get_sprite(64, 0, 32, 32)",
+"self.nebulaattacks_spritesheet.get_sprite(96, 0, 32, 32)",
+"self.nebulaattacks_spritesheet.get_sprite(0, 0, 32, 32)",
+"self.nebulaattacks_spritesheet.get_sprite(32, 0, 32, 32)",
+"self.nebulaattacks_spritesheet.get_sprite(64, 0, 32, 32)",
+"self.nebulaattacks_spritesheet.get_sprite(96, 0, 32, 32)",
+"self.nebulaattacks_spritesheet.get_sprite(0, 0, 32, 32)",
+"self.nebulaattacks_spritesheet.get_sprite(32, 0, 32, 32)",
+"self.nebulaattacks_spritesheet.get_sprite(64, 0, 32, 32)",
+"self.nebulaattacks_spritesheet.get_sprite(96, 0, 32, 32)",
+"self.nebulaattacks_spritesheet.get_sprite(0, 0, 32, 32)",
+"self.nebulaattacks_spritesheet.get_sprite(32, 0, 32, 32)",
+"self.nebulaattacks_spritesheet.get_sprite(64, 0, 32, 32)",
+"self.nebulaattacks_spritesheet.get_sprite(96, 0, 32, 32)",
+"self.nebulaattacks_spritesheet.get_sprite(0, 0, 32, 32)",
+"self.nebulaattacks_spritesheet.get_sprite(32, 0, 32, 32)",
+"self.nebulaattacks_spritesheet.get_sprite(64, 0, 32, 32)",
+"self.nebulaattacks_spritesheet.get_sprite(96, 0, 32, 32)",
+"self.nebulaattacks_spritesheet.get_sprite(0, 0, 32, 32)",
+"self.nebulaattacks_spritesheet.get_sprite(32, 0, 32, 32)",
+"self.nebulaattacks_spritesheet.get_sprite(64, 0, 32, 32)",
+"self.nebulaattacks_spritesheet.get_sprite(96, 0, 32, 32)",
+"self.nebulaattacks_spritesheet.get_sprite(0, 0, 32, 32)",
+"self.nebulaattacks_spritesheet.get_sprite(32, 0, 32, 32)",
+"self.nebulaattacks_spritesheet.get_sprite(64, 0, 32, 32)",
+"self.nebulaattacks_spritesheet.get_sprite(96, 0, 32, 32)",
+"self.nebulaattacks_spritesheet.get_sprite(0, 0, 32, 32)",
+"self.nebulaattacks_spritesheet.get_sprite(32, 0, 32, 32)",
+"self.nebulaattacks_spritesheet.get_sprite(64, 0, 32, 32)",
+"self.nebulaattacks_spritesheet.get_sprite(96, 0, 32, 32)",
+"self.nebulaattacks_spritesheet.get_sprite(0, 0, 32, 32)",
+"self.nebulaattacks_spritesheet.get_sprite(32, 0, 32, 32)",
+"self.nebulaattacks_spritesheet.get_sprite(64, 0, 32, 32)",
+"self.nebulaattacks_spritesheet.get_sprite(96, 0, 32, 32)",
+"self.nebulaattacks_spritesheet.get_sprite(0, 0, 32, 32)",
+"self.nebulaattacks_spritesheet.get_sprite(32, 0, 32, 32)",
+"self.nebulaattacks_spritesheet.get_sprite(64, 0, 32, 32)",
+"self.nebulaattacks_spritesheet.get_sprite(96, 0, 32, 32)",
+"self.nebulaattacks_spritesheet.get_sprite(0, 0, 32, 32)",
+"self.nebulaattacks_spritesheet.get_sprite(32, 0, 32, 32)",
+"self.nebulaattacks_spritesheet.get_sprite(64, 0, 32, 32)",
+"self.nebulaattacks_spritesheet.get_sprite(96, 0, 32, 32)",
+"self.nebulaattacks_spritesheet.get_sprite(0, 0, 32, 32)",
+"self.nebulaattacks_spritesheet.get_sprite(32, 0, 32, 32)",
+"self.nebulaattacks_spritesheet.get_sprite(64, 0, 32, 32)",
+"self.nebulaattacks_spritesheet.get_sprite(96, 0, 32, 32)",
+"self.nebulaattacks_spritesheet.get_sprite(0, 0, 32, 32)",
+"self.nebulaattacks_spritesheet.get_sprite(32, 0, 32, 32)",
+"self.nebulaattacks_spritesheet.get_sprite(64, 0, 32, 32)",
+"self.nebulaattacks_spritesheet.get_sprite(96, 0, 32, 32)",
+"self.nebulaattacks_spritesheet.get_sprite(0, 0, 32, 32)",
+"self.nebulaattacks_spritesheet.get_sprite(32, 0, 32, 32)",
+"self.nebulaattacks_spritesheet.get_sprite(64, 0, 32, 32)",
+"self.nebulaattacks_spritesheet.get_sprite(96, 0, 32, 32)",)
+    IDpos = (
+        "self.player.rect.x - 50",
+        "self.player.rect.y ",
+        "self.player.rect.x",
+        "self.player.rect.y + 50",
+        "self.player.rect.x + 50",
+        "self.player.rect.y",
+        "self.player.rect.x ",
+        "self.player.rect.y - 50",
+    )
+    
+    def __init__(self,game, x, y):
+
+        self.game = game 
+        self._layer = ITEM_LAYER
+
+        self.groups = self.game.all_sprites, self.game.item
+        pygame.sprite.Sprite.__init__(self, self.groups)
+
+        self.ID = Nebula_GreatSword
+        self.image = self.game.weapon_spritesheet.get_sprite(148,33,16,40)
+
+        self.x = x
+        self.y = y
+        self.x_change = 0
+        self.y_change = 0
+
+        self.puissance = 6
+
+        self.rect = self.image.get_rect() 
+        self.rect.x = self.x
+        self.rect.y = self.y
+        self.pos = (x,y)
+
+        self.nebulaattacks = [self.game.nebulaattacks_spritesheet.get_sprite(0, 0, 32, 32),
+self.game.nebulaattacks_spritesheet.get_sprite(32, 0, 32, 32),
+self.game.nebulaattacks_spritesheet.get_sprite(64, 0, 32, 32),
+self.game.nebulaattacks_spritesheet.get_sprite(96, 0, 32, 32),
+self.game.nebulaattacks_spritesheet.get_sprite(0, 0, 32, 32),
+self.game.nebulaattacks_spritesheet.get_sprite(32, 0, 32, 32),
+self.game.nebulaattacks_spritesheet.get_sprite(64, 0, 32, 32),
+self.game.nebulaattacks_spritesheet.get_sprite(96, 0, 32, 32),
+self.game.nebulaattacks_spritesheet.get_sprite(0, 0, 32, 32),
+self.game.nebulaattacks_spritesheet.get_sprite(32, 0, 32, 32),
+self.game.nebulaattacks_spritesheet.get_sprite(64, 0, 32, 32),
+self.game.nebulaattacks_spritesheet.get_sprite(96, 0, 32, 32),
+self.game.nebulaattacks_spritesheet.get_sprite(0, 0, 32, 32),
+self.game.nebulaattacks_spritesheet.get_sprite(32, 0, 32, 32),
+self.game.nebulaattacks_spritesheet.get_sprite(64, 0, 32, 32),
+self.game.nebulaattacks_spritesheet.get_sprite(96, 0, 32, 32),
+self.game.nebulaattacks_spritesheet.get_sprite(0, 0, 32, 32),
+self.game.nebulaattacks_spritesheet.get_sprite(32, 0, 32, 32),
+self.game.nebulaattacks_spritesheet.get_sprite(64, 0, 32, 32),
+self.game.nebulaattacks_spritesheet.get_sprite(96, 0, 32, 32),
+self.game.nebulaattacks_spritesheet.get_sprite(0, 0, 32, 32),
+self.game.nebulaattacks_spritesheet.get_sprite(32, 0, 32, 32),
+self.game.nebulaattacks_spritesheet.get_sprite(64, 0, 32, 32),
+self.game.nebulaattacks_spritesheet.get_sprite(96, 0, 32, 32),]
+
+        self.right_attacksanimation = self.nebulaattacks
+
+        self.down_attacksanimation = self.nebulaattacks
+
+        self.left_attacksanimation = self.nebulaattacks
+
+        self.up_attacksanimation = self.nebulaattacks
+
+
+        self.scythe_x_left = self.game.player.rect.x - 50
+        self.scythe_y_left = self.game.player.rect.y 
+        self.scythe_x_down = self.game.player.rect.x
+        self.scythe_y_down = self.game.player.rect.y + 50
+        self.scythe_x_right = self.game.player.rect.x + 50
+        self.scythe_y_right = self.game.player.rect.y
+        self.scythe_x_up = self.game.player.rect.x 
+        self.scythe_y_up = self.game.player.rect.y - 50
+        self.animation_number = 16
+
+
+    def update(self):
+        self.game.screen.blit(self.image,self.pos)
+        self.collide()
+
+        self.rect.x += self.x_change
+        self.rect.y += self.y_change
+
+        self.x_change = 0
+        self.y_change = 0
+
+
+    def collide(self):
+            hits = pygame.sprite.spritecollide(self, self.game.playerhitbox, False)
+            keys = pygame.key.get_pressed()
+            if hits:
+                self.game.player.afficheitem.trueorfalse = True
+                self.game.player.afficheitem.nom = self.nom
+                self.game.player.afficheitem.attribut1 = self.attribut
+            if (hits) and (self.game.player.epee.ID != None):
+                self.game.player.afficheequipped.trueorfalse = True
+                self.game.player.afficheequipped.nom = self.game.player.epee.ID.nom
+                self.game.player.afficheequipped.attribut1 = self.game.player.epee.ID.attribut
+            if not hits:
+                self.game.player.afficheitem.trueorfalse = False
+                self.game.player.afficheequipped.trueorfalse = False
+
+
+            if hits and keys[pygame.K_e]:
+                if self.game.player.take_timer() == False:
+                    if self.game.player.epee.ID != None:
+                        epee_instance = self.game.player.epee.ID(self.game,self.game.player.rect.x,self.game.player.rect.y)
+                        self.game.player.puissance -= epee_instance.puissance
+                    self.game.player.puissance += self.puissance
+                    self.game.player.epee.ID = Nebula_GreatSword
+                    self.game.player.widthattack = 40
+                    self.game.player.heightattack = 40
+                    self.game.player.epee.image = self.image
+                    self.game.player.rightattack_animations = self.down_attacksanimation
+                    self.game.player.downattack_animations = self.left_attacksanimation
+                    self.game.player.leftattack_animations = self.up_attacksanimation
+                    self.game.player.upattack_animations = self.right_attacksanimation
+                    self.game.player.arme_x_up = self.scythe_x_up
+                    self.game.player.arme_y_up = self.scythe_y_up
+                    self.game.player.arme_x_down = self.scythe_x_down
+                    self.game.player.arme_y_down = self.scythe_y_down
+                    self.game.player.arme_x_left = self.scythe_x_left
+                    self.game.player.arme_y_left = self.scythe_y_left
+                    self.game.player.arme_x_right = self.scythe_x_right
+                    self.game.player.arme_y_right = self.scythe_y_right
+                    self.game.player.animation_number = self.animation_number
+                    self.game.player.afficheitem.trueorfalse = False
+                    self.game.player.afficheequipped.trueorfalse = False
+                    self.kill()
+                    self.game.player.lasttaketimer = pygame.time.get_ticks() 
+
+
+
+class Seraphic_Blade(pygame.sprite.Sprite):
+    nom = "Seraphic Blade"
+    attribut = "Puissance : 5"
+    IDimage = "self.weapon_spritesheet.get_sprite(110,75,16,40)"
+    IDattack = ("self.whitecircleattacks_spritesheet.get_sprite(0, 0, 35, 32)",
+"self.whitecircleattacks_spritesheet.get_sprite(35, 0, 35, 32)",
+"self.whitecircleattacks_spritesheet.get_sprite(70, 0, 35, 32)",
+"self.whitecircleattacks_spritesheet.get_sprite(105, 0, 35, 32)",
+"self.whitecircleattacks_spritesheet.get_sprite(140, 0, 35, 32)",
+"self.whitecircleattacks_spritesheet.get_sprite(0, 32, 32, 35)",
+"self.whitecircleattacks_spritesheet.get_sprite(32, 32, 32, 35)",
+"self.whitecircleattacks_spritesheet.get_sprite(64, 32, 32, 35)",
+"self.whitecircleattacks_spritesheet.get_sprite(96, 32, 32, 35)",
+"self.whitecircleattacks_spritesheet.get_sprite(128, 32, 32, 35)",
+"self.whitecircleattacks_spritesheet.get_sprite(0, 67, 35, 32)",
+"self.whitecircleattacks_spritesheet.get_sprite(35, 67, 35, 32)",
+"self.whitecircleattacks_spritesheet.get_sprite(70, 67, 35, 32)",
+"self.whitecircleattacks_spritesheet.get_sprite(105, 67, 35, 32)",
+"self.whitecircleattacks_spritesheet.get_sprite(140, 67, 35, 32)",
+"self.whitecircleattacks_spritesheet.get_sprite(0, 99, 32, 35)",
+"self.whitecircleattacks_spritesheet.get_sprite(32, 99, 32, 35)",
+"self.whitecircleattacks_spritesheet.get_sprite(64, 99, 32, 35)",
+"self.whitecircleattacks_spritesheet.get_sprite(96, 99, 32, 35)",
+"self.whitecircleattacks_spritesheet.get_sprite(128, 99, 32, 35)",)
+    IDpos = (
+        "self.player.rect.x - 50",
+        "self.player.rect.y ",
+        "self.player.rect.x",
+        "self.player.rect.y + 50",
+        "self.player.rect.x + 50",
+        "self.player.rect.y",
+        "self.player.rect.x ",
+        "self.player.rect.y - 50",
+    )
+    
+    def __init__(self,game, x, y):
+
+        self.game = game 
+        self._layer = ITEM_LAYER
+
+        self.groups = self.game.all_sprites, self.game.item
+        pygame.sprite.Sprite.__init__(self, self.groups)
+
+        self.ID = Seraphic_Blade
+        self.image = self.game.weapon_spritesheet.get_sprite(110,75,16,40)
+
+        self.x = x
+        self.y = y
+        self.x_change = 0
+        self.y_change = 0
+
+        self.puissance = 5
+
+        self.rect = self.image.get_rect() 
+        self.rect.x = self.x
+        self.rect.y = self.y
+        self.pos = (x,y)
+
+        self.right_attacksanimation = [self.game.whitecircleattacks_spritesheet.get_sprite(0, 0, 35, 32),
+self.game.whitecircleattacks_spritesheet.get_sprite(35, 0, 35, 32),
+self.game.whitecircleattacks_spritesheet.get_sprite(70, 0, 35, 32),
+self.game.whitecircleattacks_spritesheet.get_sprite(105, 0, 35, 32),
+self.game.whitecircleattacks_spritesheet.get_sprite(140, 0, 35, 32),]
+
+        self.down_attacksanimation = [self.game.whitecircleattacks_spritesheet.get_sprite(0, 32, 32, 35),
+self.game.whitecircleattacks_spritesheet.get_sprite(32, 32, 32, 35),
+self.game.whitecircleattacks_spritesheet.get_sprite(64, 32, 32, 35),
+self.game.whitecircleattacks_spritesheet.get_sprite(96, 32, 32, 35),
+self.game.whitecircleattacks_spritesheet.get_sprite(128, 32, 32, 35),]
+
+        self.left_attacksanimation = [self.game.whitecircleattacks_spritesheet.get_sprite(0, 67, 35, 32),
+self.game.whitecircleattacks_spritesheet.get_sprite(35, 67, 35, 32),
+self.game.whitecircleattacks_spritesheet.get_sprite(70, 67, 35, 32),
+self.game.whitecircleattacks_spritesheet.get_sprite(105, 67, 35, 32),
+self.game.whitecircleattacks_spritesheet.get_sprite(140, 67, 35, 32),]
+
+        self.up_attacksanimation = [self.game.whitecircleattacks_spritesheet.get_sprite(0, 99, 32, 35),
+self.game.whitecircleattacks_spritesheet.get_sprite(32, 99, 32, 35),
+self.game.whitecircleattacks_spritesheet.get_sprite(64, 99, 32, 35),
+self.game.whitecircleattacks_spritesheet.get_sprite(96, 99, 32, 35),
+self.game.whitecircleattacks_spritesheet.get_sprite(128, 99, 32, 35),]
+
+
+
+
+
+
+        self.scythe_x_left = self.game.player.rect.x - 50
+        self.scythe_y_left = self.game.player.rect.y 
+        self.scythe_x_down = self.game.player.rect.x
+        self.scythe_y_down = self.game.player.rect.y + 50
+        self.scythe_x_right = self.game.player.rect.x + 50
+        self.scythe_y_right = self.game.player.rect.y
+        self.scythe_x_up = self.game.player.rect.x 
+        self.scythe_y_up = self.game.player.rect.y - 50
+        self.animation_number = 5
+
+
+    def update(self):
+        self.game.screen.blit(self.image,self.pos)
+        self.collide()
+
+        self.rect.x += self.x_change
+        self.rect.y += self.y_change
+
+        self.x_change = 0
+        self.y_change = 0
+
+
+    def collide(self):
+            hits = pygame.sprite.spritecollide(self, self.game.playerhitbox, False)
+            keys = pygame.key.get_pressed()
+            if hits:
+                self.game.player.afficheitem.trueorfalse = True
+                self.game.player.afficheitem.nom = self.nom
+                self.game.player.afficheitem.attribut1 = self.attribut
+            if (hits) and (self.game.player.epee.ID != None):
+                self.game.player.afficheequipped.trueorfalse = True
+                self.game.player.afficheequipped.nom = self.game.player.epee.ID.nom
+                self.game.player.afficheequipped.attribut1 = self.game.player.epee.ID.attribut
+            if not hits:
+                self.game.player.afficheitem.trueorfalse = False
+                self.game.player.afficheequipped.trueorfalse = False
+
+
+            if hits and keys[pygame.K_e]:
+                if self.game.player.take_timer() == False:
+                    if self.game.player.epee.ID != None:
+                        epee_instance = self.game.player.epee.ID(self.game,self.game.player.rect.x,self.game.player.rect.y)
+                        self.game.player.puissance -= epee_instance.puissance
+                    self.game.player.puissance += self.puissance
+                    self.game.player.epee.ID = Seraphic_Blade
+                    self.game.player.widthattack = 40
+                    self.game.player.heightattack = 40
+                    self.game.player.epee.image = self.image
+                    self.game.player.rightattack_animations = self.down_attacksanimation
+                    self.game.player.downattack_animations = self.left_attacksanimation
+                    self.game.player.leftattack_animations = self.up_attacksanimation
+                    self.game.player.upattack_animations = self.right_attacksanimation
+                    self.game.player.arme_x_up = self.scythe_x_up
+                    self.game.player.arme_y_up = self.scythe_y_up
+                    self.game.player.arme_x_down = self.scythe_x_down
+                    self.game.player.arme_y_down = self.scythe_y_down
+                    self.game.player.arme_x_left = self.scythe_x_left
+                    self.game.player.arme_y_left = self.scythe_y_left
+                    self.game.player.arme_x_right = self.scythe_x_right
+                    self.game.player.arme_y_right = self.scythe_y_right
+                    self.game.player.animation_number = self.animation_number
+                    self.game.player.afficheitem.trueorfalse = False
+                    self.game.player.afficheequipped.trueorfalse = False
+                    self.kill()
+                    self.game.player.lasttaketimer = pygame.time.get_ticks() 
+
+
+class Azure_Blade(pygame.sprite.Sprite):
+    nom = "Azure Blade"
+    attribut = "Puissance : 5"
+    IDimage = "self.weapon_spritesheet.get_sprite(146,75,16,40)"
+    IDattack = ("self.bluecircleattacks_spritesheet.get_sprite(0, 0, 35, 32)",
+"self.bluecircleattacks_spritesheet.get_sprite(35, 0, 35, 32)",
+"self.bluecircleattacks_spritesheet.get_sprite(70, 0, 35, 32)",
+"self.bluecircleattacks_spritesheet.get_sprite(105, 0, 35, 32)",
+"self.bluecircleattacks_spritesheet.get_sprite(140, 0, 35, 32)",
+"self.bluecircleattacks_spritesheet.get_sprite(0, 32, 32, 35)",
+"self.bluecircleattacks_spritesheet.get_sprite(32, 32, 32, 35)",
+"self.bluecircleattacks_spritesheet.get_sprite(64, 32, 32, 35)",
+"self.bluecircleattacks_spritesheet.get_sprite(96, 32, 32, 35)",
+"self.bluecircleattacks_spritesheet.get_sprite(128, 32, 32, 35)",
+"self.bluecircleattacks_spritesheet.get_sprite(0, 67, 35, 32)",
+"self.bluecircleattacks_spritesheet.get_sprite(35, 67, 35, 32)",
+"self.bluecircleattacks_spritesheet.get_sprite(70, 67, 35, 32)",
+"self.bluecircleattacks_spritesheet.get_sprite(105, 67, 35, 32)",
+"self.bluecircleattacks_spritesheet.get_sprite(140, 67, 35, 32)",
+"self.bluecircleattacks_spritesheet.get_sprite(0, 99, 32, 35)",
+"self.bluecircleattacks_spritesheet.get_sprite(32, 99, 32, 35)",
+"self.bluecircleattacks_spritesheet.get_sprite(64, 99, 32, 35)",
+"self.bluecircleattacks_spritesheet.get_sprite(96, 99, 32, 35)",
+"self.bluecircleattacks_spritesheet.get_sprite(128, 99, 32, 35)",)
+    IDpos = (
+        "self.player.rect.x - 50",
+        "self.player.rect.y ",
+        "self.player.rect.x",
+        "self.player.rect.y + 50",
+        "self.player.rect.x + 50",
+        "self.player.rect.y",
+        "self.player.rect.x ",
+        "self.player.rect.y - 50",
+    )
+    
+    def __init__(self,game, x, y):
+
+        self.game = game 
+        self._layer = ITEM_LAYER
+
+        self.groups = self.game.all_sprites, self.game.item
+        pygame.sprite.Sprite.__init__(self, self.groups)
+
+        self.ID = Seraphic_Blade
+        self.image = self.game.weapon_spritesheet.get_sprite(146,75,16,40)
+
+        self.x = x
+        self.y = y
+        self.x_change = 0
+        self.y_change = 0
+
+        self.puissance = 5
+
+        self.rect = self.image.get_rect() 
+        self.rect.x = self.x
+        self.rect.y = self.y
+        self.pos = (x,y)
+
+        self.right_attacksanimation = [self.game.bluecircleattacks_spritesheet.get_sprite(0, 0, 35, 32),
+self.game.bluecircleattacks_spritesheet.get_sprite(35, 0, 35, 32),
+self.game.bluecircleattacks_spritesheet.get_sprite(70, 0, 35, 32),
+self.game.bluecircleattacks_spritesheet.get_sprite(105, 0, 35, 32),
+self.game.bluecircleattacks_spritesheet.get_sprite(140, 0, 35, 32),]
+
+        self.down_attacksanimation = [self.game.bluecircleattacks_spritesheet.get_sprite(0, 32, 32, 35),
+self.game.bluecircleattacks_spritesheet.get_sprite(32, 32, 32, 35),
+self.game.bluecircleattacks_spritesheet.get_sprite(64, 32, 32, 35),
+self.game.bluecircleattacks_spritesheet.get_sprite(96, 32, 32, 35),
+self.game.bluecircleattacks_spritesheet.get_sprite(128, 32, 32, 35),]
+
+        self.left_attacksanimation = [self.game.bluecircleattacks_spritesheet.get_sprite(0, 67, 35, 32),
+self.game.bluecircleattacks_spritesheet.get_sprite(35, 67, 35, 32),
+self.game.bluecircleattacks_spritesheet.get_sprite(70, 67, 35, 32),
+self.game.bluecircleattacks_spritesheet.get_sprite(105, 67, 35, 32),
+self.game.bluecircleattacks_spritesheet.get_sprite(140, 67, 35, 32),]
+
+        self.up_attacksanimation = [self.game.bluecircleattacks_spritesheet.get_sprite(0, 99, 32, 35),
+self.game.bluecircleattacks_spritesheet.get_sprite(32, 99, 32, 35),
+self.game.bluecircleattacks_spritesheet.get_sprite(64, 99, 32, 35),
+self.game.bluecircleattacks_spritesheet.get_sprite(96, 99, 32, 35),
+self.game.bluecircleattacks_spritesheet.get_sprite(128, 99, 32, 35),]
+
+
+
+
+
+
+        self.scythe_x_left = self.game.player.rect.x - 50
+        self.scythe_y_left = self.game.player.rect.y 
+        self.scythe_x_down = self.game.player.rect.x
+        self.scythe_y_down = self.game.player.rect.y + 50
+        self.scythe_x_right = self.game.player.rect.x + 50
+        self.scythe_y_right = self.game.player.rect.y
+        self.scythe_x_up = self.game.player.rect.x 
+        self.scythe_y_up = self.game.player.rect.y - 50
+        self.animation_number = 5
+
+
+    def update(self):
+        self.game.screen.blit(self.image,self.pos)
+        self.collide()
+
+        self.rect.x += self.x_change
+        self.rect.y += self.y_change
+
+        self.x_change = 0
+        self.y_change = 0
+
+
+    def collide(self):
+            hits = pygame.sprite.spritecollide(self, self.game.playerhitbox, False)
+            keys = pygame.key.get_pressed()
+            if hits:
+                self.game.player.afficheitem.trueorfalse = True
+                self.game.player.afficheitem.nom = self.nom
+                self.game.player.afficheitem.attribut1 = self.attribut
+            if (hits) and (self.game.player.epee.ID != None):
+                self.game.player.afficheequipped.trueorfalse = True
+                self.game.player.afficheequipped.nom = self.game.player.epee.ID.nom
+                self.game.player.afficheequipped.attribut1 = self.game.player.epee.ID.attribut
+            if not hits:
+                self.game.player.afficheitem.trueorfalse = False
+                self.game.player.afficheequipped.trueorfalse = False
+
+
+            if hits and keys[pygame.K_e]:
+                if self.game.player.take_timer() == False:
+                    if self.game.player.epee.ID != None:
+                        epee_instance = self.game.player.epee.ID(self.game,self.game.player.rect.x,self.game.player.rect.y)
+                        self.game.player.puissance -= epee_instance.puissance
+                    self.game.player.puissance += self.puissance
+                    self.game.player.epee.ID = Seraphic_Blade
+                    self.game.player.widthattack = 40
+                    self.game.player.heightattack = 40
+                    self.game.player.epee.image = self.image
+                    self.game.player.rightattack_animations = self.down_attacksanimation
+                    self.game.player.downattack_animations = self.left_attacksanimation
+                    self.game.player.leftattack_animations = self.up_attacksanimation
+                    self.game.player.upattack_animations = self.right_attacksanimation
+                    self.game.player.arme_x_up = self.scythe_x_up
+                    self.game.player.arme_y_up = self.scythe_y_up
+                    self.game.player.arme_x_down = self.scythe_x_down
+                    self.game.player.arme_y_down = self.scythe_y_down
+                    self.game.player.arme_x_left = self.scythe_x_left
+                    self.game.player.arme_y_left = self.scythe_y_left
+                    self.game.player.arme_x_right = self.scythe_x_right
+                    self.game.player.arme_y_right = self.scythe_y_right
+                    self.game.player.animation_number = self.animation_number
+                    self.game.player.afficheitem.trueorfalse = False
+                    self.game.player.afficheequipped.trueorfalse = False
+                    self.kill()
+                    self.game.player.lasttaketimer = pygame.time.get_ticks() 
+
+
+class Lustrous_Blade(pygame.sprite.Sprite):
+    nom = "Lustrous Blade"
+    attribut = "Puissance : 5"
+    IDimage = "self.weapon_spritesheet.get_sprite(128,75,16,40)"
+    IDattack = ("self.yellowcircle_spritesheet.get_sprite(0, 0, 35, 32)",
+"self.yellowcircle_spritesheet.get_sprite(35, 0, 35, 32)",
+"self.yellowcircle_spritesheet.get_sprite(70, 0, 35, 32)",
+"self.yellowcircle_spritesheet.get_sprite(105, 0, 35, 32)",
+"self.yellowcircle_spritesheet.get_sprite(140, 0, 35, 32)",
+"self.yellowcircle_spritesheet.get_sprite(0, 32, 32, 35)",
+"self.yellowcircle_spritesheet.get_sprite(32, 32, 32, 35)",
+"self.yellowcircle_spritesheet.get_sprite(64, 32, 32, 35)",
+"self.yellowcircle_spritesheet.get_sprite(96, 32, 32, 35)",
+"self.yellowcircle_spritesheet.get_sprite(128, 32, 32, 35)",
+"self.yellowcircle_spritesheet.get_sprite(0, 67, 35, 32)",
+"self.yellowcircle_spritesheet.get_sprite(35, 67, 35, 32)",
+"self.yellowcircle_spritesheet.get_sprite(70, 67, 35, 32)",
+"self.yellowcircle_spritesheet.get_sprite(105, 67, 35, 32)",
+"self.yellowcircle_spritesheet.get_sprite(140, 67, 35, 32)",
+"self.yellowcircle_spritesheet.get_sprite(0, 99, 32, 35)",
+"self.yellowcircle_spritesheet.get_sprite(32, 99, 32, 35)",
+"self.yellowcircle_spritesheet.get_sprite(64, 99, 32, 35)",
+"self.yellowcircle_spritesheet.get_sprite(96, 99, 32, 35)",
+"self.yellowcircle_spritesheet.get_sprite(128, 99, 32, 35)",)
+    IDpos = (
+        "self.player.rect.x - 50",
+        "self.player.rect.y ",
+        "self.player.rect.x",
+        "self.player.rect.y + 50",
+        "self.player.rect.x + 50",
+        "self.player.rect.y",
+        "self.player.rect.x ",
+        "self.player.rect.y - 50",
+    )
+    
+    def __init__(self,game, x, y):
+
+        self.game = game 
+        self._layer = ITEM_LAYER
+
+        self.groups = self.game.all_sprites, self.game.item
+        pygame.sprite.Sprite.__init__(self, self.groups)
+
+        self.ID = Lustrous_Blade
+        self.image = self.game.weapon_spritesheet.get_sprite(128,75,16,40)
+
+        self.x = x
+        self.y = y
+        self.x_change = 0
+        self.y_change = 0
+
+        self.puissance = 5
+
+        self.rect = self.image.get_rect() 
+        self.rect.x = self.x
+        self.rect.y = self.y
+        self.pos = (x,y)
+
+        self.right_attacksanimation = [self.game.yellowcircle_spritesheet.get_sprite(0, 0, 35, 32),
+self.game.yellowcircle_spritesheet.get_sprite(35, 0, 35, 32),
+self.game.yellowcircle_spritesheet.get_sprite(70, 0, 35, 32),
+self.game.yellowcircle_spritesheet.get_sprite(105, 0, 35, 32),
+self.game.yellowcircle_spritesheet.get_sprite(140, 0, 35, 32),]
+
+        self.down_attacksanimation = [self.game.yellowcircle_spritesheet.get_sprite(0, 32, 32, 35),
+self.game.yellowcircle_spritesheet.get_sprite(32, 32, 32, 35),
+self.game.yellowcircle_spritesheet.get_sprite(64, 32, 32, 35),
+self.game.yellowcircle_spritesheet.get_sprite(96, 32, 32, 35),
+self.game.yellowcircle_spritesheet.get_sprite(128, 32, 32, 35),]
+
+        self.left_attacksanimation = [self.game.yellowcircle_spritesheet.get_sprite(0, 67, 35, 32),
+self.game.yellowcircle_spritesheet.get_sprite(35, 67, 35, 32),
+self.game.yellowcircle_spritesheet.get_sprite(70, 67, 35, 32),
+self.game.yellowcircle_spritesheet.get_sprite(105, 67, 35, 32),
+self.game.yellowcircle_spritesheet.get_sprite(140, 67, 35, 32),]
+
+        self.up_attacksanimation = [self.game.yellowcircle_spritesheet.get_sprite(0, 99, 32, 35),
+self.game.yellowcircle_spritesheet.get_sprite(32, 99, 32, 35),
+self.game.yellowcircle_spritesheet.get_sprite(64, 99, 32, 35),
+self.game.yellowcircle_spritesheet.get_sprite(96, 99, 32, 35),
+self.game.yellowcircle_spritesheet.get_sprite(128, 99, 32, 35),]
+
+
+
+
+        self.scythe_x_left = self.game.player.rect.x - 50
+        self.scythe_y_left = self.game.player.rect.y 
+        self.scythe_x_down = self.game.player.rect.x
+        self.scythe_y_down = self.game.player.rect.y + 50
+        self.scythe_x_right = self.game.player.rect.x + 50
+        self.scythe_y_right = self.game.player.rect.y
+        self.scythe_x_up = self.game.player.rect.x 
+        self.scythe_y_up = self.game.player.rect.y - 50
+        self.animation_number = 5
+
+
+    def update(self):
+        self.game.screen.blit(self.image,self.pos)
+        self.collide()
+
+        self.rect.x += self.x_change
+        self.rect.y += self.y_change
+
+        self.x_change = 0
+        self.y_change = 0
+
+
+    def collide(self):
+            hits = pygame.sprite.spritecollide(self, self.game.playerhitbox, False)
+            keys = pygame.key.get_pressed()
+            if hits:
+                self.game.player.afficheitem.trueorfalse = True
+                self.game.player.afficheitem.nom = self.nom
+                self.game.player.afficheitem.attribut1 = self.attribut
+            if (hits) and (self.game.player.epee.ID != None):
+                self.game.player.afficheequipped.trueorfalse = True
+                self.game.player.afficheequipped.nom = self.game.player.epee.ID.nom
+                self.game.player.afficheequipped.attribut1 = self.game.player.epee.ID.attribut
+            if not hits:
+                self.game.player.afficheitem.trueorfalse = False
+                self.game.player.afficheequipped.trueorfalse = False
+
+
+            if hits and keys[pygame.K_e]:
+                if self.game.player.take_timer() == False:
+                    if self.game.player.epee.ID != None:
+                        epee_instance = self.game.player.epee.ID(self.game,self.game.player.rect.x,self.game.player.rect.y)
+                        self.game.player.puissance -= epee_instance.puissance
+                    self.game.player.puissance += self.puissance
+                    self.game.player.epee.ID = Lustrous_Blade
+                    self.game.player.widthattack = 40
+                    self.game.player.heightattack = 40
+                    self.game.player.epee.image = self.image
+                    self.game.player.rightattack_animations = self.down_attacksanimation
+                    self.game.player.downattack_animations = self.left_attacksanimation
+                    self.game.player.leftattack_animations = self.up_attacksanimation
+                    self.game.player.upattack_animations = self.right_attacksanimation
+                    self.game.player.arme_x_up = self.scythe_x_up
+                    self.game.player.arme_y_up = self.scythe_y_up
+                    self.game.player.arme_x_down = self.scythe_x_down
+                    self.game.player.arme_y_down = self.scythe_y_down
+                    self.game.player.arme_x_left = self.scythe_x_left
+                    self.game.player.arme_y_left = self.scythe_y_left
+                    self.game.player.arme_x_right = self.scythe_x_right
+                    self.game.player.arme_y_right = self.scythe_y_right
+                    self.game.player.animation_number = self.animation_number
+                    self.game.player.afficheitem.trueorfalse = False
+                    self.game.player.afficheequipped.trueorfalse = False
+                    self.kill()
+                    self.game.player.lasttaketimer = pygame.time.get_ticks() 
+
+
+class Heavenly_Wand(pygame.sprite.Sprite):
+    nom = "Heavenly Wand"
+    attribut = "Puissance : 9"
+    IDimage = "self.weapon4_spritesheet.get_sprite(121,4,20,46)"
+    IDattack = ("self.bluething_spritesheet.get_sprite(0, 0, 36, 32)",
+"self.bluething_spritesheet.get_sprite(36, 0, 36, 32)",
+"self.bluething_spritesheet.get_sprite(72, 0, 36, 32)",
+"self.bluething_spritesheet.get_sprite(108, 0, 36, 32)",
+"self.bluething_spritesheet.get_sprite(144, 0, 36, 32)",
+"self.bluething_spritesheet.get_sprite(180, 0, 36, 32)",
+"self.bluething_spritesheet.get_sprite(216, 0, 36, 32)",
+"self.bluething_spritesheet.get_sprite(0, 32, 32, 36)",
+"self.bluething_spritesheet.get_sprite(32, 32, 32, 36)",
+"self.bluething_spritesheet.get_sprite(64, 32, 32, 36)",
+"self.bluething_spritesheet.get_sprite(96, 32, 32, 36)",
+"self.bluething_spritesheet.get_sprite(128, 32, 32, 36)",
+"self.bluething_spritesheet.get_sprite(160, 32, 32, 36)",
+"self.bluething_spritesheet.get_sprite(192, 32, 32, 36)",
+"self.bluething_spritesheet.get_sprite(0, 68, 36, 32)",
+"self.bluething_spritesheet.get_sprite(36, 68, 36, 32)",
+"self.bluething_spritesheet.get_sprite(72, 68, 36, 32)",
+"self.bluething_spritesheet.get_sprite(108, 68, 36, 32)",
+"self.bluething_spritesheet.get_sprite(144, 68, 36, 32)",
+"self.bluething_spritesheet.get_sprite(180, 68, 36, 32)",
+"self.bluething_spritesheet.get_sprite(216, 68, 36, 32)",
+"self.bluething_spritesheet.get_sprite(0, 100, 32, 36)",
+"self.bluething_spritesheet.get_sprite(32, 100, 32, 36)",
+"self.bluething_spritesheet.get_sprite(64, 100, 32, 36)",
+"self.bluething_spritesheet.get_sprite(96, 100, 32, 36)",
+"self.bluething_spritesheet.get_sprite(128, 100, 32, 36)",
+"self.bluething_spritesheet.get_sprite(160, 100, 32, 36)",
+"self.bluething_spritesheet.get_sprite(192, 100, 32, 36)",)
+    IDpos = (
+        "self.player.rect.x - 50",
+        "self.player.rect.y ",
+        "self.player.rect.x",
+        "self.player.rect.y + 50",
+        "self.player.rect.x + 50",
+        "self.player.rect.y",
+        "self.player.rect.x ",
+        "self.player.rect.y - 50",
+    )
+    
+    def __init__(self,game, x, y):
+
+        self.game = game 
+        self._layer = ITEM_LAYER
+
+        self.groups = self.game.all_sprites, self.game.item
+        pygame.sprite.Sprite.__init__(self, self.groups)
+
+        self.ID = Heavenly_Wand
+        self.image = self.game.weapon4_spritesheet.get_sprite(121,4,20,46)
+
+        self.x = x
+        self.y = y
+        self.x_change = 0
+        self.y_change = 0
+
+        self.puissance = 9
+
+        self.rect = self.image.get_rect() 
+        self.rect.x = self.x
+        self.rect.y = self.y
+        self.pos = (x,y)
+
+        self.right_attacksanimation = [self.game.bluething_spritesheet.get_sprite(0, 0, 36, 32),
+self.game.bluething_spritesheet.get_sprite(36, 0, 36, 32),
+self.game.bluething_spritesheet.get_sprite(72, 0, 36, 32),
+self.game.bluething_spritesheet.get_sprite(108, 0, 36, 32),
+self.game.bluething_spritesheet.get_sprite(144, 0, 36, 32),
+self.game.bluething_spritesheet.get_sprite(180, 0, 36, 32),
+self.game.bluething_spritesheet.get_sprite(216, 0, 36, 32),]
+
+        self.down_attacksanimation = [self.game.bluething_spritesheet.get_sprite(0, 32, 32, 36),
+self.game.bluething_spritesheet.get_sprite(32, 32, 32, 36),
+self.game.bluething_spritesheet.get_sprite(64, 32, 32, 36),
+self.game.bluething_spritesheet.get_sprite(96, 32, 32, 36),
+self.game.bluething_spritesheet.get_sprite(128, 32, 32, 36),
+self.game.bluething_spritesheet.get_sprite(160, 32, 32, 36),
+self.game.bluething_spritesheet.get_sprite(192, 32, 32, 36),]
+
+        self.left_attacksanimation = [self.game.bluething_spritesheet.get_sprite(0, 68, 36, 32),
+self.game.bluething_spritesheet.get_sprite(36, 68, 36, 32),
+self.game.bluething_spritesheet.get_sprite(72, 68, 36, 32),
+self.game.bluething_spritesheet.get_sprite(108, 68, 36, 32),
+self.game.bluething_spritesheet.get_sprite(144, 68, 36, 32),
+self.game.bluething_spritesheet.get_sprite(180, 68, 36, 32),
+self.game.bluething_spritesheet.get_sprite(216, 68, 36, 32),]
+
+        self.up_attacksanimation = [self.game.bluething_spritesheet.get_sprite(0, 100, 32, 36),
+self.game.bluething_spritesheet.get_sprite(32, 100, 32, 36),
+self.game.bluething_spritesheet.get_sprite(64, 100, 32, 36),
+self.game.bluething_spritesheet.get_sprite(96, 100, 32, 36),
+self.game.bluething_spritesheet.get_sprite(128, 100, 32, 36),
+self.game.bluething_spritesheet.get_sprite(160, 100, 32, 36),
+self.game.bluething_spritesheet.get_sprite(192, 100, 32, 36),]
+
+        self.scythe_x_left = self.game.player.rect.x - 50
+        self.scythe_y_left = self.game.player.rect.y 
+        self.scythe_x_down = self.game.player.rect.x
+        self.scythe_y_down = self.game.player.rect.y + 50
+        self.scythe_x_right = self.game.player.rect.x + 50
+        self.scythe_y_right = self.game.player.rect.y
+        self.scythe_x_up = self.game.player.rect.x 
+        self.scythe_y_up = self.game.player.rect.y - 50
+        self.animation_number = 7
+
+
+    def update(self):
+        self.game.screen.blit(self.image,self.pos)
+        self.collide()
+
+        self.rect.x += self.x_change
+        self.rect.y += self.y_change
+
+        self.x_change = 0
+        self.y_change = 0
+
+
+    def collide(self):
+            hits = pygame.sprite.spritecollide(self, self.game.playerhitbox, False)
+            keys = pygame.key.get_pressed()
+            if hits:
+                self.game.player.afficheitem.trueorfalse = True
+                self.game.player.afficheitem.nom = self.nom
+                self.game.player.afficheitem.attribut1 = self.attribut
+            if (hits) and (self.game.player.epee.ID != None):
+                self.game.player.afficheequipped.trueorfalse = True
+                self.game.player.afficheequipped.nom = self.game.player.epee.ID.nom
+                self.game.player.afficheequipped.attribut1 = self.game.player.epee.ID.attribut
+            if not hits:
+                self.game.player.afficheitem.trueorfalse = False
+                self.game.player.afficheequipped.trueorfalse = False
+
+
+            if hits and keys[pygame.K_e]:
+                if self.game.player.take_timer() == False:
+                    if self.game.player.epee.ID != None:
+                        epee_instance = self.game.player.epee.ID(self.game,self.game.player.rect.x,self.game.player.rect.y)
+                        self.game.player.puissance -= epee_instance.puissance
+                    self.game.player.puissance += self.puissance
+                    self.game.player.epee.ID = Heavenly_Wand
+                    self.game.player.widthattack = 40
+                    self.game.player.heightattack = 40
                     self.game.player.epee.image = self.image
                     self.game.player.rightattack_animations = self.down_attacksanimation
                     self.game.player.downattack_animations = self.left_attacksanimation

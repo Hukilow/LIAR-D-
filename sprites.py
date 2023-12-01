@@ -559,7 +559,7 @@ class Attack(pygame.sprite.Sprite):
     def dropchest(self,DROPCHEST):
         self.game.totalchestopen += 1
         if DROPCHEST == "DROPCHEST1": # couloir commun
-            DROPCHEST = [Supernova_Scepter]
+            DROPCHEST = [Heavenly_Wand]
             return random.choice(DROPCHEST)
         elif DROPCHEST == "DROPCHEST2": # couloir peu commun
             DROPCHEST = [Scythe,GreatSword,HellScythe,SnakeSword,WintersBallad,Hematite_Blade]

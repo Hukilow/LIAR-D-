@@ -805,7 +805,6 @@ class AngryMaid(pygame.sprite.Sprite):
             if distance_to_player <= self.detect_range:
                 for event in pygame.event.get():
                     if event.type == pygame.MOUSEBUTTONDOWN and event.button == 1:
-                        self.game.Attack(self.game)
                         self.angry = True
                 if self.angry:
                     if distance_to_player >= self.detect_range-250:

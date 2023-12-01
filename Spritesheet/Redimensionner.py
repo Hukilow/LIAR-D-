@@ -8,8 +8,8 @@ input_folder = 'Input/'
 output_folder = 'Sprite/'
 
 # Dimensions souhaitées pour les images redimensionnées
-new_width = 210
-new_height = 64
+new_width = 22
+new_height = 40
 
 # Liste des fichiers d'images dans le dossier
 image_files = [file for file in os.listdir(input_folder) if file.lower().endswith(('.png', '.jpg', '.jpeg', '.gif', '.bmp', '.tiff'))]
