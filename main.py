@@ -6,6 +6,8 @@ from install_dependencies import verify_requirements
 class Game():
     def __init__(self):
         pygame.init()
+        pygame.display.set_caption("LIAR(D)")
+        
         if os.stat("Saves/config.dat").st_size == 0:   
             self.WIN_WIDTH = 1200
             self.WIN_HEIGHT = 800
@@ -110,7 +112,7 @@ class Game():
                 if column == "P":
                     coordonnes = (j,i)
                 if column == "E":
-                    Slime(self, j, i,tilemap[0])
+                    AngryMaid(self, j, i,tilemap[0])
                 if column == 'C':
                     Coffre9(self, j, i)
                 if column == 'M':
@@ -177,7 +179,7 @@ class Game():
                 if column == "B":
                     Block(self, j, i)
                 if column == "E":
-                    Enemy(self, j, i,tilemap[0])
+                    AngryMaid(self, j, i,tilemap[0])
                 if column == 'C':
                     Coffre1(self, j, i)
                 if column == 'M':
@@ -865,12 +867,12 @@ class Game():
 
     def win_screen(self):
         if self.win == True:
-            text = self.font.render('You won loleee', True, WHITE)
+            text = self.font.render('You won lol', True, WHITE)
             text_rect = text.get_rect(center=(self.WIN_WIDTH/2, 100))
 
-            hp_multiplicateur_button = Button(50,self.WIN_HEIGHT/2, 300,50, WHITE, BLUE, 'HP decrease for Player', 16)
+            hp_multiplicateur_button = Button(self.WIN_WIDTH/2-150,self.WIN_HEIGHT/2-100, 300,50, WHITE, BLUE, 'HP decrease for Player', 16)
             hpenemy_multiplicateur_button = Button(self.WIN_WIDTH/2-150,self.WIN_HEIGHT/2, 300,50, WHITE, RED, 'HP increase for Enemies', 16)
-            attackenemy_multiplicateur_button = Button((self.WIN_WIDTH-350),self.WIN_HEIGHT/2, 300,50, WHITE, GREEN, 'Attack increase for Enemies', 16)
+            attackenemy_multiplicateur_button = Button(self.WIN_WIDTH/2-150,self.WIN_HEIGHT/2+100, 300,50, WHITE, GREEN, 'Attack increase for Enemies', 16)
 
             for sprite in self.all_sprites:
                 sprite.kill()
@@ -927,7 +929,7 @@ if __name__ == "__main__":
     from PIL import Image
     import sys
     import os
-    os.system('cls')
+    #os.system('cls')
     g = Game()
     g.intro_screen()
 

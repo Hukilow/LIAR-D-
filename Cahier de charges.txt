@@ -15,6 +15,7 @@ Cahier de charges : JEU LABYRINTHE 2D
             LOSE_SCREEN
             CHANGER POLICE
         
+    --Set ICON pygame.display.set_icon(Icon_name)
     --Améliorer IA/BOSS
     -- Faire glitch animation fight boss
 

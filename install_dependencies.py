@@ -16,7 +16,7 @@ def verify_requirements():
             lib_version = lib_parts[1] if len(lib_parts) == 2 else None
 
 
-            if lib_name not in installed_libraries or (lib_version and parse_version(lib_version) > parse_version(installed_libraries[installed_libraries.index(lib_name) + 1])):
+            if lib_name not in installed_libraries:
                 missing_libraries.append(lib)
 
         if missing_libraries:

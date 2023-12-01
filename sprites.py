@@ -90,7 +90,7 @@ class Player(pygame.sprite.Sprite):
         self.x_change = 0
         self.y_change = 0
         
-        self.healh = 10*self.game.multiplicateur_difficulte_hp
+        self.healh = 300*self.game.multiplicateur_difficulte_hp
 
         self.puissance = 1
         self.widthattack = 32

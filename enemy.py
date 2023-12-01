@@ -696,7 +696,7 @@ class AngryMaid(pygame.sprite.Sprite):
 
         self.etage = tilemap
 
-     
+        self.angry = False
 
         self.x = x * TILESIZE
         self.y = y * TILESIZE
@@ -725,7 +725,7 @@ class AngryMaid(pygame.sprite.Sprite):
         self.max_travel = 15
 
         self.player = self.game.player  # Référence au joueur
-        self.detect_range = 100  # Portée de détection du joueur en pixels
+        self.detect_range = 300  # Portée de détection du joueur en pixels
         self.is_attacking = False  # Indicateur d'attaque
 
         self.down_animations = [self.game.maid_spritesheet.get_sprite(0, 0, 50, 45),
@@ -802,19 +802,26 @@ class AngryMaid(pygame.sprite.Sprite):
         self.collide_attack()
         if self.player:
             distance_to_player = math.dist((self.rect.centerx, self.rect.centery), (self.player.rect.centerx, self.player.rect.centery))
-            
             if distance_to_player <= self.detect_range:
-                if distance_to_player >= self.detect_range-50:
-                    self.is_attacking = False
-                    self.follow_player()
-                    self.animate()
+                for event in pygame.event.get():
+                    if event.type == pygame.MOUSEBUTTONDOWN and event.button == 1:
+                        self.game.Attack(self.game)
+                        self.angry = True
+                if self.angry:
+                    if distance_to_player >= self.detect_range-250:
+                        self.is_attacking = False
+                        self.follow_player(True)
+                        self.animate()
+                    else: 
+                        self.is_attacking = True
+                        self.animateidle()
                 else:
-                    self.is_attacking = True
+                    self.follow_player(False)
+                    self.is_attacking = False
                     self.animateidle()
-
             else:
-                self.is_attacking = False
                 self.animateidle()
+                self.is_attacking = False
 
         self.rect.x += self.x_change
         self.collide_blocks('x')
@@ -926,21 +933,33 @@ class AngryMaid(pygame.sprite.Sprite):
             if self.animation_loop >= 4:
                 self.animation_loop = 0
 
-    def follow_player(self):
+    def follow_player(self,justfacing):
         # Déplace le chevalier vers le joueur
         if self.player.rect.centerx < self.rect.centerx:
-            self.x_change = -self.vitesse
-            self.facing = 'left'
+            if justfacing:
+                self.x_change = -self.vitesse
+                self.facing = 'left'
+            else:
+                self.facing = 'left'
         elif self.player.rect.centerx > self.rect.centerx:
-            self.x_change = self.vitesse
-            self.facing = 'right'
+            if justfacing:
+                self.x_change = self.vitesse
+                self.facing = 'right'
+            else:
+                self.facing = 'right'
 
         if self.player.rect.centery < self.rect.centery:
-            self.y_change = -self.vitesse
-            self.facing = 'up'
+            if justfacing:
+                self.y_change = -self.vitesse
+                self.facing = 'up'
+            else:
+                self.facing = 'up'
         elif self.player.rect.centery > self.rect.centery:
-            self.y_change = self.vitesse
-            self.facing = 'down'
+            if justfacing:
+                self.y_change = self.vitesse
+                self.facing = 'down'
+            else:
+                self.facing = 'down'
 
     def collide_attack(self):
         hits = pygame.sprite.spritecollide(self, self.game.attacks, False)
@@ -949,6 +968,8 @@ class AngryMaid(pygame.sprite.Sprite):
                 self.healthbar.take_damage(self.game.player.puissance)
                 self.derniertemps = pygame.time.get_ticks()
                 print(self.healthbar.health)
+            if self.healthbar.health < self.healthbar.maxhealth:
+                self.angry = True
             if self.healthbar.health <= 0:
                 self.game.totalenemykill += 1
                 self.modify_tilemap()
@@ -2138,8 +2159,7 @@ self.game.impactpurple_spritesheet.get_sprite(320, 704, 64, 64),]
         elif self.player.rect.centerx > self.rect.centerx:
             self.x_change = -self.vitesse
             self.facing = 'left'
-
-        if self.player.rect.centery < self.rect.centery:
+        elif self.player.rect.centery < self.rect.centery:
             self.y_change = -self.vitesse
             self.facing = 'up'
         elif self.player.rect.centery > self.rect.centery:
@@ -2154,8 +2174,7 @@ self.game.impactpurple_spritesheet.get_sprite(320, 704, 64, 64),]
         elif self.player.rect.centerx > self.rect.centerx:
             self.x_change = self.vitesse
             self.facing = 'right'
-
-        if self.player.rect.centery < self.rect.centery:
+        elif self.player.rect.centery < self.rect.centery:
             self.y_change = self.vitesse
             self.facing = 'down'
         elif self.player.rect.centery > self.rect.centery:
