@@ -803,9 +803,10 @@ class AngryMaid(pygame.sprite.Sprite):
         if self.player:
             distance_to_player = math.dist((self.rect.centerx, self.rect.centery), (self.player.rect.centerx, self.player.rect.centery))
             if distance_to_player <= self.detect_range:
-                for event in pygame.event.get():
-                    if event.type == pygame.MOUSEBUTTONDOWN and event.button == 1:
-                        self.angry = True
+                if not self.angry:
+                    for event in pygame.event.get():
+                        if event.type == pygame.MOUSEBUTTONDOWN and event.button == 1:
+                            self.angry = True
                 if self.angry:
                     if distance_to_player >= self.detect_range-250:
                         self.is_attacking = False
@@ -2398,3 +2399,461 @@ self.game.impactpurple_spritesheet.get_sprite(320, 704, 64, 64),]
             self.facing = "left"
         elif -135 < angle <= -45:
             self.facing = "down"
+
+
+
+class Multicolor_Man(pygame.sprite.Sprite):
+    def __init__(self,game,x,y,tilemap):
+
+        self.game = game
+        self._layer = ENEMY_LAYER
+        self.groups = self.game.all_sprites, self.game.enemies
+        pygame.sprite.Sprite.__init__(self, self.groups)
+
+        self.__coortilemap = (y,x)
+
+        self.etage = tilemap
+
+     
+
+        self.x = x * TILESIZE
+        self.y = y * TILESIZE
+        self.width = TILESIZE
+        self.height = TILESIZE
+        self.vitesse = SLIME_SPEED
+        self.health = round(MULTICOLOR_MAN_HEALTH*self.game.multiplicateur_difficulte_hp_enemies)
+        self.maxhealth = round(MULTICOLOR_MAN_HEALTH*self.game.multiplicateur_difficulte_hp_enemies)
+        self.healthbar = HealthBar(game,self.x+20,(self.y-30),self.health,self.maxhealth,False)
+
+        self.derniertemps = pygame.time.get_ticks()
+        self.derniertemps1 = pygame.time.get_ticks()
+        self.derniertemps2 = pygame.time.get_ticks()
+
+        self.x_change = 0
+        self.y_change = 0
+        
+        self.image = self.game.enemy_spritesheet.get_sprite(0, 0, 32, 32)
+        
+        self.rect = self.image.get_rect()
+        self.rect.x = self.x
+        self.rect.y = self.y
+
+        self.facing = random.choice(['left','right','up','down'])
+        self.animation_loop = 1
+        self.animation_loopshort = 1
+        self.animation_looplong = 1
+        self.animation_loopidle = 1
+
+        self.movement_loop = 0
+        self.max_travel = 15
+
+        self.player = self.game.player  # Référence au joueur
+        self.detect_range = 250  # Portée de détection du joueur en pixels
+        self.is_attackingshort = False
+        self.is_attackinglong = False
+
+        self.right_animations = [self.game.multicolorwalk_spritesheet.get_sprite(576, 0, 48, 48),
+                           self.game.multicolorwalk_spritesheet.get_sprite(624, 0, 48, 48),
+                           self.game.multicolorwalk_spritesheet.get_sprite(672, 0, 48, 48),
+                           self.game.multicolorwalk_spritesheet.get_sprite(720, 0, 48, 48),
+                           self.game.multicolorwalk_spritesheet.get_sprite(768, 0, 48, 48),
+                           self.game.multicolorwalk_spritesheet.get_sprite(816, 0, 48, 48),]
+
+        self.left_animations = [self.game.multicolorwalk_spritesheet.get_sprite(864, 0, 48, 48),
+                           self.game.multicolorwalk_spritesheet.get_sprite(912, 0, 48, 48),
+                           self.game.multicolorwalk_spritesheet.get_sprite(960, 0, 48, 48),
+                           self.game.multicolorwalk_spritesheet.get_sprite(1008, 0, 48, 48),
+                           self.game.multicolorwalk_spritesheet.get_sprite(1056, 0, 48, 48),
+                           self.game.multicolorwalk_spritesheet.get_sprite(1104, 0, 48, 48),]
+
+        self.down_animations = [self.game.multicolorwalk_spritesheet.get_sprite(288, 0, 48, 48),
+                           self.game.multicolorwalk_spritesheet.get_sprite(336, 0, 48, 48),
+                           self.game.multicolorwalk_spritesheet.get_sprite(384, 0, 48, 48),
+                           self.game.multicolorwalk_spritesheet.get_sprite(432, 0, 48, 48),
+                           self.game.multicolorwalk_spritesheet.get_sprite(480, 0, 48, 48),
+                           self.game.multicolorwalk_spritesheet.get_sprite(528, 0, 48, 48),]
+
+        self.up_animations = [self.game.multicolorwalk_spritesheet.get_sprite(0 ,0, 48, 48),
+                           self.game.multicolorwalk_spritesheet.get_sprite(48, 0, 48, 48),
+                           self.game.multicolorwalk_spritesheet.get_sprite(96, 0, 48, 48),
+                           self.game.multicolorwalk_spritesheet.get_sprite(144, 0, 48, 48),
+                           self.game.multicolorwalk_spritesheet.get_sprite(192, 0, 48, 48),
+                           self.game.multicolorwalk_spritesheet.get_sprite(240, 0, 48, 48),]
+        
+        
+        self.right_idleanimations = [self.game.multicoloridle_spritesheet.get_sprite(192, 0, 48, 48),
+                                    self.game.multicoloridle_spritesheet.get_sprite(240, 0, 48, 48),]
+
+        self.left_idleanimations = [self.game.multicoloridle_spritesheet.get_sprite(288, 0, 48,48),
+                                    self.game.multicoloridle_spritesheet.get_sprite(336, 0, 48,48),]
+
+        self.down_idleanimations = [self.game.multicoloridle_spritesheet.get_sprite(0, 0, 48,48),
+                                    self.game.multicoloridle_spritesheet.get_sprite(48, 0, 48,48),]
+
+        self.up_idleanimations = [self.game.multicoloridle_spritesheet.get_sprite(96, 0, 48,48),
+                                    self.game.multicoloridle_spritesheet.get_sprite(144, 0, 48,48),]
+        
+
+        
+        self.up_attacksanimation = [self.game.purplecircleattack_spritesheet.get_sprite(0, 0, 35, 32),
+                                    self.game.purplecircleattack_spritesheet.get_sprite(35, 0, 35, 32),
+                                    self.game.purplecircleattack_spritesheet.get_sprite(70, 0, 35, 32),
+                                    self.game.purplecircleattack_spritesheet.get_sprite(105, 0, 35, 32),
+                                    self.game.purplecircleattack_spritesheet.get_sprite(140, 0, 35, 32),]
+
+        self.right_attacksanimation = [self.game.purplecircleattack_spritesheet.get_sprite(0, 32, 32, 35),
+                                    self.game.purplecircleattack_spritesheet.get_sprite(32, 32, 32, 35),
+                                    self.game.purplecircleattack_spritesheet.get_sprite(64, 32, 32, 35),
+                                    self.game.purplecircleattack_spritesheet.get_sprite(96, 32, 32, 35),
+                                    self.game.purplecircleattack_spritesheet.get_sprite(128, 32, 32, 35),]
+
+        self.down_attacksanimation = [self.game.purplecircleattack_spritesheet.get_sprite(0, 67, 35, 32),
+                                    self.game.purplecircleattack_spritesheet.get_sprite(35, 67, 35, 32),
+                                    self.game.purplecircleattack_spritesheet.get_sprite(70, 67, 35, 32),
+                                    self.game.purplecircleattack_spritesheet.get_sprite(105, 67, 35, 32),
+                                    self.game.purplecircleattack_spritesheet.get_sprite(140, 67, 35, 32),]
+
+        self.left_attacksanimation = [self.game.purplecircleattack_spritesheet.get_sprite(0, 99, 32, 35),
+                                self.game.purplecircleattack_spritesheet.get_sprite(32, 99, 32, 35),
+                                self.game.purplecircleattack_spritesheet.get_sprite(64, 99, 32, 35),
+                                self.game.purplecircleattack_spritesheet.get_sprite(96, 99, 32, 35),
+                                self.game.purplecircleattack_spritesheet.get_sprite(128, 99, 32, 35),]
+        
+        self.right_attacksanimationpos = [self.game.multicolorattackshort_spritesheet.get_sprite(288, 0, 48, 48),
+                                    self.game.multicolorattackshort_spritesheet.get_sprite(336, 0, 48, 48),
+                                    self.game.multicolorattackshort_spritesheet.get_sprite(384, 0, 48, 48),]
+
+        self.down_attacksanimationpos = [self.game.multicolorattackshort_spritesheet.get_sprite(0, 0, 48, 48),
+                                    self.game.multicolorattackshort_spritesheet.get_sprite(48, 0, 48, 48),
+                                    self.game.multicolorattackshort_spritesheet.get_sprite(96, 0, 48, 48),]
+
+        self.left_attacksanimationpos = [self.game.multicolorattackshort_spritesheet.get_sprite(432, 0, 48, 48),
+                                    self.game.multicolorattackshort_spritesheet.get_sprite(480, 0, 48, 48),
+                                    self.game.multicolorattackshort_spritesheet.get_sprite(328, 0, 48, 48),]
+
+        self.up_attacksanimationpos = [self.game.multicolorattackshort_spritesheet.get_sprite(144, 0, 48, 48),
+                                self.game.multicolorattackshort_spritesheet.get_sprite(192, 0, 48, 48),
+                                self.game.multicolorattackshort_spritesheet.get_sprite(240, 0, 48, 48),]
+        
+
+
+        self.longattack = [self.game.fireground_spritesheet.get_sprite(0, 0, 48, 32),
+self.game.fireground_spritesheet.get_sprite(48, 0, 48, 32),
+self.game.fireground_spritesheet.get_sprite(96, 0, 48, 32),
+self.game.fireground_spritesheet.get_sprite(144, 0, 48, 32),]
+
+        self.up_attacksanimationlong = self.longattack
+        self.right_attacksanimationlong = self.longattack
+        self.down_attacksanimationlong = self.longattack
+        self.left_attacksanimationlong = self.longattack
+
+        self.right_attackslonganimationpos = [self.game.multicolorattacklong_spritesheet.get_sprite(576, 0, 48, 48),
+                                    self.game.multicolorattacklong_spritesheet.get_sprite(624, 0, 48, 48),]
+
+        self.down_attackslonganimationpos = [self.game.multicolorattacklong_spritesheet.get_sprite(384, 0, 48, 48),
+                                    self.game.multicolorattacklong_spritesheet.get_sprite(432, 0, 48, 48),]
+
+        self.left_attackslonganimationpos = [self.game.multicolorattacklong_spritesheet.get_sprite(432, 0, 48, 48),
+                                    self.game.multicolorattacklong_spritesheet.get_sprite(480, 0, 48, 48),]
+
+        self.up_attackslonganimationpos = [self.game.multicolorattacklong_spritesheet.get_sprite(480, 0, 48, 48),
+                                self.game.multicolorattacklong_spritesheet.get_sprite(528, 0, 48, 48),]
+
+    def update(self):
+        self.collide_attack()
+        if self.player:
+            distance_to_player = math.dist((self.rect.centerx, self.rect.centery), (self.player.rect.centerx, self.player.rect.centery))
+            if distance_to_player <= self.detect_range:
+                if distance_to_player <= self.detect_range-150:
+                    self.is_attackinglong = False
+                    self.is_attackingshort = True
+                    self.animateattackshort()
+                    self.away_from_player()
+
+                elif distance_to_player <= self.detect_range:
+                    if distance_to_player >= self.detect_range-125:
+                        self.follow_player()
+                        self.animate()
+                    else:
+                        self.is_attackingshort = False
+                        self.is_attackinglong = True
+                        self.animateattacklong()
+            else:
+                self.is_attackingshort = False
+                self.is_attackinglong = False
+                self.animateidle()
+
+        self.rect.x += self.x_change
+        self.collide_blocks('x')
+        self.rect.y += self.y_change
+        self.collide_blocks('y')
+        self.attackshort()
+        self.attacklong()
+
+        self.x_change = 0
+        self.y_change = 0 
+        
+    def collide_blocks(self, direction):
+        hits = pygame.sprite.spritecollide(self, self.game.blocks, False)
+        hitslave = pygame.sprite.spritecollide(self, self.game.lave, False)
+        hits1 = pygame.sprite.spritecollide(self, self.game.coffre1,False)
+        hits2 = pygame.sprite.spritecollide(self, self.game.coffre2, False)
+        hits3 = pygame.sprite.spritecollide(self, self.game.coffre3, False)
+        hits4 = pygame.sprite.spritecollide(self, self.game.coffre4, False)
+        hits5 = pygame.sprite.spritecollide(self, self.game.coffre5, False)
+        hits6 = pygame.sprite.spritecollide(self, self.game.coffre6, False)
+        hits7 = pygame.sprite.spritecollide(self, self.game.coffre7, False)
+        hits8 = pygame.sprite.spritecollide(self, self.game.coffre8, False)
+        hits9 = pygame.sprite.spritecollide(self, self.game.coffre9, False)
+        if hits or hits1 or hits2 or hits3 or hits4 or hits5 or hits6 or hits7 or hits8 or hits9 or hitslave:
+            if hits1:
+                hit = hits1
+            elif hits:
+                hit = hits
+            elif hits2:
+                hit = hits2
+            elif hits3:
+                hit = hits3
+            elif hits3:
+                hit = hits3
+            elif hits4:
+                hit = hits4
+            elif hits5:
+                hit = hits5
+            elif hits6:
+                hit = hits6
+            elif hits7:
+                hit = hits7
+            elif hits8:
+                hit = hits8
+            elif hits9:
+                hit = hits9
+            elif hitslave:
+                hit = hitslave
+            if direction == "x":
+                if hit:
+                    if self.x_change > 0:
+                        self.rect.x = hit[0].rect.left - self.rect.width
+                    if self.x_change < 0:
+                        self.rect.x = hit[0].rect.right
+
+            if direction == "y":
+                if hits:
+                    if self.y_change > 0:
+                        self.rect.y = hit[0].rect.top - self.rect.width
+                    if self.y_change < 0:
+                        self.rect.y = hit[0].rect.bottom
+
+                    
+
+    def animate(self):
+        if self.facing == 'down':
+            self.image = self.down_animations[math.floor(self.animation_loop)]
+            self.animation_loop += 0.1
+            if self.animation_loop >= 6:
+                self.animation_loop = 0
+            
+        if self.facing == "left":
+            self.image = self.left_animations[math.floor(self.animation_loop)]
+            self.animation_loop += 0.1
+            if self.animation_loop >= 6:
+                self.animation_loop = 0
+                    
+        if self.facing == "right":
+            self.image = self.right_animations[math.floor(self.animation_loop)]
+            self.animation_loop += 0.1
+            if self.animation_loop >= 6:
+                self.animation_loop = 0
+
+        if self.facing == "up":
+            self.image = self.up_animations[math.floor(self.animation_loop)]
+            self.animation_loop += 0.1
+            if self.animation_loop >= 6:
+                self.animation_loop = 0
+
+    def animateidle(self):
+        if self.facing == "down":
+            self.image = self.down_idleanimations[math.floor(self.animation_loopidle)]
+            self.animation_loopidle += 0.1
+            if self.animation_loopidle >= 2:
+                self.animation_loopidle = 0
+            
+        if self.facing == "left":
+            self.image = self.left_idleanimations[math.floor(self.animation_loopidle)]
+            self.animation_loopidle += 0.1
+            if self.animation_loopidle >= 2:
+                self.animation_loopidle = 0
+                    
+        if self.facing == "right":
+            self.image = self.right_idleanimations[math.floor(self.animation_loopidle)]
+            self.animation_loopidle += 0.1
+            if self.animation_loopidle >= 2:
+                self.animation_loopidle = 0
+
+        if self.facing == "up":
+            self.image = self.up_idleanimations[math.floor(self.animation_loopidle)]
+            self.animation_loopidle += 0.1
+            if self.animation_loopidle >= 2:
+                self.animation_loopidle = 0
+
+    def animateattackshort(self):
+        if self.facing == "down":
+            self.image = self.down_attacksanimationpos[math.floor(self.animation_loopshort)]
+            self.animation_loopshort += 0.1
+            if self.animation_loopshort >= 3:
+                self.animation_loopshort = 0
+            
+        if self.facing == "left":
+            self.image = self.left_attacksanimationpos[math.floor(self.animation_loopshort)]
+            self.animation_loopshort += 0.1
+            if self.animation_loopshort >= 3:
+                self.animation_loopshort = 0
+                    
+        if self.facing == "right":
+            self.image = self.right_attacksanimationpos[math.floor(self.animation_loopshort)]
+            self.animation_loopshort += 0.1
+            if self.animation_loopshort >= 3:
+                self.animation_loopshort = 0
+
+        if self.facing == "up":
+            self.image = self.up_attacksanimationpos[math.floor(self.animation_loopshort)]
+            self.animation_loopshort += 0.1
+            if self.animation_loopshort >= 3:
+                self.animation_loopshort = 0
+
+
+    def animateattacklong(self):
+        if self.facing == "down":
+            self.image = self.down_attackslonganimationpos[math.floor(self.animation_looplong)]
+            self.animation_looplong += 0.1
+            if self.animation_looplong >= 2:
+                self.animation_looplong = 0
+            
+        if self.facing == "left":
+            self.image = self.left_attackslonganimationpos[math.floor(self.animation_looplong)]
+            self.animation_looplong += 0.1
+            if self.animation_looplong >= 2:
+                self.animation_looplong = 0
+                    
+        if self.facing == "right":
+            self.image = self.right_attackslonganimationpos[math.floor(self.animation_looplong)]
+            self.animation_looplong += 0.1
+            if self.animation_looplong >= 2:
+                self.animation_looplong = 0
+
+        if self.facing == "up":
+            self.image = self.up_attackslonganimationpos[math.floor(self.animation_looplong)]
+            self.animation_looplong += 0.1
+            if self.animation_looplong >= 2:
+                self.animation_looplong = 0
+
+    def away_from_player(self):
+        # Déplace le chevalier vers le joueur
+        if self.player.rect.centerx < self.rect.centerx:
+            self.x_change = self.vitesse
+            self.facing = 'left'
+        elif self.player.rect.centerx > self.rect.centerx:
+            self.x_change = -self.vitesse
+            self.facing = 'right'
+
+        if self.player.rect.centery < self.rect.centery:
+            self.y_change = self.vitesse
+            self.facing = 'up'
+        elif self.player.rect.centery > self.rect.centery:
+            self.y_change = -self.vitesse
+            self.facing = 'down'
+
+    def follow_player(self):
+        # Déplace le chevalier vers le joueur
+        if self.player.rect.centerx < self.rect.centerx:
+            self.x_change = -self.vitesse
+            self.facing = 'left'
+        elif self.player.rect.centerx > self.rect.centerx:
+            self.x_change = self.vitesse
+            self.facing = 'right'
+
+        if self.player.rect.centery < self.rect.centery:
+            self.y_change = -self.vitesse
+            self.facing = 'up'
+        elif self.player.rect.centery > self.rect.centery:
+            self.y_change = self.vitesse
+            self.facing = 'down'
+
+    def collide_attack(self):
+        hits = pygame.sprite.spritecollide(self, self.game.attacks, False)
+        if hits:
+            if self.invincibility() == False:
+                self.healthbar.take_damage(self.game.player.puissance)
+                self.derniertemps = pygame.time.get_ticks()
+                print(self.healthbar.health)
+            if self.healthbar.health <= 0:
+                self.game.totalenemykill += 1
+                print(self.game.totalenemykill)
+                self.modify_tilemap()
+                self.kill()
+
+    def modify_tilemap(self):
+        if self.etage == "tilemap1":
+            self.game.all_maps.tilemap1[1][self.__coortilemap[0]][self.__coortilemap[1]] = '.'
+        elif self.etage == "tilemap2":
+            self.game.all_maps.tilemap2[1][self.__coortilemap[0]][self.__coortilemap[1]] = '.'
+        elif self.etage == "tilemap3":
+            self.game.all_maps.tilemap3[1][self.__coortilemap[0]][self.__coortilemap[1]] = '.'
+        elif self.etage == "tilemap4":
+            self.game.all_maps.tilemap4[1][self.__coortilemap[0]][self.__coortilemap[1]] = '.'
+        elif self.etage == "tilemap5":
+            self.game.all_maps.tilemap5[1][self.__coortilemap[0]][self.__coortilemap[1]] = '.'
+        elif self.etage == "tilemap6":
+            self.game.all_maps.tilemap6[1][self.__coortilemap[0]][self.__coortilemap[1]] = '.'
+
+    def invincibility(self):
+        return self.derniertemps > pygame.time.get_ticks() - 1500
+    
+    def attacktime(self):
+        return self.derniertemps1 > pygame.time.get_ticks() - 200
+    
+    def clicktime(self):
+        return self.derniertemps2 > pygame.time.get_ticks() - 500
+    
+    def attackshort(self):
+        if self.is_attackingshort == True:
+            if self.clicktime() == False:
+                if self.attacktime() == False:
+                    self.derniertemps2 = pygame.time.get_ticks()
+                    self.derniertemps1 = pygame.time.get_ticks()
+                    self.game.player.enemyattacks = 2 +self.game.multiplicateur_difficulte_attack_enemies 
+                    if self.facing == 'up':
+                        xatt = self.rect.x
+                        yatt = self.rect.y - 50
+                    if self.facing == 'down':
+                        xatt = self.rect.x 
+                        yatt = self.rect.y + 50
+                    if self.facing == 'left':
+                        xatt = self.rect.x - 50
+                        yatt = self.rect.y
+                    if self.facing == 'right':
+                        xatt = self.rect.x + 50
+                        yatt = self.rect.y
+                    AttackEnemy(self.game,xatt,yatt,40,40,5,self.facing,self.right_attacksanimation,self.left_attacksanimation,self.up_attacksanimation,self.down_attacksanimation)
+
+
+    def attacklong(self):
+        if self.is_attackinglong == True:
+            if self.clicktime() == False:
+                if self.attacktime() == False:
+                    self.derniertemps2 = pygame.time.get_ticks()
+                    self.derniertemps1 = pygame.time.get_ticks()
+                    self.game.player.enemyattacks = 2 +self.game.multiplicateur_difficulte_attack_enemies 
+                    if self.facing == 'up':
+                        xatt = self.rect.x
+                        yatt = self.rect.y - 100
+                    if self.facing == 'down':
+                        xatt = self.rect.x 
+                        yatt = self.rect.y + 100
+                    if self.facing == 'left':
+                        xatt = self.rect.x - 100
+                        yatt = self.rect.y
+                    if self.facing == 'right':
+                        xatt = self.rect.x + 100
+                        yatt = self.rect.y
+                    AttackEnemy(self.game,xatt,yatt,40,40,4,self.facing,self.right_attacksanimationlong,self.left_attacksanimationlong,self.up_attacksanimationlong,self.down_attacksanimationlong)

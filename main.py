@@ -107,6 +107,12 @@ class Game():
         self.whitecircleattacks_spritesheet = Spritesheet('img/Attacks/whiteattacks.png')
         self.bluecircleattacks_spritesheet = Spritesheet('img/Attacks/blueattacks.png')
         self.bluething_spritesheet = Spritesheet('img/Attacks/bluefloosh.png')
+        self.multicoloridle_spritesheet = Spritesheet('img/Enemy/Multicolor/sprite_sheet/multicoloridle.png')
+        self.multicolorwalk_spritesheet = Spritesheet('img/Enemy/Multicolor/sprite_sheet/multicolorwalk.png')
+        self.multicolorattackshort_spritesheet = Spritesheet('img/Enemy/Multicolor/sprite_sheet/multicolorattackshort.png')
+        self.multicolorattacklong_spritesheet = Spritesheet('img/Enemy/Multicolor/sprite_sheet/multicolorattacklong.png')
+        self.purplecircleattack_spritesheet = Spritesheet('img/Attacks/purplecircleattack.png')
+        self.fireground_spritesheet = Spritesheet('img/Attacks/firegroundattack.png')
 
 
     def createTilemap(self,tilemap):
@@ -120,7 +126,7 @@ class Game():
                 if column == "P":
                     coordonnes = (j,i)
                 if column == "E":
-                    AngryMaid(self, j, i,tilemap[0])
+                    Multicolor_Man(self, j, i,tilemap[0])
                 if column == 'C':
                     Coffre9(self, j, i)
                 if column == 'M':
