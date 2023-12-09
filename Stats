@@ -1,0 +1,91 @@
+                                        Stats de base
+
+Puissance : 1
+Health : 10
+Vision : 125 Radius; RGB : 255,167,38 ; 50 Opacité
+
+                                            ITEMS
+
+Potion de Heal : +2 HP
+
+                                            WEAPONS
+
+Scythe : 3
+Hematite Blade : 12
+HellScythe : 7
+Winters Ballad : 6
+Snake Sword : 10
+Great Sword : 15
+Hearth Shatter : 13
+Supernova Scepter The Celestial Voidcleaver Annihilator Of All Realms : 9999
+Flamestrike Maller : 8
+Crimson Blade : 6
+Celestial Scepter : 6
+Nebula Greatsword : 8
+Seraphic Blade : 5
+Azure Blade : 5
+Lustrous Blade : 5
+Heavenly Wand : 9
+Lava Sword : 5
+
+
+                                            ARMORS
+
+Helmet Leather : +1 Health ; 200 Radius Vision ; RGB : 255,167,38 ; 40 Opacité
+Helmet Chainmail : +2 Health ; 150 Radius Vision ; RGB : 255,167,38 ; 25 Opacité
+Helmet Iron : +3 Health ; 100 Radius Vision ; RGB : 255,255,255 ; 65 Opacité
+
+Pants Leather : +2 Health
+Pants Chainmail : +3 Health
+Pants Iron : +4 Health
+
+Chest Leather : +3 Health
+Chest Chainmail : +4 Health
+Chest Iron : +5 Health
+
+Boots Leather : +1 Health, x1.5 Speed
+Boots Chainmail : +2 Health, x1 Speed
+Boots Iron : +3 Health, x0.7 Speed
+
+Lava Healmet : 
+Lava Chest : 
+Lava Pants : 
+Lava Boots : 
+
+                                           ENEMIES
+
+(Vitesse ; Vie ; Attaque)
+
+Enemy : 1 ; 10 ; 1 # Très rarement dans les couloirs car nul
+
+Slime : 2 ; 5 ; 2
+Zombie : 2 ; 15 ; (2)
+Lost Adventurer : 3 ; 15 ; (2;2)
+Knight : 2 ; 30 ; 1
+Beetle : 1 ; 25 ; (2;2)
+Multicolor Man : 2 ; 15 ; (2;2)
+Fermier : 2 ; 10 ; 2
+
+Angry Maid : 2 ; 10 ; 2 # Dans les salles + très rarement dans les couloirs
+
+Boss : 2 ; 250 ; (2;2;2)
+
+                                          ACCESSORIES
+
+Necklace_copper : 
+Necklace_rubis : 
+Necklace_saphir : 
+Necklace_emerald : 
+
+Ring_copper : 
+Ring_rubis : 
+Ring_saphir : 
+Ring_emerald : 
+
+                                        SPAWN DE COFFRES
+
+//
+
+                                        SPAWN DE MOBS
+
+eza

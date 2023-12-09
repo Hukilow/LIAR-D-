@@ -113,7 +113,18 @@ class Game():
         self.multicolorattacklong_spritesheet = Spritesheet('img/Enemy/Multicolor/sprite_sheet/multicolorattacklong.png')
         self.purplecircleattack_spritesheet = Spritesheet('img/Attacks/purplecircleattack.png')
         self.fireground_spritesheet = Spritesheet('img/Attacks/firegroundattack.png')
-
+        self.shortadventurerattack_spritesheet = Spritesheet('img/Attacks/adventurershortattack.png')
+        self.adventureridle_spritesheet = Spritesheet('img/Enemy/AventurierPerdu/Idle.png')
+        self.adventurerwalk_spritesheet = Spritesheet('img/Enemy/AventurierPerdu/Walk.png')
+        self.adventurershortattackpos_spritesheet = Spritesheet('img/Enemy/AventurierPerdu/Stab.png')
+        self.adventurerlongattackpos_spritesheet = Spritesheet('img/Enemy/AventurierPerdu/Shoot.png')
+        self.zombieidle_spritesheet = Spritesheet('img/Enemy/Zombie/Idle.png')
+        self.zombiewalk_spritesheet = Spritesheet('img/Enemy/Zombie/Walk.png')
+        self.zombieattackpos_spritesheet = Spritesheet('img/Enemy/Zombie/Attack.png')
+        self.zombieattack_spritesheet = Spritesheet('img/Attacks/zombieattack.png')
+        self.gardenerwalk_spritesheet = Spritesheet('img/Enemy/Gardener/Gardener.png')
+        self.gardeneridle_spritesheet = Spritesheet('img/Enemy/Gardener/Gardener_idle.png')
+        self.boom_spritesheet = Spritesheetblanc('img/Attacks/boom.png')
 
     def createTilemap(self,tilemap):
         self.player = Player(self, 0, 0)
@@ -125,7 +136,23 @@ class Game():
                     Block(self, j, i)
                 if column == "P":
                     coordonnes = (j,i)
-                if column == "E":
+                if column == "V":
+                    Enemy(self, j, i,tilemap[0])
+                if column == "S":
+                    Slime(self, j, i,tilemap[0])
+                if column == "F":
+                    Gardener(self, j, i,tilemap[0])
+                if column == "W":
+                    Lost_Adventurer(self, j, i,tilemap[0])
+                if column == "Z":
+                    Zombie(self, j, i,tilemap[0])
+                if column == "A":
+                    AngryMaid(self, j, i,tilemap[0])
+                if column == "U":
+                    Beetle(self, j, i,tilemap[0])
+                if column == "K":
+                    Knight(self, j, i,tilemap[0])
+                if column == "R":
                     Multicolor_Man(self, j, i,tilemap[0])
                 if column == 'C':
                     Coffre9(self, j, i)
@@ -192,8 +219,24 @@ class Game():
                 Ground(self, j, i)
                 if column == "B":
                     Block(self, j, i)
-                if column == "E":
+                if column == "V":
+                    Enemy(self, j, i,tilemap[0])
+                if column == "S":
+                    Slime(self, j, i,tilemap[0])
+                if column == "F":
+                    Gardener(self, j, i,tilemap[0])
+                if column == "W":
+                    Lost_Adventurer(self, j, i,tilemap[0])
+                if column == "Z":
+                    Zombie(self, j, i,tilemap[0])
+                if column == "A":
                     AngryMaid(self, j, i,tilemap[0])
+                if column == "U":
+                    Beetle(self, j, i,tilemap[0])
+                if column == "K":
+                    Knight(self, j, i,tilemap[0])
+                if column == "R":
+                    Multicolor_Man(self, j, i,tilemap[0])
                 if column == 'C':
                     Coffre1(self, j, i)
                 if column == 'M':
@@ -267,7 +310,6 @@ class Game():
             sprite.rect.y -= coordonnes[1]*TILESIZE
             sprite.rect.x += self.WIN_WIDTH/2
             sprite.rect.y += self.WIN_HEIGHT/2
-
 
     def createTilemapboss(self,tilemap,change):
         for i, row in enumerate(tilemap):

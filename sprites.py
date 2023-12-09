@@ -251,7 +251,7 @@ class Player(pygame.sprite.Sprite):
             self.afficheequipped.y_change += PLAYER_SPEED*self.vitesse*self.vitesse2*self.vitesse3
         if keys[pygame.K_g] and self.potion.nbrpotion >= 1:
             if self.drink_timer() == False:
-                self.healthbar.heal(1)
+                self.healthbar.heal(2)
                 self.lastdrinktimer = pygame.time.get_ticks()
 
         looking_vector = pygame.Vector2(1,1)
@@ -559,7 +559,7 @@ class Attack(pygame.sprite.Sprite):
     def dropchest(self,DROPCHEST):
         self.game.totalchestopen += 1
         if DROPCHEST == "DROPCHEST1": # couloir commun
-            DROPCHEST = [Heavenly_Wand]
+            DROPCHEST = [Boots_leather,Boots_chainmail,Boots_iron]
             return random.choice(DROPCHEST)
         elif DROPCHEST == "DROPCHEST2": # couloir peu commun
             DROPCHEST = [Scythe,GreatSword,HellScythe,SnakeSword,WintersBallad,Hematite_Blade]

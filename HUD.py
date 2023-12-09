@@ -678,9 +678,9 @@ class PlayerHitbox(pygame.sprite.Sprite):
         self.game.screen.blit(self.image,self.pos)
 
         self.rect.x += self.x_change
-        #self.collide_blocks('x')
+        self.collide_blocks('x')
         self.rect.y += self.y_change
-        #self.collide_blocks('y')
+        self.collide_blocks('y')
         self.collide_enemyattacks()
         self.collide_enemy()
         self.collide_lava()
@@ -890,24 +890,27 @@ class PlayerHitbox(pygame.sprite.Sprite):
         keys = pygame.key.get_pressed()
 
         if hit and keys[pygame.K_SPACE]:
-            #if self.monter_descendretime() == False:
-                #self.descendre_etage()
-            self.game.player.etage.descendre()
-            for sprite in self.game.all_sprites:
-                if (self.game.player.spritedujoueur != sprite) and (self.game.player.light.spritedelalumiere != sprite) and (self.game.player.healthbar.spriteduhealthbar != sprite) and (self.game.player.etage.spriteduetage != sprite) and (self.game.player.potion.spriteduhubpotion!= sprite) and (self.game.player.epee.spriteduEpeeHUD != sprite) and (self.game.player.helmet.spriteduCasqueHUD != sprite) and (self.game.player.chest.spriteduChestHUD != sprite) and (self.game.player.pants.spriteduPantsHUD != sprite) and (self.game.player.boots.spritedesBootsHUD != sprite) and (self.game.player.necklace.spriteNecklaceHUD != sprite) and (self.game.player.ring.spriteRingHUD != sprite) and (self.game.player.ranged.spriteRangeHUD != sprite) and (self.game.player.afficheequipped.spriteduafficheequipped != sprite) and (self.game.player.afficheitem.spriteduafficheitem != sprite) and (self.spriteduplayerhitbox != sprite):
-                    sprite.kill()
-            self.game.createTilemapboss(tilemap_boss,False)
-                #self.derniertempsechelle = pygame.time.get_ticks()
+            if self.monter_descendretime() == False:
+                for sprite in self.game.all_sprites:
+                    if (self.game.player.spritedujoueur != sprite) and (self.game.player.light.spritedelalumiere != sprite) and (self.game.player.healthbar.spriteduhealthbar != sprite) and (self.game.player.etage.spriteduetage != sprite) and (self.game.player.potion.spriteduhubpotion!= sprite) and (self.game.player.epee.spriteduEpeeHUD != sprite) and (self.game.player.helmet.spriteduCasqueHUD != sprite) and (self.game.player.chest.spriteduChestHUD != sprite) and (self.game.player.pants.spriteduPantsHUD != sprite) and (self.game.player.boots.spritedesBootsHUD != sprite) and (self.game.player.necklace.spriteNecklaceHUD != sprite) and (self.game.player.ring.spriteRingHUD != sprite) and (self.game.player.ranged.spriteRangeHUD != sprite) and (self.game.player.afficheequipped.spriteduafficheequipped != sprite) and (self.game.player.afficheitem.spriteduafficheitem != sprite) and (self.spriteduplayerhitbox != sprite):
+                        sprite.kill()
+                self.descendre_etage()
+                self.derniertempsechelle = pygame.time.get_ticks()
+
         if hit2 and keys[pygame.K_SPACE]:
             if self.monter_descendretime() == False:
+                for sprite in self.game.all_sprites:
+                    if (self.game.player.spritedujoueur != sprite) and (self.game.player.light.spritedelalumiere != sprite) and (self.game.player.healthbar.spriteduhealthbar != sprite) and (self.game.player.etage.spriteduetage != sprite) and (self.game.player.potion.spriteduhubpotion!= sprite) and (self.game.player.epee.spriteduEpeeHUD != sprite) and (self.game.player.helmet.spriteduCasqueHUD != sprite) and (self.game.player.chest.spriteduChestHUD != sprite) and (self.game.player.pants.spriteduPantsHUD != sprite) and (self.game.player.boots.spritedesBootsHUD != sprite) and (self.game.player.necklace.spriteNecklaceHUD != sprite) and (self.game.player.ring.spriteRingHUD != sprite) and (self.game.player.ranged.spriteRangeHUD != sprite) and (self.game.player.afficheequipped.spriteduafficheequipped != sprite) and (self.game.player.afficheitem.spriteduafficheitem != sprite) and (self.spriteduplayerhitbox != sprite):
+                        sprite.kill()
                 self.monter_etage()
                 self.derniertempsechelle = pygame.time.get_ticks()
+
         if hits3 and keys[pygame.K_SPACE]:
             self.game.player.etage.descendre()
             for sprite in self.game.all_sprites:
                 if (self.game.player.spritedujoueur != sprite) and (self.game.player.light.spritedelalumiere != sprite) and (self.game.player.healthbar.spriteduhealthbar != sprite) and (self.game.player.etage.spriteduetage != sprite) and (self.game.player.potion.spriteduhubpotion!= sprite) and (self.game.player.epee.spriteduEpeeHUD != sprite) and (self.game.player.helmet.spriteduCasqueHUD != sprite) and (self.game.player.chest.spriteduChestHUD != sprite) and (self.game.player.pants.spriteduPantsHUD != sprite) and (self.game.player.boots.spritedesBootsHUD != sprite) and (self.game.player.necklace.spriteNecklaceHUD != sprite) and (self.game.player.ring.spriteRingHUD != sprite) and (self.game.player.ranged.spriteRangeHUD != sprite) and (self.game.player.afficheequipped.spriteduafficheequipped != sprite) and (self.game.player.afficheitem.spriteduafficheitem != sprite) and (self.spriteduplayerhitbox != sprite):
                     sprite.kill()
-            self.game.createTilemapboss(tilemap_boss)
+            self.game.createTilemapboss(tilemap_boss, False)
 
     def descendre_etage(self):
             if self.game.player.etage.etageici == 1:

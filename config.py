@@ -10,7 +10,9 @@ SLIME_HEALTH = 5
 ANGRY_MAID_HEALTH = 10
 KNIGHT_HEALTH = 30
 MULTICOLOR_MAN_HEALTH = 15
-
+ADVENTURER_HEALTH = 15
+ZOMBIE_HEALTH = 15
+GARDENER_HEALTH = 10
 
 HEALTH_LAYER = 7
 PLAYER_LAYER = 6
@@ -29,6 +31,10 @@ SLIME_SPEED = 2
 BETTLE_SPEED = 1
 BOSS_SPEED = 2
 KNOCKBACK_SPEED = 10
+MULTICOLOR_MAN_SPEED = 2
+ADVENTURER_SPEED = 3
+ZOMBIE_SPEED = 2
+GARDENER_SPEED = 5
 
 RED = (255, 0, 0)
 LIGHTRED = (211,58,48)
@@ -91,30 +97,37 @@ tilemap1 = ["tilemap1",tilemap1]"""
 
 class All_maps:
     def __init__(self):
-        self.dino = random.randint(1,100)
+        #self.dinop = random.randint(1,100)
+        self.dinop = 100
         self.tilemap1 = generate_labyrinth(15,15)
         self.tilemap1 = ["tilemap1",self.tilemap1]
         self.tilemap1 = spawncoffres(self.tilemap1)
+        self.tilemap1 = spawnennemis(self.tilemap1)
 
-        self.tilemap2 = generate_labyrinth2(15,15,self.dino)
+        self.tilemap2 = generate_labyrinth2(15,15,self.dinop)
         self.tilemap2 = ["tilemap2",self.tilemap2]
         self.tilemap2 = spawncoffres(self.tilemap2)
+        self.tilemap2 = spawnennemis(self.tilemap2)
 
-        self.tilemap3 = generate_labyrinth2(15,15,self.dino)
+        self.tilemap3 = generate_labyrinth2(15,15,self.dinop)
         self.tilemap3 = ["tilemap3",self.tilemap3]
         self.tilemap3 = spawncoffres(self.tilemap3)
+        self.tilemap3 = spawnennemis(self.tilemap3)
 
-        self.tilemap4 = generate_labyrinth2(15,15,self.dino)
+        self.tilemap4 = generate_labyrinth2(15,15,self.dinop)
         self.tilemap4 = ["tilemap4",self.tilemap4]
         self.tilemap4 = spawncoffres(self.tilemap4)
+        self.tilemap4 = spawnennemis(self.tilemap4)
 
-        self.tilemap5 = generate_labyrinth2(15,15,self.dino)
+        self.tilemap5 = generate_labyrinth2(15,15,self.dinop)
         self.tilemap5 = ["tilemap5",self.tilemap5]
         self.tilemap5 = spawncoffres(self.tilemap5)
+        self.tilemap5 = spawnennemis(self.tilemap5)
 
-        self.tilemap6 = generate_labyrinth5(15,15)
+        self.tilemap6 = generate_labyrinth5(15,15,self.dinop)
         self.tilemap6 = ["tilemap6",self.tilemap6]
         self.tilemap6 = spawncoffres(self.tilemap6)
+        self.tilemap6 = spawnennemis(self.tilemap6)
 
 class All_mapsload:
     def __init__(self):

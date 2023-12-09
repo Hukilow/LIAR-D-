@@ -5,7 +5,7 @@ from HUD import Light
 
 class Potion(pygame.sprite.Sprite):
     nom = 'Health Potion'
-    attribut = 'Health : +1'
+    attribut = 'Health : +2'
     def __init__(self,game, x, y):
 
         self.game = game 
@@ -1178,7 +1178,7 @@ class GreatSword(pygame.sprite.Sprite):
 class Helmet_leather(pygame.sprite.Sprite):
     nom = "Leather Helmet"
     attribut = "Max health : +1"
-    attribut1 = "Vision : +50"
+    attribut1 = "Vision : +75"
     IDimage = (37,35,24,26)
     def __init__(self,game, x, y):
 
@@ -1253,7 +1253,7 @@ class Helmet_leather(pygame.sprite.Sprite):
 class Helmet_chainmail(pygame.sprite.Sprite):
     nom = "Chainmail Helmet"
     attribut = "Max health : +2"
-    attribut1 = "Vision : +100"
+    attribut1 = "Vision : +25"
     IDimage = (35,96,27,32)
     def __init__(self,game, x, y):
 
@@ -1783,7 +1783,7 @@ class Chest_iron(pygame.sprite.Sprite):
 class Boots_leather(pygame.sprite.Sprite):
     nom = "Leather Boots"
     attribut = "Max health : +1"
-    attribut1 = "Speed : +0,2"
+    attribut1 = "Speed : x1.5"
     IDimage = (130,33,27,30)
     def __init__(self,game, x, y):
 
@@ -1806,7 +1806,7 @@ class Boots_leather(pygame.sprite.Sprite):
         self.rect.y = self.y
         self.pos = (x,y)
 
-        self.vitesse = 1.2
+        self.vitesse = 1.3
 
     def update(self):
         self.game.screen.blit(self.image,self.pos)
@@ -1852,6 +1852,7 @@ class Boots_leather(pygame.sprite.Sprite):
 class Boots_chainmail(pygame.sprite.Sprite):
     nom = "Chainmail Boots"
     attribut = "Max health : +2"
+    attribut1 = "Speed : x1"
     IDimage = (131,96,26,32)
     def __init__(self,game, x, y):
 
@@ -1893,10 +1894,12 @@ class Boots_chainmail(pygame.sprite.Sprite):
                 self.game.player.afficheitem.trueorfalse = True
                 self.game.player.afficheitem.nom = self.nom
                 self.game.player.afficheitem.attribut1 = self.attribut
+                self.game.player.afficheitem.attribut2 = self.attribut1
             if (hits) and (self.game.player.boots.ID != None):
                 self.game.player.afficheequipped.trueorfalse = True
                 self.game.player.afficheequipped.nom = self.game.player.boots.ID.nom
                 self.game.player.afficheequipped.attribut1 = self.game.player.boots.ID.attribut
+                self.game.player.afficheequipped.attribut2 = self.game.player.boots.ID.attribut1
             if not hits:
                 self.game.player.afficheitem.trueorfalse = False
                 self.game.player.afficheequipped.trueorfalse = False
@@ -1915,7 +1918,7 @@ class Boots_chainmail(pygame.sprite.Sprite):
 class Boots_iron(pygame.sprite.Sprite):
     nom = "Iron Boots"
     attribut = "Max health : +3"
-    attribut1 = "Speed : -0.1"
+    attribut1 = "Speed : x0.7"
     IDimage = (130,129,28,31)
     def __init__(self,game, x, y):
 
@@ -1938,7 +1941,7 @@ class Boots_iron(pygame.sprite.Sprite):
         self.rect.y = self.y
         self.pos = (x,y)
 
-        self.vitesse = 0.9
+        self.vitesse = 0.7
 
     def update(self):
         self.game.screen.blit(self.image,self.pos)
@@ -1981,7 +1984,7 @@ class Boots_iron(pygame.sprite.Sprite):
                 self.game.player.afficheequipped.trueorfalse = False
                 self.kill()
 
-class Boots_Lava(pygame.sprite.Sprite):
+"""class Boots_Lava(pygame.sprite.Sprite):
     nom = "Lava Boots"
     attribut = "Max health : +5"
     attribut1 = "Speed : +0.3"
@@ -2048,7 +2051,7 @@ class Boots_Lava(pygame.sprite.Sprite):
                 self.game.player.boots.image = self.image
                 self.game.player.afficheitem.trueorfalse = False
                 self.game.player.afficheequipped.trueorfalse = False
-                self.kill()
+                self.kill()"""
 
 class Necklace_copper(pygame.sprite.Sprite):
     IDimage = (193,129,28,31)
@@ -2598,7 +2601,7 @@ class Supernova_Scepter(pygame.sprite.Sprite):
         self.x_change = 0
         self.y_change = 0
 
-        self.puissance = 999
+        self.puissance = 9999
 
         self.rect = self.image.get_rect() 
         self.rect.x = self.x
@@ -2838,8 +2841,6 @@ class Flamestrike_Mallet(pygame.sprite.Sprite):
                     self.kill()
                     self.game.player.lasttaketimer = pygame.time.get_ticks() 
 
-
-
 class Crimson_Blade(pygame.sprite.Sprite):
     nom = "Crimson Blade"
     attribut = "Puissance : 6"
@@ -3028,8 +3029,6 @@ self.game.bloodslash_spritesheet.get_sprite(216, 112, 24, 64),]
                     self.game.player.afficheequipped.trueorfalse = False
                     self.kill()
                     self.game.player.lasttaketimer = pygame.time.get_ticks() 
-
-
 
 class Celestial_Scepter(pygame.sprite.Sprite):
     nom = "Celestial Scepter"
@@ -3259,7 +3258,6 @@ self.game.fallingstar_spritesheet.get_sprite(840, 0, 60, 110),]
                     self.game.player.afficheequipped.trueorfalse = False
                     self.kill()
                     self.game.player.lasttaketimer = pygame.time.get_ticks() 
-
 
 class Nebula_GreatSword(pygame.sprite.Sprite):
     nom = "Nebula Greatsword"
@@ -3495,8 +3493,6 @@ self.game.nebulaattacks_spritesheet.get_sprite(96, 0, 32, 32),]
                     self.kill()
                     self.game.player.lasttaketimer = pygame.time.get_ticks() 
 
-
-
 class Seraphic_Blade(pygame.sprite.Sprite):
     nom = "Seraphic Blade"
     attribut = "Puissance : 5"
@@ -3649,7 +3645,6 @@ self.game.whitecircleattacks_spritesheet.get_sprite(128, 99, 32, 35),]
                     self.game.player.afficheequipped.trueorfalse = False
                     self.kill()
                     self.game.player.lasttaketimer = pygame.time.get_ticks() 
-
 
 class Azure_Blade(pygame.sprite.Sprite):
     nom = "Azure Blade"
@@ -3804,7 +3799,6 @@ self.game.bluecircleattacks_spritesheet.get_sprite(128, 99, 32, 35),]
                     self.kill()
                     self.game.player.lasttaketimer = pygame.time.get_ticks() 
 
-
 class Lustrous_Blade(pygame.sprite.Sprite):
     nom = "Lustrous Blade"
     attribut = "Puissance : 5"
@@ -3955,7 +3949,6 @@ self.game.yellowcircle_spritesheet.get_sprite(128, 99, 32, 35),]
                     self.game.player.afficheequipped.trueorfalse = False
                     self.kill()
                     self.game.player.lasttaketimer = pygame.time.get_ticks() 
-
 
 class Heavenly_Wand(pygame.sprite.Sprite):
     nom = "Heavenly Wand"

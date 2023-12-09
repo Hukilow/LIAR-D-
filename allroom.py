@@ -68,31 +68,73 @@ ps_lave =[
     '...........',  
 ]
 
-ps_reference =[
+ps_dansdans =[
     '...........',
-    '...........',
-    '...........',
-    '...........',
-    '...........',
-    '...........',
-    '...........', 
-    '...........', 
-    '...........', 
-    '...........', 
+    '...BBBBB...',
+    '..BE.C.EB..',
+    '.B..LLL..B.',
+    '.B.BBLBB.B.',
+    '.B.B.C.B.B.',
+    '.B.BE.EB.B.', 
+    '.B..B.B..B.', 
+    '.B.......B.', 
+    '.BBBB.BBBB.', 
     '...........',  
 ]
 
-ps_reference =[
+ps_eight =[
     '...........',
+    '..BBBBBBB..',
+    '.BE..C..EB.',
+    '.B.......B.',
+    '..BLLCLLB..',
+    '.BE.....EB.',
+    '.B...L...B.', 
+    '.B...L...B.', 
+    '.B.......B.', 
+    '..B.BBB.B..', 
+    '...........',  
+]
+
+ps_chaise =[
     '...........',
+    '..B........',
+    '..B........',
+    '..B........',
+    '..B........',
+    '..B.CC.....',
+    '..BBBBBB...', 
+    '..BE..EB...', 
+    '..B....B...', 
+    '..BE..EB...', 
+    '...........',  
+]
+
+ps_esquive =[
     '...........',
+    '.BBBBBBBBB.',
+    '.BL.....LB.',
+    '.B..L.L.LB.',
+    '.B.LL.L..B.',
+    '.B.LL.LL.B.',
+    '.B..LCLL.B.', 
+    '.BL.LLL..B.', 
+    '.BL.....LB.', 
+    '.BBBB.BBBB.', 
+    '...........',  
+]
+
+ps_E =[
     '...........',
-    '...........',
-    '...........',
-    '...........', 
-    '...........', 
-    '...........', 
-    '...........', 
+    '.BBBBBBBBB.',
+    '.BE......B.',
+    '.B.BBBBB.B.',
+    '.B.BC....B.',
+    '...BBBBBLB.',
+    '.B.BC....B.', 
+    '.B.BBBBB.B.', 
+    '.BE......B.', 
+    '.BBBBBBBBB.', 
     '...........',  
 ]
 
@@ -114,10 +156,26 @@ echelle_monter =[
 
 ]
 
+gs_reference =[
+    '.............',  
+    '.............',  
+    '.............',   
+    '.............',    
+    '.............',  
+    '.............',  
+    '.............',   
+    '.............',  
+    '.............',   
+    '.............',  
+    '.............',  
+    '.............',  
+    '.............',   
+]
+
 gs_lave =[
     '.............',  
     '.LLLLLLLLLLL.',  
-    '.LCE..H..ECL.',  
+    '.LCE..C..ECL.',  
     '.LLLL...LLLL.',  
     '....L...L....',   
     '..LLL...LLL..',  
@@ -149,7 +207,7 @@ gs_mobs =[
 gs_enfermé =[
     '.............',  
     '.BBBBBBBBBBB.',  
-    '.BLLLEHELLLB.',  
+    '.BLLLECELLLB.',  
     '.BLL..B..LLB.',  
     '.B....B....B.',   
     '.B...CBC...B.',  
@@ -169,7 +227,7 @@ gs_carremilieu =[
     '.BBBBBBBBB.B.',  
     '.B....E.CB.B.',   
     '.B.B..L..B.B.',  
-    '.BEB.HLH.BEB.',  
+    '.BEB.CLC.BEB.',  
     '.B.B..L..B.B.',  
     '.B.BC.E....B.',  
     '.B.BBBBBBBBB.',  
@@ -178,14 +236,30 @@ gs_carremilieu =[
     '.............',   
 ]
 
-gs_sprirale =[
+gs_o_O =[
+    '.............',  
+    '.............',  
+    '....E..LLLLL.',   
+    '.......L.C.L.',    
+    '.LLLL..L.H.L.',  
+    '.L..L..L.H.L.',  
+    '.LCLLE.L.C.L.',   
+    '.LLLLLLLLLLL.',  
+    '.............',   
+    '.........E...',  
+    '.............',  
+    '....E........',  
+    '.............',   
+]
+
+gs_spirale =[
     '.............',  
     '.BBBBBBBBBBB.',  
     '.B.........B.',  
     '.B.BBBBBBB.B.',  
     '.B.B..E.CB.B.',   
     '.B.B.BBB.B.B.',  
-    '.BEB.BH..BEB.',  
+    '.BEB.BC..BEB.',  
     '.B.B.BBBBB.B.',  
     '.B.BC.E....B.',  
     '.B.BBBBBBBBB.',  
@@ -199,7 +273,7 @@ gs_chaud =[
     '.BBBBBBBBBBB.',  
     '.BE.......EB.',  
     '.BLL..B..LLB.',  
-    '.BH.......CB.',   
+    '.BC.......CB.',   
     '.BLL..E.CLLB.',  
     '.B..BB.BB..B.',  
     '.B.........B.',  
@@ -217,7 +291,7 @@ gs_protection =[
     '.BL.......LB.',  
     '.B....E....B.',   
     '.B...ECE...B.',  
-    '.....EHE.....',  
+    '.....ECE.....',  
     '.B...ECE...B.',  
     '.B....E....B.',  
     '.BL.......LB.',  
@@ -231,14 +305,62 @@ gs_rituel =[
     '.BBBB...BBBB.',  
     '.B.........B.',  
     '.B.........B.',  
-    '.B..V...V..B.',   
+    '.B..E...E..B.',   
     '.............',  
-    '......H......',  
+    '......E......',  
     '.............',  
-    '.B..V...V..B.',  
+    '.B..E...E..B.',  
     '.B.........B.',  
     '.B.........B.',  
     '.BBBB...BBBB.',  
+    '.............',   
+]
+
+gs_smiley =[
+    '.............',  
+    '.............',  
+    '...B.....B...',   
+    '...B..E..B...',    
+    '...B.....B...',  
+    '.............',  
+    '.............',   
+    '.............',  
+    '.B.........B.',   
+    '..BC.....CB..',  
+    '...BBBBBBB...',  
+    '.............',  
+    '.............',   
+]
+
+gs_angry =[
+    '.............',  
+    '.............',  
+    '...B.....B...',   
+    '...B..E..B...',    
+    '...B.....B...',  
+    '.............',  
+    '.............',   
+    '.............',  
+    '...BBBBBBB...',   
+    '..BE..C..EB..',  
+    '.BE...E...EB.',  
+    '.............',  
+    '.............',   
+]
+
+gs_traps =[
+    '.............',  
+    '.LLLLLLLLLLL.',  
+    '.LLLLLLLLLLL.',   
+    '.LLLLLLLLLLL.',    
+    '.LLLLLLLLLLL.',  
+    '.LLLL.C.LLLL.',  
+    '.LLLLCCCLLLL.',   
+    '.LLLL.C.LLLL.',  
+    '.LLLLLLLLLLL.',   
+    '.LLLLLLLLLLL.',  
+    '.LLLLLLLLLLL.',  
+    '.LLLLLLLLLLL.',  
     '.............',   
 ]
 
@@ -252,7 +374,7 @@ gs_L =[
     '..LLE........',  
     '..LL.E.......',  
     '..LLC.E......',  
-    '..LLHC.E.....',  
+    '..LLCC.E.....',  
     '..LLLLLLLLL..',  
     '..LLLLLLLLL..',  
     '.....EE......',   
@@ -265,7 +387,7 @@ gs_I =[
     '......L......',   
     '...E..L..E...',  
     '..E...L...E..',  
-    '..E..CHC..E..',  
+    '..E..CCC..E..',  
     '..E...L...E..',  
     '...E..L..E...',  
     '......L......',  
@@ -275,11 +397,11 @@ gs_I =[
 gs_A =[
     '.............',  
     '.....LLL.....',  
-    '....LLHLL....',  
+    '....LLCLL....',  
     '...LL...LL...',  
     '..LL.E.E.LL..',   
-    '..LL.....LL..',  
-    '..LLLL.LLLL..',  
+    '..LLC...CLL..',  
+    '..LLLLLLLLL..',  
     '..LLLL.LLLL..',  
     '..LL..E..LL..',  
     '..LL.....LL..',  
@@ -291,7 +413,7 @@ gs_R =[
     '.............',  
     '...LLLLLLLL..',  
     '.LLLLLLLLLLL.',  
-    '.LLE.CHCE.LL.',  
+    '.LLE.CCCE.LL.',  
     '.LL.......LL.',   
     '.LL.....ELL..',  
     '.LL.LLLLLL...',  
@@ -305,24 +427,24 @@ gs_R =[
 
 gs_D =[
     '.............',  
-    '.BBBB........',  
-    '.B..HBB......',  
-    '.B.....BB....',  
-    '.B.......BB..',   
+    '.BBBBBBB.....',  
+    '.B.....CB....',  
+    '.B.......B...',  
+    '.B........B..',   
     '.B.........B.',  
     '.B........NB.',  
     '.B.........B.',  
-    '.B.......BB..',  
-    '.B.....BB....',  
-    '.B..HBB......',  
-    '.BBBB........',  
+    '.B........B..',  
+    '.B.......B...',  
+    '.B.....CB....',  
+    '.BBBBBBB.....',  
     '.............',   
 ]
 
 salle_entrée_boss =[
     '.............',  
     '.BBBBBBB.....',  
-    '.BH....B.....',  
+    '.BC....B.....',  
     '.B.....BB....',  
     '.B.....BBBBB.',   
     '...........B.',  
@@ -330,11 +452,11 @@ salle_entrée_boss =[
     '...........B.',  
     '.B.....BBBBB.',  
     '.B.....BB....',  
-    '.BH....B.....',  
+    '.BC....B.....',  
     '.BBBBBBB.....',  
     '.............',   
 ]
 
-liste_ps = [ps_ambuscade, ps_entonnoire,ps_lave,ps_maison,ps_pillier]
-liste_gs = [gs_lave,gs_mobs,gs_enfermé,gs_carremilieu,gs_lave,gs_mobs,gs_enfermé,gs_carremilieu]
+liste_ps = [ps_ambuscade, ps_entonnoire,ps_lave,ps_maison,ps_pillier,ps_chaise,ps_dansdans,ps_eight,ps_esquive,ps_E]
+liste_gs = [gs_lave,gs_mobs,gs_enfermé,gs_carremilieu,gs_mobs,gs_enfermé,gs_carremilieu,gs_o_O,gs_spirale,gs_chaud,gs_protection,gs_rituel,gs_smiley,gs_angry,gs_traps]
 liste_lettre =[gs_L,gs_I,gs_A,gs_R]
