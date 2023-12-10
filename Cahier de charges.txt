@@ -8,15 +8,13 @@ Cahier de charges : JEU LABYRINTHE 2D
     - MENU OPTION
         -- VOLUME SON
     - SON
+    - Zombie bug
+    - Take RING NECKLACE
     - LOSE SCREEN
         -- LORE
-        -- TOTAL DES STATS (ENEMY TUER,COFFRE OUVERT)
-            WIN_SCREEN
-            LOSE_SCREEN
-            CHANGER POLICE
+        -- CHANGER POLICE
         
     --Set ICON pygame.display.set_icon(Icon_name)
     --Améliorer IA/BOSS
-    -- Faire glitch animation fight boss
 
 

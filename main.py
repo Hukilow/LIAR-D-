@@ -1,6 +1,7 @@
 from config import *
 from sprites import *
 from install_dependencies import verify_requirements
+from Blocks import Cailloux1,Cailloux2,Cailloux3,Cailloux4,Cailloux5,Cailloux6,Cailloux7,Cailloux8
 
 
 class Game():
@@ -30,6 +31,8 @@ class Game():
         self.font = pygame.font.Font('mandalorelasertitle.ttf', 32)
         self.running = True
         self.win = False
+
+        self.cailloux = [Cailloux1,Cailloux2,Cailloux3,Cailloux4,Cailloux5,Cailloux6,Cailloux7,Cailloux8]
 
         self.nombre_de_win = 0
         self.totalenemykill = 0
@@ -182,6 +185,10 @@ class Game():
                     Coffre8(self,j,i)
                 if column == '9':
                     Coffre9(self,j,i)
+                if column == 'X':
+                    z = random.choice(self.cailloux)
+                    z(self,j,i)
+                
         self.player.rect.x = coordonnes[0] * TILESIZE
         self.player.rect.y = coordonnes[1] * TILESIZE
         self.player.healthbar.rect.x = (coordonnes[0] * TILESIZE) -(self.WIN_WIDTH/2)+10
@@ -466,6 +473,7 @@ class Game():
         self.light = pygame.sprite.LayeredUpdates()
         self.escaliercasse = pygame.sprite.LayeredUpdates()
         self.lave = pygame.sprite.LayeredUpdates()
+        self.caillouxgroup = pygame.sprite.LayeredUpdates()
         self.totalenemykill = load_data[27]
         self.totalchestopen = load_data[28]
         self.multiplicateur_difficulte_hp_enemies = load_data[31]
@@ -566,8 +574,8 @@ class Game():
         self.light = pygame.sprite.LayeredUpdates()
         self.escaliercasse = pygame.sprite.LayeredUpdates()
         self.lave = pygame.sprite.LayeredUpdates()
+        self.caillouxgroup = pygame.sprite.LayeredUpdates()
 
-        
         self.all_maps = All_maps()      
         self.createTilemap(self.all_maps.tilemap1)
         self.save()

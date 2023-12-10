@@ -91,6 +91,10 @@ def generate_labyrinth(width, height,):
                     b = random.randint(1,150)
                     if a == b:
                         tilemap[i][j] = "C"
+                if column == '.':
+                    b = random.randint(1,50)
+                    if a == b:
+                        tilemap[i][j] = "X"
         return tilemap
     tilemap = transformer(width,height)
     tilemap = spawnentites(tilemap)
@@ -180,6 +184,10 @@ def generate_labyrinth2(width, height, nombre_determinant_lettre):
                     b = random.randint(1,150)
                     if a == b:
                         tilemap[i][j] = "C"
+                if column == '.':
+                    b = random.randint(1,150)
+                    if a == b:
+                        tilemap[i][j] = "X"
 
         return tilemap
     
@@ -200,6 +208,7 @@ def generate_labyrinth2(width, height, nombre_determinant_lettre):
     a.remove(c)
     tilemap = creer_salle(echelle_monter, tilemap, c)
     g = liste_ps.copy()
+    d = liste_lettre.copy()
     listy = liste_gs.copy()
     for i in range(0,2):
         f = random.choice(g)
@@ -208,12 +217,12 @@ def generate_labyrinth2(width, height, nombre_determinant_lettre):
         a.remove(c)
         tilemap = creer_salle(f, tilemap, c)
     if nombre_determinant_lettre == 100:
-        d = liste_lettre[0]
-        liste_lettre.remove(d)
+        e = d[0]
+        d.remove(e)
     else:
-        d = random.choice(listy)
-        listy.remove(d)
-    creer_salle_principale(d,tilemap)
+        e = random.choice(listy)
+        listy.remove(e)
+    creer_salle_principale(e,tilemap)
     return tilemap
 
 def generate_labyrinth5(width, height, nombre_determinant_lettre):
@@ -288,6 +297,10 @@ def generate_labyrinth5(width, height, nombre_determinant_lettre):
                     b = random.randint(1,150)
                     if a == b:
                         tilemap[i][j] = "C"
+                if column == '.':
+                    b = random.randint(1,150)
+                    if a == b:
+                        tilemap[i][j] = "X"
         return tilemap
     
     def creer_salle_principale(salle,tilemap):
@@ -456,7 +469,7 @@ def spawncoffres(tilemap):
 
 def spawnennemis(tilemap):
     e = ['V','S','F','W','Z','A','U','K','R']
-    b = random.randint(1,1000)
+    b = random.randint(1,100)
     for i, row in enumerate(tilemap[1]):
         for j, column in enumerate(row):
             if column == 'E':
@@ -567,9 +580,7 @@ def spawnennemis(tilemap):
                         tilemap[1][i][j] = 'F'
 
                 if tilemap[0] == 'tilemap6':
-                    b = random.randint(1,1000)
-
-                    if 1 < b < 100:
+                    if 9 < b <= 100:
                         a = random.randint(1,1000)
                         if 1 <= a < 25:
                             tilemap[1][i][j] = 'V'
@@ -599,22 +610,21 @@ def spawnennemis(tilemap):
                     elif b == 3:
                         tilemap[1][i][j] = 'Z'
                         
-
-                    elif b == 3:
+                    elif b == 4:
                         tilemap[1][i][j] = 'W'
                     
-                    elif b == 3:
+                    elif b == 5:
                         tilemap[1][i][j] = 'K'
 
-                    elif b == 3:
+                    elif b == 6:
                         tilemap[1][i][j] = 'U'
 
-                    elif b == 3:
+                    elif b == 7:
                         tilemap[1][i][j] = 'R'
 
-                    elif b == 3:
+                    elif b == 8:
                         tilemap[1][i][j] = 'A'
 
-                    elif b == 3:
+                    elif b == 9:
                         tilemap[1][i][j] = 'F'
     return tilemap

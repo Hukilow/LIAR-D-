@@ -2187,7 +2187,7 @@ self.game.impactpurple_spritesheet.get_sprite(320, 704, 64, 64),]
                 self.healthbar.take_damage(self.game.player.puissance)
                 self.derniertemps = pygame.time.get_ticks()
                 print(self.healthbar.health)
-            if self.healthbar.health <= 248:
+            if self.healthbar.health <= 187:
                 if self.phase1 == True:
                     self.wait = True
                     if self.facing == 'up':
@@ -2214,7 +2214,33 @@ self.game.impactpurple_spritesheet.get_sprite(320, 704, 64, 64),]
                     self.phase2 = True
                     self.phase1 = False
 
-            if self.healthbar.health <= 240:
+            if self.healthbar.health <= 125:
+                if self.phase2 == True:
+                    self.wait = True
+                    if self.facing == 'up':
+                        xatt = self.rect.x 
+                        yatt = self.rect.y 
+
+                    if self.facing == 'down':
+                        xatt = self.rect.x
+                        yatt = self.rect.y
+
+                    if self.facing == 'left':
+                        xatt = self.rect.x -200
+                        yatt = self.rect.y
+
+                    if self.facing == 'right':
+                        xatt = self.rect.x + TILESIZE
+                        yatt = self.rect.y
+                    self.derniertemps4 = pygame.time.get_ticks()
+                    self.derniertemps1 = pygame.time.get_ticks() 
+                    self.game.player.enemyattacks = 2+self.game.multiplicateur_difficulte_attack_enemies 
+                    self.derniertempsloading = pygame.time.get_ticks()
+                    AttackEnemy(self.game,xatt,yatt,64,64,32,self.facing,self.teleportation_right,self.teleportation_left,self.teleportation_up,self.teleportation_down)
+                    self.invocation_times = pygame.time.get_ticks()
+                    self.phase2 = False
+
+            if self.healthbar.health <= 62:
                 if self.phase2 == True:
                     self.wait = True
                     if self.facing == 'up':
@@ -2250,7 +2276,8 @@ self.game.impactpurple_spritesheet.get_sprite(320, 704, 64, 64),]
             for sprite in self.game .all_sprites:
                 if (self.game.player.spritedujoueur != sprite) and (self.spriteduboss != sprite) and (self.game.player.light.spritedelalumiere != sprite) and (self.game.player.healthbar.spriteduhealthbar != sprite) and (self.game.player.etage.spriteduetage != sprite) and (self.game.player.potion.spriteduhubpotion!= sprite) and (self.game.player.epee.spriteduEpeeHUD != sprite) and (self.game.player.helmet.spriteduCasqueHUD != sprite) and (self.game.player.chest.spriteduChestHUD != sprite) and (self.game.player.pants.spriteduPantsHUD != sprite) and (self.game.player.boots.spritedesBootsHUD != sprite) and (self.game.player.necklace.spriteNecklaceHUD != sprite) and (self.game.player.ring.spriteRingHUD != sprite) and (self.game.player.ranged.spriteRangeHUD != sprite) and (self.game.player.afficheequipped.spriteduafficheequipped != sprite) and (self.game.player.afficheitem.spriteduafficheitem != sprite) and (self.game.hitbox.spriteduplayerhitbox != sprite):
                     sprite.kill()
-            self.game.createTilemapboss(random.choice([tilemap_boss1,tilemap_boss2]),True)
+            self.newmap = self.pop(random.choice(allbossmaps))
+            self.game.createTilemapboss(self.newmap,True)
             self.wait = False
 
     def invocation_time(self):

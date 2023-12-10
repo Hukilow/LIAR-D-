@@ -84,13 +84,14 @@ class Player(pygame.sprite.Sprite):
         self.vitesse = 1
         self.vitesse2 = 1 
         self.vitesse3 = 1
+        self.vitesse4 = 1
 
         self.movement_loop = 0
 
         self.x_change = 0
         self.y_change = 0
         
-        self.healh = 300*self.game.multiplicateur_difficulte_hp
+        self.healh = 10*self.game.multiplicateur_difficulte_hp
 
         self.puissance = 1
         self.widthattack = 32
@@ -117,6 +118,7 @@ class Player(pygame.sprite.Sprite):
 
         self.lasttaketimer = pygame.time.get_ticks()
         self.lastdrinktimer = pygame.time.get_ticks()
+        self.lasttrentesec = pygame.time.get_ticks()
         self.time = pygame.time.get_ticks()
 
         self.facing= 'down'
@@ -166,6 +168,9 @@ class Player(pygame.sprite.Sprite):
     def update(self):
         self.movement()
         self.animate()
+        self.necklaceemerald()
+
+        print(self.puissance)
 
         self.rect.x += self.x_change
         self.rect.y += self.y_change
@@ -173,8 +178,14 @@ class Player(pygame.sprite.Sprite):
         self.x_change = 0
         self.y_change = 0
 
-
-        
+    def trentesectime(self):
+        return self.lasttrentesec > pygame.time.get_ticks() - 30000
+    def necklaceemerald(self):
+        if self.necklace.ID == Necklace_emerald:
+            if self.trentesectime() == False:
+                self.lasttrentesec = pygame.time.get_ticks()
+                self.healthbar.heal2(1)
+                
     def movement(self):
         keys = pygame.key.get_pressed()
         if keys[pygame.K_q]:
@@ -319,58 +330,6 @@ class Player(pygame.sprite.Sprite):
                 if self.animation_loop >= 3:
                     self.animation_loop = 1
 
-    """def knockback(self):
-        hits = pygame.sprite.spritecollide(self, self.game.enemies, False)
-        hits2 = pygame.sprite.spritecollide(self, self.game.blocks, False)
-        if (self.facing == 'right') and (hits) and not (hits2):
-            self.STUN_player = True
-            max_travel = KNOCKBACK_SPEED*3
-            for i in range(max_travel):
-                self.x_change -= PLAYER_SPEED*self.vitesse*self.vitesse2*self.vitesse3
-                self.healthbar.x_change -= PLAYER_SPEED*self.vitesse*self.vitesse2*self.vitesse3
-                for sprite in self.game.all_sprites:
-                    sprite.rect.x += PLAYER_SPEED*self.vitesse*self.vitesse2*self.vitesse3
-                temps = pygame.time.get_ticks()
-                while (pygame.time.get_ticks()) - temps < 2:
-                    self.collide_blocks("x")
-
-                
-            self.STUN_player = False
-
-
-        if (self.facing == 'left') and (hits) and not (hits2):
-            movement_loop = 0
-            max_travel = KNOCKBACK_SPEED*3
-            self.x_change += KNOCKBACK_SPEED*3
-            self.healthbar.x_change += KNOCKBACK_SPEED*3
-            for sprite in self.game.all_sprites:
-                sprite.rect.x -= KNOCKBACK_SPEED*3
-            movement_loop -= 1 
-            if movement_loop <= -max_travel:
-                max_travel = movement_loop
-                
-        if (self.facing == 'down') and (hits) and not (hits2) :
-            movement_loop = 0
-            max_travel = KNOCKBACK_SPEED*3
-            self.y_change -= KNOCKBACK_SPEED*3
-            self.healthbar.y_change -= KNOCKBACK_SPEED*3
-            for sprite in self.game.all_sprites:
-                sprite.rect.y += KNOCKBACK_SPEED*3
-            movement_loop -= 1 
-            if movement_loop <= -max_travel:
-                max_travel = movement_loop
-        if (self.facing == 'up') and (hits) and not (hits2) :
-            movement_loop = 0
-            max_travel = KNOCKBACK_SPEED*3
-            self.y_change += KNOCKBACK_SPEED*3
-            self.healthbar.y_change += KNOCKBACK_SPEED*3
-            for sprite in self.game.all_sprites:
-                sprite.rect.y -= KNOCKBACK_SPEED*3
-            movement_loop -= 1 
-            if movement_loop <= -max_travel:
-                max_travel = movement_loop"""
-    
-
 class Button():
     def __init__(self,x, y, width, height, fg, bg, content, fontsize):
         self.font = pygame.font.Font('mandalorelasertitle.ttf', fontsize)
@@ -440,8 +399,6 @@ class Attack(pygame.sprite.Sprite):
             if self.game.player.facing == 'right':
                 self.x = self.game.player.rect.x + TILESIZE
                 self.y = self.game.player.rect.y
-        print(self.x)
-        print(self.y)
 
         self.width = self.game.player.widthattack
         self.height = self.game.player.heightattack
@@ -559,7 +516,7 @@ class Attack(pygame.sprite.Sprite):
     def dropchest(self,DROPCHEST):
         self.game.totalchestopen += 1
         if DROPCHEST == "DROPCHEST1": # couloir commun
-            DROPCHEST = [Boots_leather,Boots_chainmail,Boots_iron]
+            DROPCHEST = [Crimson_Blade,HellScythe]
             return random.choice(DROPCHEST)
         elif DROPCHEST == "DROPCHEST2": # couloir peu commun
             DROPCHEST = [Scythe,GreatSword,HellScythe,SnakeSword,WintersBallad,Hematite_Blade]

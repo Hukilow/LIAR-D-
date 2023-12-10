@@ -1,33 +1,31 @@
                                         Stats de base
 
+Vitesse : 3
 Puissance : 1
 Health : 10
 Vision : 125 Radius; RGB : 255,167,38 ; 50 Opacité
 
                                             ITEMS
 
-Potion de Heal : +2 HP
+Potion De Heal : +2 HP
 
                                             WEAPONS
 
-Scythe : 3
-Hematite Blade : 12
-HellScythe : 7
+Scythe : 2
+Lustrous Blade : 2
+Heavenly Wand : 2
+Celestial Scepter : 3
+Seraphic Blade : 4
+Azure Blade : 4
+Nebula Greatsword : 5
 Winters Ballad : 6
-Snake Sword : 10
-Great Sword : 15
-Hearth Shatter : 13
+Crimson Blade : 7
+HellScythe : 8
+Hematite Blade : 9
+Flamestrike Mallet : 10
+Great Sword : 12
+Snake Sword : 15
 Supernova Scepter The Celestial Voidcleaver Annihilator Of All Realms : 9999
-Flamestrike Maller : 8
-Crimson Blade : 6
-Celestial Scepter : 6
-Nebula Greatsword : 8
-Seraphic Blade : 5
-Azure Blade : 5
-Lustrous Blade : 5
-Heavenly Wand : 9
-Lava Sword : 5
-
 
                                             ARMORS
 
@@ -43,44 +41,44 @@ Chest Leather : +3 Health
 Chest Chainmail : +4 Health
 Chest Iron : +5 Health
 
-Boots Leather : +1 Health, x1.5 Speed
+Boots Leather : +1 Health, x1.2 Speed
 Boots Chainmail : +2 Health, x1 Speed
 Boots Iron : +3 Health, x0.7 Speed
 
-Lava Healmet : 
-Lava Chest : 
-Lava Pants : 
-Lava Boots : 
+Lava Healmet : +5, 500 Radius Vision ; RGB : 255,0,0 ; 25 Opacité
+Lava Chest : +15
+Lava Pants : +10
+Lava Boots : +5, x1.4 Speed
 
                                            ENEMIES
 
 (Vitesse ; Vie ; Attaque)
 
-Enemy : 1 ; 10 ; 1 # Très rarement dans les couloirs car nul
+Enemy : 1.5 ; 3 ; 1 # Très rarement dans les couloirs car nul
 
-Slime : 2 ; 5 ; 2
-Zombie : 2 ; 15 ; (2)
-Lost Adventurer : 3 ; 15 ; (2;2)
-Knight : 2 ; 30 ; 1
-Beetle : 1 ; 25 ; (2;2)
-Multicolor Man : 2 ; 15 ; (2;2)
-Fermier : 2 ; 10 ; 2
+Slime : 1.5 ; 3 ; 2
+Zombie : 0.5 ; 10 ; 2
+Lost Adventurer : 3 ; 15 ; (5;2)
+Knight : 1 ; 30 ; 3
+Beetle : 2.5 ; 15 ; (2;3)
+Multicolor Man : 3 ; 25 ; (4;3)
+Fermier : 5 ; 1 ; 10
 
-Angry Maid : 2 ; 10 ; 2 # Dans les salles + très rarement dans les couloirs
+Angry Maid : 1.5 ; 10 ; 5 # Dans les salles + très rarement dans les couloirs
 
 Boss : 2 ; 250 ; (2;2;2)
 
                                           ACCESSORIES
 
-Necklace_copper : 
-Necklace_rubis : 
-Necklace_saphir : 
-Necklace_emerald : 
+Necklace_copper : Il est cassé
+Necklace_rubis : +2 puissance
+Necklace_saphir : vision x1.5
+Necklace_emerald : recup 1 pv toutes les 30 secondes
 
-Ring_copper : 
-Ring_rubis : 
-Ring_saphir : 
-Ring_emerald : 
+Ring_copper : a capout
+Ring_rubis : +1 puissance
+Ring_saphir : vision + 50
+Ring_emerald : +3pv
 
                                         SPAWN DE COFFRES
 

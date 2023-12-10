@@ -570,11 +570,11 @@ class Lave9(pygame.sprite.Sprite):
         self.rect.x = self.x
         self.rect.y = self.y
 
-"""class Gold(pygame.sprite.Sprite):
+class Cailloux1(pygame.sprite.Sprite):
     def __init__(self,game,x,y):
         self.game= game
         self._layer = GROUND_LAYER
-        self.groups = self.game.all_sprites, self.game.???
+        self.groups = self.game.all_sprites, self.game.caillouxgroup
         pygame.sprite.Sprite.__init__(self, self.groups)
         
         self.x = x * TILESIZE
@@ -582,8 +582,134 @@ class Lave9(pygame.sprite.Sprite):
         self.width = TILESIZE
         self.height = TILESIZE
 
-        self.image = self.game.???_spritesheet.get_sprite(544, 128, 32, 32)
+        self.image = self.game.terrain_spritesheet.get_sprite(960, 480, 32, 32)
         
         self.rect = self.image.get_rect()
         self.rect.x = self.x
-        self.rect.y = self.y"""
+        self.rect.y = self.y
+
+class Cailloux2(pygame.sprite.Sprite):
+    def __init__(self,game,x,y):
+        self.game= game
+        self._layer = GROUND_LAYER
+        self.groups = self.game.all_sprites, self.game.caillouxgroup
+        pygame.sprite.Sprite.__init__(self, self.groups)
+        
+        self.x = x * TILESIZE
+        self.y = y * TILESIZE
+        self.width = TILESIZE
+        self.height = TILESIZE
+
+        self.image = self.game.terrain_spritesheet.get_sprite(928, 512, 32, 32)
+        
+        self.rect = self.image.get_rect()
+        self.rect.x = self.x
+        self.rect.y = self.y
+
+class Cailloux3(pygame.sprite.Sprite):
+    def __init__(self,game,x,y):
+        self.game= game
+        self._layer = GROUND_LAYER
+        self.groups = self.game.all_sprites, self.game.caillouxgroup
+        pygame.sprite.Sprite.__init__(self, self.groups)
+        
+        self.x = x * TILESIZE
+        self.y = y * TILESIZE
+        self.width = TILESIZE
+        self.height = TILESIZE
+
+        self.image = self.game.terrain_spritesheet.get_sprite(960, 512, 32, 32)
+        
+        self.rect = self.image.get_rect()
+        self.rect.x = self.x
+        self.rect.y = self.y
+
+class Cailloux4(pygame.sprite.Sprite):
+    def __init__(self,game,x,y):
+        self.game= game
+        self._layer = GROUND_LAYER
+        self.groups = self.game.all_sprites, self.game.caillouxgroup
+        pygame.sprite.Sprite.__init__(self, self.groups)
+        
+        self.x = x * TILESIZE
+        self.y = y * TILESIZE
+        self.width = TILESIZE
+        self.height = TILESIZE
+
+        self.image = self.game.terrain_spritesheet.get_sprite(992, 512, 32, 32)
+        
+        self.rect = self.image.get_rect()
+        self.rect.x = self.x
+        self.rect.y = self.y
+
+class Cailloux5(pygame.sprite.Sprite):
+    def __init__(self,game,x,y):
+        self.game= game
+        self._layer = GROUND_LAYER
+        self.groups = self.game.all_sprites, self.game.caillouxgroup
+        pygame.sprite.Sprite.__init__(self, self.groups)
+        
+        self.x = x * TILESIZE
+        self.y = y * TILESIZE
+        self.width = TILESIZE
+        self.height = TILESIZE
+
+        self.image = self.game.terrain_spritesheet.get_sprite(928, 576, 32, 32)
+        
+        self.rect = self.image.get_rect()
+        self.rect.x = self.x
+        self.rect.y = self.y
+
+class Cailloux6(pygame.sprite.Sprite):
+    def __init__(self,game,x,y):
+        self.game= game
+        self._layer = GROUND_LAYER
+        self.groups = self.game.all_sprites, self.game.caillouxgroup
+        pygame.sprite.Sprite.__init__(self, self.groups)
+        
+        self.x = x * TILESIZE
+        self.y = y * TILESIZE
+        self.width = TILESIZE
+        self.height = TILESIZE
+
+        self.image = self.game.terrain_spritesheet.get_sprite(928, 608, 32, 32)
+        
+        self.rect = self.image.get_rect()
+        self.rect.x = self.x
+        self.rect.y = self.y
+
+class Cailloux7(pygame.sprite.Sprite):
+    def __init__(self,game,x,y):
+        self.game= game
+        self._layer = GROUND_LAYER
+        self.groups = self.game.all_sprites, self.game.caillouxgroup
+        pygame.sprite.Sprite.__init__(self, self.groups)
+        
+        self.x = x * TILESIZE
+        self.y = y * TILESIZE
+        self.width = TILESIZE
+        self.height = TILESIZE
+
+        self.image = self.game.terrain_spritesheet.get_sprite(960, 608, 32, 32)
+        
+        self.rect = self.image.get_rect()
+        self.rect.x = self.x
+        self.rect.y = self.y
+
+class Cailloux8(pygame.sprite.Sprite):
+    def __init__(self,game,x,y):
+        self.game= game
+        self._layer = GROUND_LAYER
+        self.groups = self.game.all_sprites, self.game.caillouxgroup
+        pygame.sprite.Sprite.__init__(self, self.groups)
+        
+        self.x = x * TILESIZE
+        self.y = y * TILESIZE
+        self.width = TILESIZE
+        self.height = TILESIZE
+
+        self.image = self.game.terrain_spritesheet.get_sprite(992, 576, 32, 32)
+        
+        self.rect = self.image.get_rect()
+        self.rect.x = self.x
+        self.rect.y = self.y

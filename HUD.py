@@ -41,6 +41,10 @@ class HealthBar(pygame.sprite.Sprite):
 
     def take_damage(self,damage):
         self.health -= damage
+    
+    def heal2(self,heal):
+        if self.health < self.maxhealth:
+            self.health += heal
 
     def heal(self,heal):
         if self.health < self.maxhealth:
@@ -662,6 +666,7 @@ class PlayerHitbox(pygame.sprite.Sprite):
         self.vitesse = self.game.player.vitesse
         self.vitesse2 = self.game.player.vitesse2
         self.vitesse3 = self.game.player.vitesse3
+        self.vitesse4 = self.game.player.vitesse4
 
         self.derniertemps = pygame.time.get_ticks()
         self.derniertemps2 = pygame.time.get_ticks()
@@ -678,12 +683,13 @@ class PlayerHitbox(pygame.sprite.Sprite):
         self.game.screen.blit(self.image,self.pos)
 
         self.rect.x += self.x_change
-        self.collide_blocks('x')
+        #self.collide_blocks('x')
         self.rect.y += self.y_change
-        self.collide_blocks('y')
+        #self.collide_blocks('y')
         self.collide_enemyattacks()
         self.collide_enemy()
         self.collide_lava()
+        self.collide_cailloux()
         self.speed()
         self.speed_lava()
         self.collide_echelle()
@@ -691,6 +697,7 @@ class PlayerHitbox(pygame.sprite.Sprite):
         self.vitesse = self.game.player.vitesse
         self.vitesse2 = self.game.player.vitesse2
         self.vitesse3 = self.game.player.vitesse3
+        self.vitesse4 = self.game.player.vitesse4
 
 
         self.x_change = 0
@@ -767,6 +774,13 @@ class PlayerHitbox(pygame.sprite.Sprite):
             if self.game.player.healthbar.health < 0 :
                 self.kill()
                 self.game.playing = False
+
+    def collide_cailloux(self):
+        hits = pygame.sprite.spritecollide(self, self.game.caillouxgroup, False)
+        if hits:
+            if self.invincibility_lava() == False:
+                self.derniertemps2 = pygame.time.get_ticks()
+                print(self.derniertemps2)
         
 
     def collide_blocks(self, direction):
@@ -807,78 +821,78 @@ class PlayerHitbox(pygame.sprite.Sprite):
             if direction == 'x':
                     if self.x_change > 0:
                         for sprite in self.game.all_sprites:
-                            sprite.rect.x += PLAYER_SPEED*self.vitesse*self.vitesse2*self.vitesse3
+                            sprite.rect.x += PLAYER_SPEED*self.vitesse*self.vitesse2*self.vitesse3*self.vitesse4
                         self.rect.x = hit[0].rect.left - self.rect.width
-                        self.game.player.healthbar.rect.x -= PLAYER_SPEED*self.vitesse*self.vitesse2*self.vitesse3
-                        self.game.player.etage.rect.x -= PLAYER_SPEED*self.vitesse*self.vitesse2*self.vitesse3
-                        self.game.player.potion.rect.x -= PLAYER_SPEED*self.vitesse*self.vitesse2*self.vitesse3
-                        self.game.player.epee.rect.x -= PLAYER_SPEED*self.vitesse*self.vitesse2*self.vitesse3
-                        self.game.player.ranged.rect.x -= PLAYER_SPEED*self.vitesse*self.vitesse2*self.vitesse3
-                        self.game.player.helmet.rect.x -= PLAYER_SPEED*self.vitesse*self.vitesse2*self.vitesse3
-                        self.game.player.chest.rect.x -= PLAYER_SPEED*self.vitesse*self.vitesse2*self.vitesse3
-                        self.game.player.pants.rect.x -= PLAYER_SPEED*self.vitesse*self.vitesse2*self.vitesse3
-                        self.game.player.boots.rect.x -= PLAYER_SPEED*self.vitesse*self.vitesse2*self.vitesse3
-                        self.game.player.ring.rect.x -= PLAYER_SPEED*self.vitesse*self.vitesse2*self.vitesse3
-                        self.game.player.necklace.rect.x -= PLAYER_SPEED*self.vitesse*self.vitesse2*self.vitesse3
-                        self.game.player.rect.x -= PLAYER_SPEED*self.vitesse*self.vitesse2*self.vitesse3
-                        self.game.player.afficheitem.rect.x -= PLAYER_SPEED*self.vitesse*self.vitesse2*self.vitesse3
-                        self.game.player.afficheequipped.rect.x -= PLAYER_SPEED*self.vitesse*self.vitesse2*self.vitesse3
+                        self.game.player.healthbar.rect.x -= PLAYER_SPEED*self.vitesse*self.vitesse2*self.vitesse3*self.vitesse4
+                        self.game.player.etage.rect.x -= PLAYER_SPEED*self.vitesse*self.vitesse2*self.vitesse3*self.vitesse4
+                        self.game.player.potion.rect.x -= PLAYER_SPEED*self.vitesse*self.vitesse2*self.vitesse3*self.vitesse4
+                        self.game.player.epee.rect.x -= PLAYER_SPEED*self.vitesse*self.vitesse2*self.vitesse3*self.vitesse4
+                        self.game.player.ranged.rect.x -= PLAYER_SPEED*self.vitesse*self.vitesse2*self.vitesse3*self.vitesse4
+                        self.game.player.helmet.rect.x -= PLAYER_SPEED*self.vitesse*self.vitesse2*self.vitesse3*self.vitesse4
+                        self.game.player.chest.rect.x -= PLAYER_SPEED*self.vitesse*self.vitesse2*self.vitesse3*self.vitesse4
+                        self.game.player.pants.rect.x -= PLAYER_SPEED*self.vitesse*self.vitesse2*self.vitesse3*self.vitesse4
+                        self.game.player.boots.rect.x -= PLAYER_SPEED*self.vitesse*self.vitesse2*self.vitesse3*self.vitesse4
+                        self.game.player.ring.rect.x -= PLAYER_SPEED*self.vitesse*self.vitesse2*self.vitesse3*self.vitesse4
+                        self.game.player.necklace.rect.x -= PLAYER_SPEED*self.vitesse*self.vitesse2*self.vitesse3*self.vitesse4
+                        self.game.player.rect.x -= PLAYER_SPEED*self.vitesse*self.vitesse2*self.vitesse3*self.vitesse4
+                        self.game.player.afficheitem.rect.x -= PLAYER_SPEED*self.vitesse*self.vitesse2*self.vitesse3*self.vitesse4
+                        self.game.player.afficheequipped.rect.x -= PLAYER_SPEED*self.vitesse*self.vitesse2*self.vitesse3*self.vitesse4
                     if self.x_change < 0:
                         for sprite in self.game.all_sprites:
-                            sprite.rect.x -= PLAYER_SPEED*self.vitesse*self.vitesse2*self.vitesse3
+                            sprite.rect.x -= PLAYER_SPEED*self.vitesse*self.vitesse2*self.vitesse3*self.vitesse4
                         self.rect.x = hit[0].rect.right
-                        self.game.player.healthbar.rect.x += PLAYER_SPEED*self.vitesse*self.vitesse2*self.vitesse3
-                        self.game.player.etage.rect.x += PLAYER_SPEED*self.vitesse*self.vitesse2*self.vitesse3
-                        self.game.player.potion.rect.x += PLAYER_SPEED*self.vitesse*self.vitesse2*self.vitesse3
-                        self.game.player.epee.rect.x += PLAYER_SPEED*self.vitesse*self.vitesse2*self.vitesse3
-                        self.game.player.ranged.rect.x += PLAYER_SPEED*self.vitesse*self.vitesse2*self.vitesse3
-                        self.game.player.helmet.rect.x += PLAYER_SPEED*self.vitesse*self.vitesse2*self.vitesse3
-                        self.game.player.chest.rect.x += PLAYER_SPEED*self.vitesse*self.vitesse2*self.vitesse3
-                        self.game.player.pants.rect.x += PLAYER_SPEED*self.vitesse*self.vitesse2*self.vitesse3
-                        self.game.player.boots.rect.x += PLAYER_SPEED*self.vitesse*self.vitesse2*self.vitesse3
-                        self.game.player.ring.rect.x += PLAYER_SPEED*self.vitesse*self.vitesse2*self.vitesse3
-                        self.game.player.necklace.rect.x += PLAYER_SPEED*self.vitesse*self.vitesse2*self.vitesse3
-                        self.game.player.rect.x += PLAYER_SPEED*self.vitesse*self.vitesse2*self.vitesse3
-                        self.game.player.afficheitem.rect.x += PLAYER_SPEED*self.vitesse*self.vitesse2*self.vitesse3
-                        self.game.player.afficheequipped.rect.x += PLAYER_SPEED*self.vitesse*self.vitesse2*self.vitesse3
+                        self.game.player.healthbar.rect.x += PLAYER_SPEED*self.vitesse*self.vitesse2*self.vitesse3*self.vitesse4
+                        self.game.player.etage.rect.x += PLAYER_SPEED*self.vitesse*self.vitesse2*self.vitesse3*self.vitesse4
+                        self.game.player.potion.rect.x += PLAYER_SPEED*self.vitesse*self.vitesse2*self.vitesse3*self.vitesse4
+                        self.game.player.epee.rect.x += PLAYER_SPEED*self.vitesse*self.vitesse2*self.vitesse3*self.vitesse4
+                        self.game.player.ranged.rect.x += PLAYER_SPEED*self.vitesse*self.vitesse2*self.vitesse3*self.vitesse4
+                        self.game.player.helmet.rect.x += PLAYER_SPEED*self.vitesse*self.vitesse2*self.vitesse3*self.vitesse4
+                        self.game.player.chest.rect.x += PLAYER_SPEED*self.vitesse*self.vitesse2*self.vitesse3*self.vitesse4
+                        self.game.player.pants.rect.x += PLAYER_SPEED*self.vitesse*self.vitesse2*self.vitesse3*self.vitesse4
+                        self.game.player.boots.rect.x += PLAYER_SPEED*self.vitesse*self.vitesse2*self.vitesse3*self.vitesse4
+                        self.game.player.ring.rect.x += PLAYER_SPEED*self.vitesse*self.vitesse2*self.vitesse3*self.vitesse4
+                        self.game.player.necklace.rect.x += PLAYER_SPEED*self.vitesse*self.vitesse2*self.vitesse3*self.vitesse4
+                        self.game.player.rect.x += PLAYER_SPEED*self.vitesse*self.vitesse2*self.vitesse3*self.vitesse4
+                        self.game.player.afficheitem.rect.x += PLAYER_SPEED*self.vitesse*self.vitesse2*self.vitesse3*self.vitesse4
+                        self.game.player.afficheequipped.rect.x += PLAYER_SPEED*self.vitesse*self.vitesse2*self.vitesse3*self.vitesse4
 
             if direction == 'y':
                     if self.y_change > 0:
                         for sprite in self.game.all_sprites:
-                            sprite.rect.y += PLAYER_SPEED*self.vitesse*self.vitesse2*self.vitesse3
+                            sprite.rect.y += PLAYER_SPEED*self.vitesse*self.vitesse2*self.vitesse3*self.vitesse4
                         self.rect.y = hit[0].rect.top - self.rect.height
-                        self.game.player.healthbar.rect.y -= PLAYER_SPEED*self.vitesse*self.vitesse2*self.vitesse3
-                        self.game.player.etage.rect.y -= PLAYER_SPEED*self.vitesse*self.vitesse2*self.vitesse3
-                        self.game.player.potion.rect.y -= PLAYER_SPEED*self.vitesse*self.vitesse2*self.vitesse3
-                        self.game.player.epee.rect.y -= PLAYER_SPEED*self.vitesse*self.vitesse2*self.vitesse3
-                        self.game.player.ranged.rect.y -= PLAYER_SPEED*self.vitesse*self.vitesse2*self.vitesse3
-                        self.game.player.helmet.rect.y -= PLAYER_SPEED*self.vitesse*self.vitesse2*self.vitesse3
-                        self.game.player.chest.rect.y -= PLAYER_SPEED*self.vitesse*self.vitesse2*self.vitesse3
-                        self.game.player.pants.rect.y -= PLAYER_SPEED*self.vitesse*self.vitesse2*self.vitesse3
-                        self.game.player.boots.rect.y -= PLAYER_SPEED*self.vitesse*self.vitesse2*self.vitesse3
-                        self.game.player.ring.rect.y -= PLAYER_SPEED*self.vitesse*self.vitesse2*self.vitesse3
-                        self.game.player.necklace.rect.y -= PLAYER_SPEED*self.vitesse*self.vitesse2*self.vitesse3
-                        self.game.player.rect.y -= PLAYER_SPEED*self.vitesse*self.vitesse2*self.vitesse3
-                        self.game.player.afficheitem.rect.y -= PLAYER_SPEED*self.vitesse*self.vitesse2*self.vitesse3
-                        self.game.player.afficheequipped.rect.y -= PLAYER_SPEED*self.vitesse*self.vitesse2*self.vitesse3
+                        self.game.player.healthbar.rect.y -= PLAYER_SPEED*self.vitesse*self.vitesse2*self.vitesse3*self.vitesse4
+                        self.game.player.etage.rect.y -= PLAYER_SPEED*self.vitesse*self.vitesse2*self.vitesse3*self.vitesse4
+                        self.game.player.potion.rect.y -= PLAYER_SPEED*self.vitesse*self.vitesse2*self.vitesse3*self.vitesse4
+                        self.game.player.epee.rect.y -= PLAYER_SPEED*self.vitesse*self.vitesse2*self.vitesse3*self.vitesse4
+                        self.game.player.ranged.rect.y -= PLAYER_SPEED*self.vitesse*self.vitesse2*self.vitesse3*self.vitesse4
+                        self.game.player.helmet.rect.y -= PLAYER_SPEED*self.vitesse*self.vitesse2*self.vitesse3*self.vitesse4
+                        self.game.player.chest.rect.y -= PLAYER_SPEED*self.vitesse*self.vitesse2*self.vitesse3*self.vitesse4
+                        self.game.player.pants.rect.y -= PLAYER_SPEED*self.vitesse*self.vitesse2*self.vitesse3*self.vitesse4
+                        self.game.player.boots.rect.y -= PLAYER_SPEED*self.vitesse*self.vitesse2*self.vitesse3*self.vitesse4
+                        self.game.player.ring.rect.y -= PLAYER_SPEED*self.vitesse*self.vitesse2*self.vitesse3*self.vitesse4
+                        self.game.player.necklace.rect.y -= PLAYER_SPEED*self.vitesse*self.vitesse2*self.vitesse3*self.vitesse4
+                        self.game.player.rect.y -= PLAYER_SPEED*self.vitesse*self.vitesse2*self.vitesse3*self.vitesse4
+                        self.game.player.afficheitem.rect.y -= PLAYER_SPEED*self.vitesse*self.vitesse2*self.vitesse3*self.vitesse4
+                        self.game.player.afficheequipped.rect.y -= PLAYER_SPEED*self.vitesse*self.vitesse2*self.vitesse3*self.vitesse4
                     if self.y_change < 0:
                         for sprite in self.game.all_sprites:
-                            sprite.rect.y -= PLAYER_SPEED*self.vitesse*self.vitesse2*self.vitesse3
+                            sprite.rect.y -= PLAYER_SPEED*self.vitesse*self.vitesse2*self.vitesse3*self.vitesse4
                         self.rect.y = hit[0].rect.bottom
-                        self.game.player.healthbar.rect.y += PLAYER_SPEED*self.vitesse*self.vitesse2*self.vitesse3
-                        self.game.player.etage.rect.y += PLAYER_SPEED*self.vitesse*self.vitesse2*self.vitesse3
-                        self.game.player.potion.rect.y += PLAYER_SPEED*self.vitesse*self.vitesse2*self.vitesse3
-                        self.game.player.epee.rect.y += PLAYER_SPEED*self.vitesse*self.vitesse2*self.vitesse3
-                        self.game.player.ranged.rect.y += PLAYER_SPEED*self.vitesse*self.vitesse2*self.vitesse3
-                        self.game.player.helmet.rect.y += PLAYER_SPEED*self.vitesse*self.vitesse2*self.vitesse3
-                        self.game.player.chest.rect.y += PLAYER_SPEED*self.vitesse*self.vitesse2*self.vitesse3
-                        self.game.player.pants.rect.y += PLAYER_SPEED*self.vitesse*self.vitesse2*self.vitesse3
-                        self.game.player.boots.rect.y += PLAYER_SPEED*self.vitesse*self.vitesse2*self.vitesse3
-                        self.game.player.ring.rect.y += PLAYER_SPEED*self.vitesse*self.vitesse2*self.vitesse3
-                        self.game.player.necklace.rect.y += PLAYER_SPEED*self.vitesse*self.vitesse2*self.vitesse3
-                        self.game.player.rect.y += PLAYER_SPEED*self.vitesse*self.vitesse2*self.vitesse3
-                        self.game.player.afficheitem.rect.y += PLAYER_SPEED*self.vitesse*self.vitesse2*self.vitesse3
-                        self.game.player.afficheequipped.rect.y += PLAYER_SPEED*self.vitesse*self.vitesse2*self.vitesse3
+                        self.game.player.healthbar.rect.y += PLAYER_SPEED*self.vitesse*self.vitesse2*self.vitesse3*self.vitesse4
+                        self.game.player.etage.rect.y += PLAYER_SPEED*self.vitesse*self.vitesse2*self.vitesse3*self.vitesse4
+                        self.game.player.potion.rect.y += PLAYER_SPEED*self.vitesse*self.vitesse2*self.vitesse3*self.vitesse4
+                        self.game.player.epee.rect.y += PLAYER_SPEED*self.vitesse*self.vitesse2*self.vitesse3*self.vitesse4
+                        self.game.player.ranged.rect.y += PLAYER_SPEED*self.vitesse*self.vitesse2*self.vitesse3*self.vitesse4
+                        self.game.player.helmet.rect.y += PLAYER_SPEED*self.vitesse*self.vitesse2*self.vitesse3*self.vitesse4
+                        self.game.player.chest.rect.y += PLAYER_SPEED*self.vitesse*self.vitesse2*self.vitesse3*self.vitesse4
+                        self.game.player.pants.rect.y += PLAYER_SPEED*self.vitesse*self.vitesse2*self.vitesse3*self.vitesse4
+                        self.game.player.boots.rect.y += PLAYER_SPEED*self.vitesse*self.vitesse2*self.vitesse3*self.vitesse4
+                        self.game.player.ring.rect.y += PLAYER_SPEED*self.vitesse*self.vitesse2*self.vitesse3*self.vitesse4
+                        self.game.player.necklace.rect.y += PLAYER_SPEED*self.vitesse*self.vitesse2*self.vitesse3*self.vitesse4
+                        self.game.player.rect.y += PLAYER_SPEED*self.vitesse*self.vitesse2*self.vitesse3*self.vitesse4
+                        self.game.player.afficheitem.rect.y += PLAYER_SPEED*self.vitesse*self.vitesse2*self.vitesse3*self.vitesse4
+                        self.game.player.afficheequipped.rect.y += PLAYER_SPEED*self.vitesse*self.vitesse2*self.vitesse3*self.vitesse4
 
     def monter_descendretime(self):
         return self.derniertempsechelle > pygame.time.get_ticks() - 1000

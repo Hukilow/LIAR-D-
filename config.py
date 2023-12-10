@@ -4,15 +4,15 @@ import pickle
 TILESIZE = 32
 FPS = 60
 
-BEETLE_HEALTH = 25
+BEETLE_HEALTH = 15
 BOSS_HEALTH = 250
-SLIME_HEALTH = 5
+SLIME_HEALTH = 3
 ANGRY_MAID_HEALTH = 10
 KNIGHT_HEALTH = 30
-MULTICOLOR_MAN_HEALTH = 15
+MULTICOLOR_MAN_HEALTH = 25
 ADVENTURER_HEALTH = 15
-ZOMBIE_HEALTH = 15
-GARDENER_HEALTH = 10
+ZOMBIE_HEALTH = 10
+GARDENER_HEALTH = 1
 
 HEALTH_LAYER = 7
 PLAYER_LAYER = 6
@@ -24,16 +24,16 @@ GROUND_LAYER = 1
 HITBOX_LAYER = 0
 
 PLAYER_SPEED = 3
-ENEMY_SPEED = 3
-KNIGHT_SPEED = 2
-MAID_SPEED = 2
-SLIME_SPEED = 2
-BETTLE_SPEED = 1
+ENEMY_SPEED = 1.5
+KNIGHT_SPEED = 1
+MAID_SPEED = 1.5
+SLIME_SPEED = 1.5
+BETTLE_SPEED = 2
 BOSS_SPEED = 2
 KNOCKBACK_SPEED = 10
-MULTICOLOR_MAN_SPEED = 2
+MULTICOLOR_MAN_SPEED = 2.5
 ADVENTURER_SPEED = 3
-ZOMBIE_SPEED = 2
+ZOMBIE_SPEED = 0.5
 GARDENER_SPEED = 5
 
 RED = (255, 0, 0)
@@ -222,3 +222,32 @@ tilemap_boss2 = [
     'B.....Q......................B',
     'B............................B',
     'BBBBBBBBBBBBBBBBBBBBBBBBBBBBBB',]
+
+tilemap_boss3 = [
+    'BBBBBBBBBBBBBBBBBBBBBBBBBBBBBB',
+    'B............................B',
+    'B............................B',
+    'B............................B',
+    'B.....Q.................Q....B',
+    'B...............Q............B',
+    'B..........Q.................B',
+    'B....................Q.......B',
+    'B.....123....................B',
+    'B.....456...............Q....B',
+    'B.....789....................B',
+    'BQQ..........................B',
+    'BJP.Q....................W...B',
+    'BQQ..........................B',
+    'B............................B',
+    'B............................B',
+    'B............................B',
+    'B............................B',
+    'B........................Q...B',
+    'B............................B',
+    'B...........Q.......Q........B',
+    'B............................B',
+    'B.....Q......................B',
+    'B............................B',
+    'BBBBBBBBBBBBBBBBBBBBBBBBBBBBBB',]
+
+allbossmaps = [tilemap_boss1,tilemap_boss2,tilemap_boss3]

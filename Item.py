@@ -52,7 +52,6 @@ class Potion(pygame.sprite.Sprite):
                 self.game.player.afficheitem.trueorfalse = False
                 self.kill()
 
-
 class Scythe(pygame.sprite.Sprite):
     nom = "Scythe"
     attribut = "Puissance : +3"
@@ -1400,6 +1399,81 @@ class Helmet_iron(pygame.sprite.Sprite):
                     self.kill()
                     self.game.player.lasttaketimer = pygame.time.get_ticks()
 
+class Helmet_Lava(pygame.sprite.Sprite):
+    nom = "Lava Helmet"
+    attribut = "Max health : +5"
+    attribut1 = "Vision : 500"
+    IDimage = (37,129,23,30)
+    def __init__(self,game, x, y):
+
+        self.game = game 
+        self._layer = ITEM_LAYER
+
+        self.groups = self.game.all_sprites, self.game.item
+        pygame.sprite.Sprite.__init__(self, self.groups)
+
+        self.ID = Helmet_Lava
+        self.image = self.game.lavaequipement_spritesheet.get_sprite(416,0,32,32)
+
+        self.x = x
+        self.y = y
+        self.x_change = 0
+        self.y_change = 0
+
+        self.addhealth = 5
+        self.vision = 500
+        self.rect = self.image.get_rect() 
+        self.rect.x = self.x
+        self.rect.y = self.y
+        self.pos = (x,y)
+
+
+    def update(self):
+        self.game.screen.blit(self.image,self.pos)
+        self.collide()
+
+        self.rect.x += self.x_change
+        self.rect.y += self.y_change
+
+        self.x_change = 0
+        self.y_change = 0
+
+
+    def collide(self):
+            hits = pygame.sprite.spritecollide(self, self.game.playerhitbox, False)
+            keys = pygame.key.get_pressed()
+            if hits:
+                self.game.player.afficheitem.trueorfalse = True
+                self.game.player.afficheitem.nom = self.nom
+                self.game.player.afficheitem.attribut1 = self.attribut
+                self.game.player.afficheitem.attribut2 = self.attribut1
+            if (hits) and (self.game.player.helmet.ID != None):
+                self.game.player.afficheequipped.trueorfalse = True
+                self.game.player.afficheequipped.nom = self.game.player.helmet.ID.nom
+                self.game.player.afficheequipped.attribut1 = self.game.player.helmet.ID.attribut
+                self.game.player.afficheequipped.attribut2 = self.game.player.helmet.ID.attribut1
+            if not hits:
+                self.game.player.afficheitem.trueorfalse = False
+                self.game.player.afficheequipped.trueorfalse = False
+                 
+
+            if hits and keys[pygame.K_e]:
+                if self.game.player.take_timer() == False:
+                    print(self.game.player.light.light_radius)     
+                    if self.game.player.helmet.ID != None:
+                        helmet_instance = self.game.player.helmet.ID(self.game,self.game.player.rect.x,self.game.player.rect.y)
+                        self.game.player.healthbar.maxhealth -= helmet_instance.addhealth
+                    self.game.player.light.kill()
+                    self.game.player.light = None
+                    self.game.player.light = Light(self.game,self.game.player.x,self.game.player.y,self.vision,(255,0,0,25))
+                    print(self.game.player.light.light_radius)
+                    self.game.player.helmet.ID = Helmet_Lava
+                    self.game.player.helmet.image = self.image
+                    self.game.player.afficheitem.trueorfalse = False
+                    self.game.player.afficheequipped.trueorfalse = False
+                    self.kill()
+                    self.game.player.lasttaketimer = pygame.time.get_ticks()
+
 class Pants_leather(pygame.sprite.Sprite):
     nom = "Leather Pants"
     attribut = "Max health : +2"
@@ -1455,15 +1529,17 @@ class Pants_leather(pygame.sprite.Sprite):
                 self.game.player.afficheequipped.trueorfalse = False
                  
             if hits and keys[pygame.K_e]:
-                if self.game.player.pants.ID != None:
-                    helmet_instance = self.game.player.pants.ID(self.game,self.game.player.rect.x,self.game.player.rect.y)
-                    self.game.player.healthbar.maxhealth -= helmet_instance.addhealth
-                self.game.player.healthbar.maxhealth += self.addhealth
-                self.game.player.pants.ID = Pants_leather
-                self.game.player.pants.image = self.image
-                self.game.player.afficheitem.trueorfalse = False
-                self.game.player.afficheequipped.trueorfalse = False
-                self.kill()
+                if self.game.player.take_timer() == False:
+                    if self.game.player.pants.ID != None:
+                        helmet_instance = self.game.player.pants.ID(self.game,self.game.player.rect.x,self.game.player.rect.y)
+                        self.game.player.healthbar.maxhealth -= helmet_instance.addhealth
+                    self.game.player.healthbar.maxhealth += self.addhealth
+                    self.game.player.pants.ID = Pants_leather
+                    self.game.player.pants.image = self.image
+                    self.game.player.afficheitem.trueorfalse = False
+                    self.game.player.afficheequipped.trueorfalse = False
+                    self.kill()
+                    self.game.player.lasttaketimer = pygame.time.get_ticks()
 
 class Pants_chainmail(pygame.sprite.Sprite):
     nom = "Chainmail Pants"
@@ -1518,15 +1594,17 @@ class Pants_chainmail(pygame.sprite.Sprite):
                 self.game.player.afficheequipped.trueorfalse = False
                  
             if hits and keys[pygame.K_e]:
-                if self.game.player.pants.ID != None:
-                    helmet_instance = self.game.player.pants.ID(self.game,self.game.player.rect.x,self.game.player.rect.y)
-                    self.game.player.healthbar.maxhealth -= helmet_instance.addhealth
-                self.game.player.healthbar.maxhealth += self.addhealth
-                self.game.player.pants.ID = Pants_chainmail
-                self.game.player.pants.image = self.image
-                self.game.player.afficheitem.trueorfalse = False
-                self.game.player.afficheequipped.trueorfalse = False
-                self.kill()
+                if self.game.player.take_timer() == False:
+                    if self.game.player.pants.ID != None:
+                        helmet_instance = self.game.player.pants.ID(self.game,self.game.player.rect.x,self.game.player.rect.y)
+                        self.game.player.healthbar.maxhealth -= helmet_instance.addhealth
+                    self.game.player.healthbar.maxhealth += self.addhealth
+                    self.game.player.pants.ID = Pants_chainmail
+                    self.game.player.pants.image = self.image
+                    self.game.player.afficheitem.trueorfalse = False
+                    self.game.player.afficheequipped.trueorfalse = False
+                    self.kill()
+                    self.game.player.lasttaketimer = pygame.time.get_ticks()
 
 class Pants_iron(pygame.sprite.Sprite):
     nom = "Iron Pants"
@@ -1581,15 +1659,82 @@ class Pants_iron(pygame.sprite.Sprite):
                 self.game.player.afficheequipped.trueorfalse = False
                  
             if hits and keys[pygame.K_e]:
-                if self.game.player.pants.ID != None:
-                    helmet_instance = self.game.player.pants.ID(self.game,self.game.player.rect.x,self.game.player.rect.y)
-                    self.game.player.healthbar.maxhealth -= helmet_instance.addhealth
-                self.game.player.healthbar.maxhealth += self.addhealth
-                self.game.player.pants.ID = Pants_iron
-                self.game.player.pants.image = self.image
+                if self.game.player.take_timer() == False:
+                    if self.game.player.pants.ID != None:
+                        helmet_instance = self.game.player.pants.ID(self.game,self.game.player.rect.x,self.game.player.rect.y)
+                        self.game.player.healthbar.maxhealth -= helmet_instance.addhealth
+                    self.game.player.healthbar.maxhealth += self.addhealth
+                    self.game.player.pants.ID = Pants_iron
+                    self.game.player.pants.image = self.image
+                    self.game.player.afficheitem.trueorfalse = False
+                    self.game.player.afficheequipped.trueorfalse = False
+                    self.kill()
+                    self.game.player.lasttaketimer = pygame.time.get_ticks()
+
+class Pants_Lava(pygame.sprite.Sprite):
+    nom = "Lava Pants"
+    attribut = "Max health : +10"
+    IDimage = (96,131,32,27)
+    def __init__(self,game, x, y):
+
+        self.game = game
+        self._layer = ITEM_LAYER
+
+        self.groups = self.game.all_sprites, self.game.item
+        pygame.sprite.Sprite.__init__(self, self.groups)
+
+        self.ID = Pants_Lava
+        self.image = self.game.lavaequipement_spritesheet.get_sprite(480,0,32,32)
+        self.addhealth = 10
+        self.x = x
+        self.y = y
+        self.x_change = 0
+        self.y_change = 0
+
+        self.rect = self.image.get_rect() 
+        self.rect.x = self.x
+        self.rect.y = self.y
+        self.pos = (x,y)
+
+
+    def update(self):
+        self.game.screen.blit(self.image,self.pos)
+        self.collide()
+
+        self.rect.x += self.x_change
+        self.rect.y += self.y_change
+
+        self.x_change = 0
+        self.y_change = 0
+
+
+    def collide(self):
+            hits = pygame.sprite.spritecollide(self, self.game.playerhitbox, False)
+            keys = pygame.key.get_pressed()
+            if hits:
+                self.game.player.afficheitem.trueorfalse = True
+                self.game.player.afficheitem.nom = self.nom
+                self.game.player.afficheitem.attribut1 = self.attribut
+            if (hits) and (self.game.player.pants.ID != None):
+                self.game.player.afficheequipped.trueorfalse = True
+                self.game.player.afficheequipped.nom = self.game.player.pants.ID.nom
+                self.game.player.afficheequipped.attribut1 = self.game.player.pants.ID.attribut
+            if not hits:
                 self.game.player.afficheitem.trueorfalse = False
                 self.game.player.afficheequipped.trueorfalse = False
-                self.kill()
+                 
+            if hits and keys[pygame.K_e]:
+                if self.game.player.take_timer() == False:
+                    if self.game.player.pants.ID != None:
+                        helmet_instance = self.game.player.pants.ID(self.game,self.game.player.rect.x,self.game.player.rect.y)
+                        self.game.player.healthbar.maxhealth -= helmet_instance.addhealth
+                    self.game.player.healthbar.maxhealth += self.addhealth
+                    self.game.player.pants.ID = Pants_Lava
+                    self.game.player.pants.image = self.image
+                    self.game.player.afficheitem.trueorfalse = False
+                    self.game.player.afficheequipped.trueorfalse = False
+                    self.kill()
+                    self.game.player.lasttaketimer = pygame.time.get_ticks()
 
 class Chest_leather(pygame.sprite.Sprite):
     nom = "Leather Chest"
@@ -1644,15 +1789,17 @@ class Chest_leather(pygame.sprite.Sprite):
                 self.game.player.afficheequipped.trueorfalse = False
                  
             if hits and keys[pygame.K_e]:
-                if self.game.player.chest.ID != None:
-                    helmet_instance = self.game.player.chest.ID(self.game,self.game.player.rect.x,self.game.player.rect.y)
-                    self.game.player.healthbar.maxhealth -= helmet_instance.addhealth
-                self.game.player.healthbar.maxhealth += self.addhealth
-                self.game.player.chest.ID = Chest_leather
-                self.game.player.chest.image = self.image
-                self.game.player.afficheitem.trueorfalse = False
-                self.game.player.afficheequipped.trueorfalse = False
-                self.kill()
+                if self.game.player.take_timer() == False:
+                    if self.game.player.chest.ID != None:
+                        helmet_instance = self.game.player.chest.ID(self.game,self.game.player.rect.x,self.game.player.rect.y)
+                        self.game.player.healthbar.maxhealth -= helmet_instance.addhealth
+                    self.game.player.healthbar.maxhealth += self.addhealth
+                    self.game.player.chest.ID = Chest_leather
+                    self.game.player.chest.image = self.image
+                    self.game.player.afficheitem.trueorfalse = False
+                    self.game.player.afficheequipped.trueorfalse = False
+                    self.kill()
+                    self.game.player.lasttaketimer = pygame.time.get_ticks()
 
 class Chest_chainmail(pygame.sprite.Sprite):
     nom = "Chainmail Chest"
@@ -1707,15 +1854,17 @@ class Chest_chainmail(pygame.sprite.Sprite):
                 self.game.player.afficheequipped.trueorfalse = False
                  
             if hits and keys[pygame.K_e]:
-                if self.game.player.chest.ID != None:
-                    helmet_instance = self.game.player.chest.ID(self.game,self.game.player.rect.x,self.game.player.rect.y)
-                    self.game.player.healthbar.maxhealth -= helmet_instance.addhealth
-                self.game.player.healthbar.maxhealth += self.addhealth
-                self.game.player.chest.ID = Chest_chainmail
-                self.game.player.chest.image = self.image
-                self.game.player.afficheitem.trueorfalse = False
-                self.game.player.afficheequipped.trueorfalse = False
-                self.kill()
+                if self.game.player.take_timer() == False:
+                    if self.game.player.chest.ID != None:
+                        helmet_instance = self.game.player.chest.ID(self.game,self.game.player.rect.x,self.game.player.rect.y)
+                        self.game.player.healthbar.maxhealth -= helmet_instance.addhealth
+                    self.game.player.healthbar.maxhealth += self.addhealth
+                    self.game.player.chest.ID = Chest_chainmail
+                    self.game.player.chest.image = self.image
+                    self.game.player.afficheitem.trueorfalse = False
+                    self.game.player.afficheequipped.trueorfalse = False
+                    self.kill()
+                    self.game.player.lasttaketimer = pygame.time.get_ticks()
 
 class Chest_iron(pygame.sprite.Sprite):
     nom = "Iron Chest"
@@ -1770,20 +1919,87 @@ class Chest_iron(pygame.sprite.Sprite):
                 self.game.player.afficheequipped.trueorfalse = False
                  
             if hits and keys[pygame.K_e]:
-                if self.game.player.chest.ID != None:
-                    helmet_instance = self.game.player.chest.ID(self.game,self.game.player.rect.x,self.game.player.rect.y)
-                    self.game.player.healthbar.maxhealth -= helmet_instance.addhealth
-                self.game.player.healthbar.maxhealth += self.addhealth
-                self.game.player.chest.ID = Chest_iron
-                self.game.player.chest.image = self.image
+                if self.game.player.take_timer() == False:
+                    if self.game.player.chest.ID != None:
+                        helmet_instance = self.game.player.chest.ID(self.game,self.game.player.rect.x,self.game.player.rect.y)
+                        self.game.player.healthbar.maxhealth -= helmet_instance.addhealth
+                    self.game.player.healthbar.maxhealth += self.addhealth
+                    self.game.player.chest.ID = Chest_iron
+                    self.game.player.chest.image = self.image
+                    self.game.player.afficheitem.trueorfalse = False
+                    self.game.player.afficheequipped.trueorfalse = False
+                    self.kill()
+                    self.game.player.lasttaketimer = pygame.time.get_ticks()
+
+class Chest_Lava(pygame.sprite.Sprite):
+    nom = "Lava Chest"
+    attribut = "Max health : +15"
+    IDimage = (67,128,25,32)
+    def __init__(self,game, x, y):
+
+        self.game = game
+        self._layer = ITEM_LAYER
+
+        self.groups = self.game.all_sprites, self.game.item
+        pygame.sprite.Sprite.__init__(self, self.groups)
+
+        self.ID = Chest_Lava
+        self.image = self.game.lavaequipement_spritesheet.get_sprite(448,0,32,32)
+        self.addhealth = 15
+        self.x = x
+        self.y = y
+        self.x_change = 0
+        self.y_change = 0
+
+        self.rect = self.image.get_rect() 
+        self.rect.x = self.x
+        self.rect.y = self.y
+        self.pos = (x,y)
+
+
+    def update(self):
+        self.game.screen.blit(self.image,self.pos)
+        self.collide()
+
+        self.rect.x += self.x_change
+        self.rect.y += self.y_change
+
+        self.x_change = 0
+        self.y_change = 0
+
+
+    def collide(self):
+            hits = pygame.sprite.spritecollide(self, self.game.playerhitbox, False)
+            keys = pygame.key.get_pressed()
+            if hits:
+                self.game.player.afficheitem.trueorfalse = True
+                self.game.player.afficheitem.nom = self.nom
+                self.game.player.afficheitem.attribut1 = self.attribut
+            if (hits) and (self.game.player.chest.ID != None):
+                self.game.player.afficheequipped.trueorfalse = True
+                self.game.player.afficheequipped.nom = self.game.player.chest.ID.nom
+                self.game.player.afficheequipped.attribut1 = self.game.player.chest.ID.attribut
+            if not hits:
                 self.game.player.afficheitem.trueorfalse = False
                 self.game.player.afficheequipped.trueorfalse = False
-                self.kill()
+                 
+            if hits and keys[pygame.K_e]:
+                if self.game.player.take_timer() == False:
+                    if self.game.player.chest.ID != None:
+                        helmet_instance = self.game.player.chest.ID(self.game,self.game.player.rect.x,self.game.player.rect.y)
+                        self.game.player.healthbar.maxhealth -= helmet_instance.addhealth
+                    self.game.player.healthbar.maxhealth += self.addhealth
+                    self.game.player.chest.ID = Chest_Lava
+                    self.game.player.chest.image = self.image
+                    self.game.player.afficheitem.trueorfalse = False
+                    self.game.player.afficheequipped.trueorfalse = False
+                    self.kill()
+                    self.game.player.lasttaketimer = pygame.time.get_ticks()
 
 class Boots_leather(pygame.sprite.Sprite):
     nom = "Leather Boots"
     attribut = "Max health : +1"
-    attribut1 = "Speed : x1.5"
+    attribut1 = "Speed : x1.2"
     IDimage = (130,33,27,30)
     def __init__(self,game, x, y):
 
@@ -1806,7 +2022,7 @@ class Boots_leather(pygame.sprite.Sprite):
         self.rect.y = self.y
         self.pos = (x,y)
 
-        self.vitesse = 1.3
+        self.vitesse = 1.2
 
     def update(self):
         self.game.screen.blit(self.image,self.pos)
@@ -1837,17 +2053,19 @@ class Boots_leather(pygame.sprite.Sprite):
                 self.game.player.afficheequipped.trueorfalse = False
                  
             if hits and keys[pygame.K_e]:
-                if self.game.player.boots.ID != None:
-                    boots_instance = self.game.player.boots.ID(self.game,self.game.player.rect.x,self.game.player.rect.y)
-                    self.game.player.healthbar.maxhealth -= boots_instance.addhealth
-                self.game.player.healthbar.maxhealth += self.addhealth
-                self.game.player.vitesse3 = self.vitesse
-                print(self.game.player.vitesse3)
-                self.game.player.boots.ID = Boots_leather
-                self.game.player.boots.image = self.image
-                self.game.player.afficheitem.trueorfalse = False
-                self.game.player.afficheequipped.trueorfalse = False
-                self.kill()
+                if self.game.player.take_timer() == False:
+                    if self.game.player.boots.ID != None:
+                        boots_instance = self.game.player.boots.ID(self.game,self.game.player.rect.x,self.game.player.rect.y)
+                        self.game.player.healthbar.maxhealth -= boots_instance.addhealth
+                    self.game.player.healthbar.maxhealth += self.addhealth
+                    self.game.player.vitesse3 = self.vitesse
+                    print(self.game.player.vitesse3)
+                    self.game.player.boots.ID = Boots_leather
+                    self.game.player.boots.image = self.image
+                    self.game.player.afficheitem.trueorfalse = False
+                    self.game.player.afficheequipped.trueorfalse = False
+                    self.kill()
+                    self.game.player.lasttaketimer = pygame.time.get_ticks()
 
 class Boots_chainmail(pygame.sprite.Sprite):
     nom = "Chainmail Boots"
@@ -1905,20 +2123,22 @@ class Boots_chainmail(pygame.sprite.Sprite):
                 self.game.player.afficheequipped.trueorfalse = False
                  
             if hits and keys[pygame.K_e]:
-                if self.game.player.boots.ID != None:
-                    boots_instance = self.game.player.boots.ID(self.game,self.game.player.rect.x,self.game.player.rect.y)
-                    self.game.player.healthbar.maxhealth -= boots_instance.addhealth
-                self.game.player.healthbar.maxhealth += self.addhealth
-                self.game.player.boots.ID = Boots_chainmail
-                self.game.player.boots.image = self.image
-                self.game.player.afficheitem.trueorfalse = False
-                self.game.player.afficheequipped.trueorfalse = False
-                self.kill()
+                if self.game.player.take_timer() == False:
+                    if self.game.player.boots.ID != None:
+                        boots_instance = self.game.player.boots.ID(self.game,self.game.player.rect.x,self.game.player.rect.y)
+                        self.game.player.healthbar.maxhealth -= boots_instance.addhealth
+                    self.game.player.healthbar.maxhealth += self.addhealth
+                    self.game.player.boots.ID = Boots_chainmail
+                    self.game.player.boots.image = self.image
+                    self.game.player.afficheitem.trueorfalse = False
+                    self.game.player.afficheequipped.trueorfalse = False
+                    self.kill()
+                    self.game.player.lasttaketimer = pygame.time.get_ticks()
 
 class Boots_iron(pygame.sprite.Sprite):
     nom = "Iron Boots"
     attribut = "Max health : +3"
-    attribut1 = "Speed : x0.7"
+    attribut1 = "Speed : x0.8"
     IDimage = (130,129,28,31)
     def __init__(self,game, x, y):
 
@@ -1941,7 +2161,7 @@ class Boots_iron(pygame.sprite.Sprite):
         self.rect.y = self.y
         self.pos = (x,y)
 
-        self.vitesse = 0.7
+        self.vitesse = 0.8
 
     def update(self):
         self.game.screen.blit(self.image,self.pos)
@@ -1972,22 +2192,24 @@ class Boots_iron(pygame.sprite.Sprite):
                 self.game.player.afficheequipped.trueorfalse = False
                  
             if hits and keys[pygame.K_e]:
-                if self.game.player.boots.ID != None:
-                    boots_instance = self.game.player.boots.ID(self.game,self.game.player.rect.x,self.game.player.rect.y)
-                    self.game.player.healthbar.maxhealth -= boots_instance.addhealth
-                self.game.player.healthbar.maxhealth += self.addhealth
-                self.game.player.vitesse3 = self.vitesse
-                print(self.game.player.vitesse3)
-                self.game.player.boots.ID = Boots_iron
-                self.game.player.boots.image = self.image
-                self.game.player.afficheitem.trueorfalse = False
-                self.game.player.afficheequipped.trueorfalse = False
-                self.kill()
+                if self.game.player.take_timer() == False:
+                    if self.game.player.boots.ID != None:
+                        boots_instance = self.game.player.boots.ID(self.game,self.game.player.rect.x,self.game.player.rect.y)
+                        self.game.player.healthbar.maxhealth -= boots_instance.addhealth
+                    self.game.player.healthbar.maxhealth += self.addhealth
+                    self.game.player.vitesse3 = self.vitesse
+                    print(self.game.player.vitesse3)
+                    self.game.player.boots.ID = Boots_iron
+                    self.game.player.boots.image = self.image
+                    self.game.player.afficheitem.trueorfalse = False
+                    self.game.player.afficheequipped.trueorfalse = False
+                    self.kill()
+                    self.game.player.lasttaketimer = pygame.time.get_ticks()
 
-"""class Boots_Lava(pygame.sprite.Sprite):
+class Boots_Lava(pygame.sprite.Sprite):
     nom = "Lava Boots"
     attribut = "Max health : +5"
-    attribut1 = "Speed : +0.3"
+    attribut1 = "Speed : x1.4"
     IDimage = (544,0,32,32)
     def __init__(self,game, x, y):
 
@@ -2010,7 +2232,7 @@ class Boots_iron(pygame.sprite.Sprite):
         self.rect.y = self.y
         self.pos = (x,y)
 
-        self.vitesse = 1.3
+        self.vitesse = 1.4
 
     def update(self):
         self.game.screen.blit(self.image,self.pos)
@@ -2041,19 +2263,23 @@ class Boots_iron(pygame.sprite.Sprite):
                 self.game.player.afficheequipped.trueorfalse = False
                  
             if hits and keys[pygame.K_e]:
-                if self.game.player.boots.ID != None:
-                    boots_instance = self.game.player.boots.ID(self.game,self.game.player.rect.x,self.game.player.rect.y)
-                    self.game.player.healthbar.maxhealth -= boots_instance.addhealth
-                self.game.player.healthbar.maxhealth += self.addhealth
-                self.game.player.vitesse3 = self.vitesse
-                print(self.game.player.vitesse3)
-                self.game.player.boots.ID = Boots_Lava
-                self.game.player.boots.image = self.image
-                self.game.player.afficheitem.trueorfalse = False
-                self.game.player.afficheequipped.trueorfalse = False
-                self.kill()"""
+                if self.game.player.take_timer() == False:
+                    if self.game.player.boots.ID != None:
+                        boots_instance = self.game.player.boots.ID(self.game,self.game.player.rect.x,self.game.player.rect.y)
+                        self.game.player.healthbar.maxhealth -= boots_instance.addhealth
+                    self.game.player.healthbar.maxhealth += self.addhealth
+                    self.game.player.vitesse3 = self.vitesse
+                    print(self.game.player.vitesse3)
+                    self.game.player.boots.ID = Boots_Lava
+                    self.game.player.boots.image = self.image
+                    self.game.player.afficheitem.trueorfalse = False
+                    self.game.player.afficheequipped.trueorfalse = False
+                    self.kill()
+                    self.game.player.lasttaketimer = pygame.time.get_ticks()
 
 class Necklace_copper(pygame.sprite.Sprite):
+    nom = "Necklace Copper"
+    attribut = "Il est cassé"
     IDimage = (193,129,28,31)
     def __init__(self,game, x, y):
 
@@ -2076,6 +2302,7 @@ class Necklace_copper(pygame.sprite.Sprite):
         self.rect.y = self.y
         self.pos = (x,y)
 
+        self.puissance = 0
 
     def update(self):
         self.game.screen.blit(self.image,self.pos)
@@ -2089,16 +2316,35 @@ class Necklace_copper(pygame.sprite.Sprite):
 
 
     def collide(self):
-            hits = pygame.sprite.spritecollide(self, self.game.playerhitbox, False)
-            keys = pygame.key.get_pressed()
-            if hits and keys[pygame.K_e]:
+        hits = pygame.sprite.spritecollide(self, self.game.playerhitbox, False)
+        keys = pygame.key.get_pressed()
+        if hits:
+            self.game.player.afficheitem.trueorfalse = True
+            self.game.player.afficheitem.nom = self.nom
+            self.game.player.afficheitem.attribut1 = self.attribut
+        if (hits) and (self.game.player.necklace.ID != None):
+            self.game.player.afficheequipped.trueorfalse = True
+            self.game.player.afficheequipped.nom = self.game.player.necklace.ID.nom
+            self.game.player.afficheequipped.attribut1 = self.game.player.necklace.ID.attribut
+        if not hits:
+            self.game.player.afficheitem.trueorfalse = False
+            self.game.player.afficheequipped.trueorfalse = False
+                
+        if hits and keys[pygame.K_e]:
+            if self.game.player.take_timer() == False:
                 if self.game.player.necklace.ID != None:
-                    self.game.player.necklace.ID(self.game,self.game.player.rect.x,self.game.player.rect.y)
+                    necklace_instance = self.game.player.necklace.ID(self.game,self.game.player.rect.x,self.game.player.rect.y)
+                    self.game.player.puissance -= necklace_instance.puissance
                 self.game.player.necklace.ID = Necklace_copper
                 self.game.player.necklace.image = self.image
+                self.game.player.afficheitem.trueorfalse = False
+                self.game.player.afficheequipped.trueorfalse = False
                 self.kill()
+                self.game.player.lasttaketimer = pygame.time.get_ticks()
 
 class Necklace_rubis(pygame.sprite.Sprite):
+    nom = "Necklace Rubis"
+    attribut = "+2 de puissance"
     IDimage = (227,129,28,31)
     def __init__(self,game, x, y):
 
@@ -2121,6 +2367,7 @@ class Necklace_rubis(pygame.sprite.Sprite):
         self.rect.y = self.y
         self.pos = (x,y)
 
+        self.puissance = 2
 
     def update(self):
         self.game.screen.blit(self.image,self.pos)
@@ -2136,12 +2383,30 @@ class Necklace_rubis(pygame.sprite.Sprite):
     def collide(self):
             hits = pygame.sprite.spritecollide(self, self.game.playerhitbox, False)
             keys = pygame.key.get_pressed()
+            if hits:
+                self.game.player.afficheitem.trueorfalse = True
+                self.game.player.afficheitem.nom = self.nom
+                self.game.player.afficheitem.attribut1 = self.attribut
+            if (hits) and (self.game.player.necklace.ID != None):
+                self.game.player.afficheequipped.trueorfalse = True
+                self.game.player.afficheequipped.nom = self.game.player.necklace.ID.nom
+                self.game.player.afficheequipped.attribut1 = self.game.player.necklace.ID.attribut
+            if not hits:
+                self.game.player.afficheitem.trueorfalse = False
+                self.game.player.afficheequipped.trueorfalse = False
+                 
             if hits and keys[pygame.K_e]:
-                if self.game.player.necklace.ID != None:
-                    self.game.player.necklace.ID(self.game,self.game.player.rect.x,self.game.player.rect.y)
-                self.game.player.necklace.ID = Necklace_rubis
-                self.game.player.necklace.image = self.image
-                self.kill()
+                if self.game.player.take_timer() == False:
+                    if self.game.player.necklace.ID != None:
+                        necklace_instance = self.game.player.necklace.ID(self.game,self.game.player.rect.x,self.game.player.rect.y)
+                        self.game.player.puissance -= necklace_instance.puissance
+                    self.game.player.puissance += self.puissance
+                    self.game.player.necklace.ID = Necklace_rubis
+                    self.game.player.necklace.image = self.image
+                    self.game.player.afficheitem.trueorfalse = False
+                    self.game.player.afficheequipped.trueorfalse = False
+                    self.kill()
+                    self.game.player.lasttaketimer = pygame.time.get_ticks()
 
 class Necklace_saphir(pygame.sprite.Sprite):
     IDimage = (157,129,29,30)
@@ -2166,6 +2431,7 @@ class Necklace_saphir(pygame.sprite.Sprite):
         self.rect.y = self.y
         self.pos = (x,y)
 
+        self.puissance = 0
 
     def update(self):
         self.game.screen.blit(self.image,self.pos)
@@ -2182,13 +2448,17 @@ class Necklace_saphir(pygame.sprite.Sprite):
             hits = pygame.sprite.spritecollide(self, self.game.playerhitbox, False)
             keys = pygame.key.get_pressed()
             if hits and keys[pygame.K_e]:
-                if self.game.player.necklace.ID != None:
-                    self.game.player.necklace.ID(self.game,self.game.player.rect.x,self.game.player.rect.y)
-                self.game.player.necklace.ID = Necklace_saphir
-                self.game.player.necklace.image = self.image
-                self.kill()
+                if self.game.player.take_timer() == False:
+                    if self.game.player.necklace.ID != None:
+                        self.game.player.necklace.ID(self.game,self.game.player.rect.x,self.game.player.rect.y)
+                    self.game.player.necklace.ID = Necklace_saphir
+                    self.game.player.necklace.image = self.image
+                    self.kill()
+                    self.game.player.lasttaketimer = pygame.time.get_ticks()
 
 class Necklace_emerald(pygame.sprite.Sprite):
+    nom = "Necklace Emerald"
+    attribut = "+1 PV toutes les 30 sec"
     IDimage = (289,129,30,30)
     def __init__(self,game, x, y):
 
@@ -2211,6 +2481,7 @@ class Necklace_emerald(pygame.sprite.Sprite):
         self.rect.y = self.y
         self.pos = (x,y)
 
+        self.puissance = 0
 
     def update(self):
         self.game.screen.blit(self.image,self.pos)
@@ -2224,16 +2495,35 @@ class Necklace_emerald(pygame.sprite.Sprite):
 
 
     def collide(self):
-            hits = pygame.sprite.spritecollide(self, self.game.playerhitbox, False)
-            keys = pygame.key.get_pressed()
-            if hits and keys[pygame.K_e]:
+        hits = pygame.sprite.spritecollide(self, self.game.playerhitbox, False)
+        keys = pygame.key.get_pressed()
+        if hits:
+            self.game.player.afficheitem.trueorfalse = True
+            self.game.player.afficheitem.nom = self.nom
+            self.game.player.afficheitem.attribut1 = self.attribut
+        if (hits) and (self.game.player.necklace.ID != None):
+            self.game.player.afficheequipped.trueorfalse = True
+            self.game.player.afficheequipped.nom = self.game.player.necklace.ID.nom
+            self.game.player.afficheequipped.attribut1 = self.game.player.necklace.ID.attribut
+        if not hits:
+            self.game.player.afficheitem.trueorfalse = False
+            self.game.player.afficheequipped.trueorfalse = False
+                
+        if hits and keys[pygame.K_e]:
+            if self.game.player.take_timer() == False:
                 if self.game.player.necklace.ID != None:
-                    self.game.player.necklace.ID(self.game,self.game.player.rect.x,self.game.player.rect.y)
+                    necklace_instance = self.game.player.necklace.ID(self.game,self.game.player.rect.x,self.game.player.rect.y)
+                    self.game.player.puissance -= necklace_instance.puissance
                 self.game.player.necklace.ID = Necklace_emerald
                 self.game.player.necklace.image = self.image
+                self.game.player.afficheitem.trueorfalse = False
+                self.game.player.afficheequipped.trueorfalse = False
                 self.kill()
+                self.game.player.lasttaketimer = pygame.time.get_ticks()
 
 class Ring_copper(pygame.sprite.Sprite):
+    nom = "Ring Copper"
+    attribut = "A capout"
     IDimage = (196,104,24,17)
     def __init__(self,game, x, y):
 
@@ -2269,14 +2559,30 @@ class Ring_copper(pygame.sprite.Sprite):
 
 
     def collide(self):
-            hits = pygame.sprite.spritecollide(self, self.game.playerhitbox, False)
-            keys = pygame.key.get_pressed()
-            if hits and keys[pygame.K_e]:
+        hits = pygame.sprite.spritecollide(self, self.game.playerhitbox, False)
+        keys = pygame.key.get_pressed()
+        if hits:
+            self.game.player.afficheitem.trueorfalse = True
+            self.game.player.afficheitem.nom = self.nom
+            self.game.player.afficheitem.attribut1 = self.attribut
+        if (hits) and (self.game.player.ring.ID != None):
+            self.game.player.afficheequipped.trueorfalse = True
+            self.game.player.afficheequipped.nom = self.game.player.ring.ID.nom
+            self.game.player.afficheequipped.attribut1 = self.game.player.ring.ID.attribut
+        if not hits:
+            self.game.player.afficheitem.trueorfalse = False
+            self.game.player.afficheequipped.trueorfalse = False
+                
+        if hits and keys[pygame.K_e]:
+            if self.game.player.take_timer() == False:
                 if self.game.player.ring.ID != None:
                     self.game.player.ring.ID(self.game,self.game.player.rect.x,self.game.player.rect.y)
                 self.game.player.ring.ID = Ring_copper
                 self.game.player.ring.image = self.image
+                self.game.player.afficheitem.trueorfalse = False
+                self.game.player.afficheequipped.trueorfalse = False
                 self.kill()
+                self.game.player.lasttaketimer = pygame.time.get_ticks()
 
 class Ring_rubis(pygame.sprite.Sprite):
     IDimage = (230,103,22,18)
@@ -2317,11 +2623,13 @@ class Ring_rubis(pygame.sprite.Sprite):
             hits = pygame.sprite.spritecollide(self, self.game.playerhitbox, False)
             keys = pygame.key.get_pressed()
             if hits and keys[pygame.K_e]:
-                if self.game.player.ring.ID != None:
-                    self.game.player.ring.ID(self.game,self.game.player.rect.x,self.game.player.rect.y)
-                self.game.player.ring.ID = Ring_rubis
-                self.game.player.ring.image = self.image
-                self.kill()
+                if self.game.player.take_timer() == False:
+                    if self.game.player.ring.ID != None:
+                        self.game.player.ring.ID(self.game,self.game.player.rect.x,self.game.player.rect.y)
+                    self.game.player.ring.ID = Ring_rubis
+                    self.game.player.ring.image = self.image
+                    self.kill()
+                    self.game.player.lasttaketimer = pygame.time.get_ticks()
 
 class Ring_saphir(pygame.sprite.Sprite):
     IDimage = (292,101,24,22)
@@ -2362,11 +2670,13 @@ class Ring_saphir(pygame.sprite.Sprite):
             hits = pygame.sprite.spritecollide(self, self.game.playerhitbox, False)
             keys = pygame.key.get_pressed()
             if hits and keys[pygame.K_e]:
-                if self.game.player.ring.ID != None:
-                    self.game.player.ring.ID(self.game,self.game.player.rect.x,self.game.player.rect.y)
-                self.game.player.ring.ID = Ring_saphir
-                self.game.player.ring.image = self.image
-                self.kill()
+                if self.game.player.take_timer() == False:
+                    if self.game.player.ring.ID != None:
+                        self.game.player.ring.ID(self.game,self.game.player.rect.x,self.game.player.rect.y)
+                    self.game.player.ring.ID = Ring_saphir
+                    self.game.player.ring.image = self.image
+                    self.kill()
+                    self.game.player.lasttaketimer = pygame.time.get_ticks()
 
 class Ring_emerald(pygame.sprite.Sprite):
     IDimage = (262,103,22,19)
@@ -2407,11 +2717,13 @@ class Ring_emerald(pygame.sprite.Sprite):
             hits = pygame.sprite.spritecollide(self, self.game.playerhitbox, False)
             keys = pygame.key.get_pressed()
             if hits and keys[pygame.K_e]:
-                if self.game.player.ring.ID != None:
-                    self.game.player.ring.ID(self.game,self.game.player.rect.x,self.game.player.rect.y)
-                self.game.player.ring.ID = Ring_emerald
-                self.game.player.ring.image = self.image
-                self.kill()
+                if self.game.player.take_timer() == False:
+                    if self.game.player.ring.ID != None:
+                        self.game.player.ring.ID(self.game,self.game.player.rect.x,self.game.player.rect.y)
+                    self.game.player.ring.ID = Ring_emerald
+                    self.game.player.ring.image = self.image
+                    self.kill()
+                    self.game.player.lasttaketimer = pygame.time.get_ticks()
 
 class Earth_Shatter(pygame.sprite.Sprite):
     nom = "Earth Shatter"
@@ -2886,14 +3198,14 @@ class Crimson_Blade(pygame.sprite.Sprite):
 "self.bloodslash_spritesheet.get_sprite(512, 0, 64, 24)",
 "self.bloodslash_spritesheet.get_sprite(576, 0, 64, 24)",)
     IDpos = (
-        "self.player.rect.x - 60",
+        "self.player.rect.x - 30",
         "self.player.rect.y - 20",
         "self.player.rect.x - 15",
-        "self.player.rect.y + 55",
-        "self.player.rect.x + 60",
+        "self.player.rect.y + 25",
+        "self.player.rect.x + 30",
         "self.player.rect.y - 20",
         "self.player.rect.x - 15",
-        "self.player.rect.y - 55",
+        "self.player.rect.y - 25",
     )
     
     def __init__(self,game, x, y):
@@ -2964,14 +3276,14 @@ self.game.bloodslash_spritesheet.get_sprite(192, 112, 24, 64),
 self.game.bloodslash_spritesheet.get_sprite(216, 112, 24, 64),]
 
 
-        self.scythe_x_left = self.game.player.rect.x - 60
+        self.scythe_x_left = self.game.player.rect.x - 30
         self.scythe_y_left = self.game.player.rect.y - 20
         self.scythe_x_down = self.game.player.rect.x - 15
-        self.scythe_y_down = self.game.player.rect.y + 55
-        self.scythe_x_right = self.game.player.rect.x + 60
+        self.scythe_y_down = self.game.player.rect.y + 35
+        self.scythe_x_right = self.game.player.rect.x + 35
         self.scythe_y_right = self.game.player.rect.y - 20
         self.scythe_x_up = self.game.player.rect.x - 15
-        self.scythe_y_up = self.game.player.rect.y - 55
+        self.scythe_y_up = self.game.player.rect.y - 35
         self.animation_number = 10
 
 
@@ -3518,14 +3830,14 @@ class Seraphic_Blade(pygame.sprite.Sprite):
 "self.whitecircleattacks_spritesheet.get_sprite(96, 99, 32, 35)",
 "self.whitecircleattacks_spritesheet.get_sprite(128, 99, 32, 35)",)
     IDpos = (
-        "self.player.rect.x - 50",
+        "self.player.rect.x - 30",
         "self.player.rect.y ",
         "self.player.rect.x",
-        "self.player.rect.y + 50",
-        "self.player.rect.x + 50",
+        "self.player.rect.y + 30",
+        "self.player.rect.x + 30",
         "self.player.rect.y",
         "self.player.rect.x ",
-        "self.player.rect.y - 50",
+        "self.player.rect.y - 30",
     )
     
     def __init__(self,game, x, y):
@@ -3580,14 +3892,14 @@ self.game.whitecircleattacks_spritesheet.get_sprite(128, 99, 32, 35),]
 
 
 
-        self.scythe_x_left = self.game.player.rect.x - 50
+        self.scythe_x_left = self.game.player.rect.x - 30
         self.scythe_y_left = self.game.player.rect.y 
         self.scythe_x_down = self.game.player.rect.x
-        self.scythe_y_down = self.game.player.rect.y + 50
-        self.scythe_x_right = self.game.player.rect.x + 50
+        self.scythe_y_down = self.game.player.rect.y + 30
+        self.scythe_x_right = self.game.player.rect.x + 30
         self.scythe_y_right = self.game.player.rect.y
         self.scythe_x_up = self.game.player.rect.x 
-        self.scythe_y_up = self.game.player.rect.y - 50
+        self.scythe_y_up = self.game.player.rect.y - 30
         self.animation_number = 5
 
 
@@ -3671,14 +3983,14 @@ class Azure_Blade(pygame.sprite.Sprite):
 "self.bluecircleattacks_spritesheet.get_sprite(96, 99, 32, 35)",
 "self.bluecircleattacks_spritesheet.get_sprite(128, 99, 32, 35)",)
     IDpos = (
-        "self.player.rect.x - 50",
+        "self.player.rect.x - 30",
         "self.player.rect.y ",
         "self.player.rect.x",
-        "self.player.rect.y + 50",
-        "self.player.rect.x + 50",
+        "self.player.rect.y + 30",
+        "self.player.rect.x + 30",
         "self.player.rect.y",
         "self.player.rect.x ",
-        "self.player.rect.y - 50",
+        "self.player.rect.y - 30",
     )
     
     def __init__(self,game, x, y):
@@ -3733,14 +4045,14 @@ self.game.bluecircleattacks_spritesheet.get_sprite(128, 99, 32, 35),]
 
 
 
-        self.scythe_x_left = self.game.player.rect.x - 50
+        self.scythe_x_left = self.game.player.rect.x - 30
         self.scythe_y_left = self.game.player.rect.y 
         self.scythe_x_down = self.game.player.rect.x
-        self.scythe_y_down = self.game.player.rect.y + 50
-        self.scythe_x_right = self.game.player.rect.x + 50
+        self.scythe_y_down = self.game.player.rect.y + 30
+        self.scythe_x_right = self.game.player.rect.x + 30
         self.scythe_y_right = self.game.player.rect.y
         self.scythe_x_up = self.game.player.rect.x 
-        self.scythe_y_up = self.game.player.rect.y - 50
+        self.scythe_y_up = self.game.player.rect.y - 30
         self.animation_number = 5
 
 
@@ -3777,7 +4089,7 @@ self.game.bluecircleattacks_spritesheet.get_sprite(128, 99, 32, 35),]
                         epee_instance = self.game.player.epee.ID(self.game,self.game.player.rect.x,self.game.player.rect.y)
                         self.game.player.puissance -= epee_instance.puissance
                     self.game.player.puissance += self.puissance
-                    self.game.player.epee.ID = Seraphic_Blade
+                    self.game.player.epee.ID = Azure_Blade
                     self.game.player.widthattack = 40
                     self.game.player.heightattack = 40
                     self.game.player.epee.image = self.image
@@ -3824,14 +4136,14 @@ class Lustrous_Blade(pygame.sprite.Sprite):
 "self.yellowcircle_spritesheet.get_sprite(96, 99, 32, 35)",
 "self.yellowcircle_spritesheet.get_sprite(128, 99, 32, 35)",)
     IDpos = (
-        "self.player.rect.x - 50",
+        "self.player.rect.x - 30",
         "self.player.rect.y ",
         "self.player.rect.x",
-        "self.player.rect.y + 50",
-        "self.player.rect.x + 50",
+        "self.player.rect.y + 30",
+        "self.player.rect.x + 30",
         "self.player.rect.y",
         "self.player.rect.x ",
-        "self.player.rect.y - 50",
+        "self.player.rect.y - 30",
     )
     
     def __init__(self,game, x, y):
@@ -3884,14 +4196,14 @@ self.game.yellowcircle_spritesheet.get_sprite(128, 99, 32, 35),]
 
 
 
-        self.scythe_x_left = self.game.player.rect.x - 50
+        self.scythe_x_left = self.game.player.rect.x - 30
         self.scythe_y_left = self.game.player.rect.y 
         self.scythe_x_down = self.game.player.rect.x
-        self.scythe_y_down = self.game.player.rect.y + 50
-        self.scythe_x_right = self.game.player.rect.x + 50
+        self.scythe_y_down = self.game.player.rect.y + 30
+        self.scythe_x_right = self.game.player.rect.x + 30
         self.scythe_y_right = self.game.player.rect.y
         self.scythe_x_up = self.game.player.rect.x 
-        self.scythe_y_up = self.game.player.rect.y - 50
+        self.scythe_y_up = self.game.player.rect.y - 30
         self.animation_number = 5
 
 
