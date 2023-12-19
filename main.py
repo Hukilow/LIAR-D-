@@ -1018,7 +1018,7 @@ class Game():
 
 
 if __name__ == "__main__":
-    verify_requirements()
+    #verify_requirements()
     import pygame
     import pickle
     from PIL import Image

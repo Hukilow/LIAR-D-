@@ -48,7 +48,10 @@ class HealthBar(pygame.sprite.Sprite):
 
     def heal(self,heal):
         if self.health < self.maxhealth:
-            self.health += heal
+            if self.maxhealth - self.health < 5:
+                self.health = self.maxhealth
+            else:
+                self.health += heal
             self.game.player.potion.potion_bu()
     def update(self):
         self.image = self.affichageur(self.afficher)
@@ -62,9 +65,9 @@ class HealthBar(pygame.sprite.Sprite):
 
     def affichageur(self,affichage):
         if affichage == True:
-            self.barredevie = pygame.Surface((self.maxhealth*30,30))
+            self.barredevie = pygame.Surface((self.maxhealth*15,30))
             self.barredevie.fill(GREY)
-            pygame.draw.rect(self.barredevie,LIGHTRED,(5,5,(self.health*30)-10,20 ))
+            pygame.draw.rect(self.barredevie,LIGHTRED,(5,5,(self.health*15)-10,20 ))
             self.image =self.barredevie
             return self.image
         if affichage == False:
@@ -683,9 +686,9 @@ class PlayerHitbox(pygame.sprite.Sprite):
         self.game.screen.blit(self.image,self.pos)
 
         self.rect.x += self.x_change
-        #self.collide_blocks('x')
+        self.collide_blocks('x')
         self.rect.y += self.y_change
-        #self.collide_blocks('y')
+        self.collide_blocks('y')
         self.collide_enemyattacks()
         self.collide_enemy()
         self.collide_lava()

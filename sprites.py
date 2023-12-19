@@ -91,7 +91,7 @@ class Player(pygame.sprite.Sprite):
         self.x_change = 0
         self.y_change = 0
         
-        self.healh = 10*self.game.multiplicateur_difficulte_hp
+        self.healh = 15*self.game.multiplicateur_difficulte_hp
 
         self.puissance = 1
         self.widthattack = 32
@@ -99,7 +99,7 @@ class Player(pygame.sprite.Sprite):
 
         self.enemyattacks = 1
 
-        self.light = Light(game,self.x,self.y,900,(255, 167, 38, 50))
+        self.light = Light(game,self.x,self.y,125,(255, 167, 38, 50))
 
         self.epee = EpeeHUD(game,(self.x-(self.game.WIN_WIDTH/2))+20,(self.y-(self.game.WIN_HEIGHT/2))+50,self.game.equipement_spritesheet.get_sprite(0, 0, 32, 32))
         self.helmet = CasqueHUD(game,(self.x-(self.game.WIN_WIDTH/2))+60,(self.y-(self.game.WIN_HEIGHT/2))+30,self.game.equipement_spritesheet.get_sprite(36,0, 32, 32))
@@ -262,7 +262,7 @@ class Player(pygame.sprite.Sprite):
             self.afficheequipped.y_change += PLAYER_SPEED*self.vitesse*self.vitesse2*self.vitesse3
         if keys[pygame.K_g] and self.potion.nbrpotion >= 1:
             if self.drink_timer() == False:
-                self.healthbar.heal(2)
+                self.healthbar.heal(5)
                 self.lastdrinktimer = pygame.time.get_ticks()
 
         looking_vector = pygame.Vector2(1,1)
@@ -516,31 +516,39 @@ class Attack(pygame.sprite.Sprite):
     def dropchest(self,DROPCHEST):
         self.game.totalchestopen += 1
         if DROPCHEST == "DROPCHEST1": # couloir commun
-            DROPCHEST = [Crimson_Blade,HellScythe]
+            DROPCHEST = [Potion,Potion,Potion,Scythe,Lustrous_Blade,Heavenly_Wand,Boots_leather,Chest_leather,Pants_leather,Helmet_leather,Ring_copper,Necklace_copper]
             return random.choice(DROPCHEST)
+        
         elif DROPCHEST == "DROPCHEST2": # couloir peu commun
-            DROPCHEST = [Scythe,GreatSword,HellScythe,SnakeSword,WintersBallad,Hematite_Blade]
+            DROPCHEST = [Boots_leather,Chest_leather,Helmet_leather,Pants_leather,Potion,Potion,Potion,Boots_chainmail,Helmet_chainmail,Heavenly_Wand,Celestial_Scepter,Seraphic_Blade,Azure_Blade,Ring_copper,Necklace_copper]
             return random.choice(DROPCHEST)
+        
         elif DROPCHEST == "DROPCHEST3": # couloir rare
-            DROPCHEST = [Boots_iron,Chest_iron,Helmet_iron,Pants_iron,Scythe]
+            DROPCHEST = [Boots_leather,Chest_leather,Helmet_leather,Pants_leather,Potion,Potion,Potion,Boots_chainmail,Chest_chainmail,Pants_chainmail,Helmet_chainmail,Seraphic_Blade,Azure_Blade,Nebula_GreatSword,WintersBallad,Ring_copper,Necklace_copper]
             return random.choice(DROPCHEST)
+        
         elif DROPCHEST == "DROPCHEST4": # couloir epic
-            DROPCHEST = [SnakeSword]
+            DROPCHEST = [Potion,Potion,Potion,Boots_chainmail,Chest_chainmail,Pants_chainmail,Helmet_chainmail,Boots_iron,Helmet_iron,WintersBallad,Crimson_Blade,HellScythe,Ring_emerald,Ring_rubis,Ring_saphir]
             return random.choice(DROPCHEST)
-        elif DROPCHEST == "DROPCHEST5": # salle rare
-            DROPCHEST = [Necklace_copper,Ring_copper]
+        
+        elif DROPCHEST == "DROPCHEST5": # couloir légendaire
+            DROPCHEST = [Potion,Potion,Potion,Chest_chainmail,Pants_chainmail,Boots_iron,Helmet_iron,Chest_iron,Pants_iron,HellScythe,Hematite_Blade,Flamestrike_Mallet,Ring_emerald,Ring_rubis,Ring_saphir]
             return random.choice(DROPCHEST)
-        elif DROPCHEST == "DROPCHEST6": # couloir légendaire
-            DROPCHEST = [Necklace_rubis,Ring_rubis]
+        
+        elif DROPCHEST == "DROPCHEST6": # couloir ???
+            DROPCHEST = [Boots_Lava,Chest_Lava,Pants_Lava,Helmet_Lava,Supernova_Scepter]
             return random.choice(DROPCHEST)
+        
         elif DROPCHEST == "DROPCHEST7": # salle commun
-            DROPCHEST = [Necklace_rubis,Ring_rubis]
+            DROPCHEST = [Potion,Necklace_emerald,Necklace_rubis,Necklace_saphir,Boots_iron,Chest_iron,Pants_iron,Helmet_iron,GreatSword]
             return random.choice(DROPCHEST)
-        elif DROPCHEST == "DROPCHEST8":  # salle légendaire
-            DROPCHEST = [Necklace_emerald]
+        
+        elif DROPCHEST == "DROPCHEST8":  # salle épique
+            DROPCHEST = [Potion,Necklace_emerald,Necklace_rubis,Necklace_saphir,Chest_iron,Pants_iron,GreatSword,SnakeSword]
             return random.choice(DROPCHEST)
-        elif DROPCHEST == "DROPCHEST9": # couloir ???
-            DROPCHEST = [Ring_emerald]
+        
+        elif DROPCHEST == "DROPCHEST9": # salle légendaire
+            DROPCHEST = [Potion,Necklace_emerald,Necklace_rubis,Necklace_saphir,Chest_iron,SnakeSword,Potion,Necklace_emerald,Necklace_rubis,Necklace_saphir,Chest_iron,SnakeSword,Potion,Necklace_emerald,Necklace_rubis,Necklace_saphir,Chest_iron,SnakeSword,Boots_Lava,Chest_Lava,Pants_Lava,Helmet_Lava]
             return random.choice(DROPCHEST)
         
     def animate(self):
@@ -581,4 +589,3 @@ class Attack(pygame.sprite.Sprite):
             self.animation_loop += 0.5
             if self.animation_loop >= self.game.player.animation_number:
                 self.kill()
-

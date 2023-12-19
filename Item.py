@@ -5,7 +5,7 @@ from HUD import Light
 
 class Potion(pygame.sprite.Sprite):
     nom = 'Health Potion'
-    attribut = 'Health : +2'
+    attribut = 'Health : +5'
     def __init__(self,game, x, y):
 
         self.game = game 
@@ -54,7 +54,7 @@ class Potion(pygame.sprite.Sprite):
 
 class Scythe(pygame.sprite.Sprite):
     nom = "Scythe"
-    attribut = "Puissance : +3"
+    attribut = "Puissance : +2"
     IDimage = "self.weapon_spritesheet.get_sprite(81,68,28,42)"
     IDattack = ("self.attackscythe_spritesheet.get_sprite(0, 0, 50, 60)",
                            "self.attackscythe_spritesheet.get_sprite(50, 0 ,50, 60)",
@@ -101,7 +101,7 @@ class Scythe(pygame.sprite.Sprite):
         self.x_change = 0
         self.y_change = 0
 
-        self.puissance = 3
+        self.puissance = 2
 
         self.rect = self.image.get_rect() 
         self.rect.x = self.x
@@ -203,7 +203,7 @@ class Scythe(pygame.sprite.Sprite):
 
 class Hematite_Blade(pygame.sprite.Sprite):
     nom = "Hematite Blade"
-    attribut = "Puissance : +12"
+    attribut = "Puissance : +9"
     IDimage = "self.weapon3_spritesheet.get_sprite(156,89,17,45)"
     IDattack = ("self.hematiteblade_spritesheet.get_sprite(0, 0, 64, 49)",
         "self.hematiteblade_spritesheet.get_sprite(64, 0, 64, 49)",
@@ -286,7 +286,7 @@ class Hematite_Blade(pygame.sprite.Sprite):
         self.x_change = 0
         self.y_change = 0
 
-        self.puissance = 12
+        self.puissance = 9
 
         self.rect = self.image.get_rect() 
         self.rect.x = self.x
@@ -426,7 +426,7 @@ class Hematite_Blade(pygame.sprite.Sprite):
 
 class HellScythe(pygame.sprite.Sprite):
     nom = "Hell Scythe"
-    attribut = "Puissance : +7"
+    attribut = "Puissance : +8"
     IDimage = "self.weapon2_spritesheet.get_sprite(100,80,26,33)"
     IDattack = ("self.attackhellscythe_spritesheet.get_sprite(0, 0, 60, 80)",
                            "self.attackhellscythe_spritesheet.get_sprite(60, 0 ,60, 80)",
@@ -473,7 +473,7 @@ class HellScythe(pygame.sprite.Sprite):
         self.x_change = 0
         self.y_change = 0
 
-        self.puissance = 7
+        self.puissance = 8
 
         self.rect = self.image.get_rect() 
         self.rect.x = self.x
@@ -772,7 +772,7 @@ class WintersBallad(pygame.sprite.Sprite):
 
 class SnakeSword(pygame.sprite.Sprite):
     nom = "SnakeSword"
-    attribut = "Puissance : +10"
+    attribut = "Puissance : +15"
     IDimage = "self.weapon3_spritesheet.get_sprite(129,38,13,45)"
     IDattack = ("self.attacksnakesword_spritesheet.get_sprite(0, 0, 110, 110)",
                                             "self.attacksnakesword_spritesheet.get_sprite(110, 0, 110, 110)",
@@ -875,7 +875,7 @@ class SnakeSword(pygame.sprite.Sprite):
         self.x_change = 0
         self.y_change = 0
 
-        self.puissance = 10
+        self.puissance = 15
 
         self.rect = self.image.get_rect() 
         self.rect.x = self.x
@@ -973,7 +973,7 @@ class SnakeSword(pygame.sprite.Sprite):
 
 class GreatSword(pygame.sprite.Sprite):
     nom = "GreatSword"
-    attribut = "Puissance : +15"
+    attribut = "Puissance : +12"
     IDimage = "self.weapon3_spritesheet.get_sprite(46,85,22,49)"
     IDattack = ("self.attackgreatsword_spritesheet.get_sprite(0, 0, 110, 110)",
                                     "self.attackgreatsword_spritesheet.get_sprite(110, 0, 110, 110)",
@@ -1078,7 +1078,7 @@ class GreatSword(pygame.sprite.Sprite):
         self.x_change = 0
         self.y_change = 0
 
-        self.puissance = 15
+        self.puissance = 12
 
         self.rect = self.image.get_rect() 
         self.rect.x = self.x
@@ -1240,8 +1240,10 @@ class Helmet_leather(pygame.sprite.Sprite):
                     self.game.player.healthbar.maxhealth += self.addhealth
                     self.game.player.light.kill()
                     self.game.player.light = None
-
-                    self.game.player.light = Light(self.game,self.game.player.x,self.game.player.y,self.vision,(255,167,38,40))
+                    if self.game.player.necklace.ID == Necklace_saphir:                 
+                        self.game.player.light = Light(self.game,self.game.player.x,self.game.player.y,self.vision*1.5,(255,167,38,40))
+                    else:
+                        self.game.player.light = Light(self.game,self.game.player.x,self.game.player.y,self.vision,(255,167,38,40))
                     self.game.player.helmet.ID = Helmet_leather
                     self.game.player.helmet.image = self.image
                     self.game.player.afficheitem.trueorfalse = False
@@ -1316,7 +1318,10 @@ class Helmet_chainmail(pygame.sprite.Sprite):
                     self.game.player.healthbar.maxhealth += self.addhealth
                     self.game.player.light.kill()
                     self.game.player.light = None
-                    self.game.player.light = Light(self.game,self.game.player.x,self.game.player.y,self.vision,(255,167,38,25))
+                    if self.game.player.necklace.ID == Necklace_saphir:
+                        self.game.player.light = Light(self.game,self.game.player.x,self.game.player.y,self.vision*1.5,(255,167,38,25))
+                    else:
+                        self.game.player.light = Light(self.game,self.game.player.x,self.game.player.y,self.vision,(255,167,38,25))
                     self.game.player.helmet.ID = Helmet_chainmail
                     self.game.player.helmet.image = self.image
                     self.game.player.afficheitem.trueorfalse = False
@@ -1390,7 +1395,10 @@ class Helmet_iron(pygame.sprite.Sprite):
                         self.game.player.healthbar.maxhealth -= helmet_instance.addhealth
                     self.game.player.light.kill()
                     self.game.player.light = None
-                    self.game.player.light = Light(self.game,self.game.player.x,self.game.player.y,self.vision,(255,255,255,65))
+                    if self.game.player.necklace.ID == Necklace_saphir:
+                        self.game.player.light = Light(self.game,self.game.player.x,self.game.player.y,self.vision*1.5,(255,255,255,65))
+                    else:
+                        self.game.player.light = Light(self.game,self.game.player.x,self.game.player.y,self.vision,(255,255,255,65))
                     print(self.game.player.light.light_radius)
                     self.game.player.helmet.ID = Helmet_iron
                     self.game.player.helmet.image = self.image
@@ -1465,8 +1473,10 @@ class Helmet_Lava(pygame.sprite.Sprite):
                         self.game.player.healthbar.maxhealth -= helmet_instance.addhealth
                     self.game.player.light.kill()
                     self.game.player.light = None
-                    self.game.player.light = Light(self.game,self.game.player.x,self.game.player.y,self.vision,(255,0,0,25))
-                    print(self.game.player.light.light_radius)
+                    if self.game.player.necklace.ID == Necklace_saphir:
+                        self.game.player.light = Light(self.game,self.game.player.x,self.game.player.y,self.vision*1.5,(255,0,0,25))
+                    else:
+                        self.game.player.light = Light(self.game,self.game.player.x,self.game.player.y,self.vision,(255,0,0,25))
                     self.game.player.helmet.ID = Helmet_Lava
                     self.game.player.helmet.image = self.image
                     self.game.player.afficheitem.trueorfalse = False
@@ -2409,6 +2419,8 @@ class Necklace_rubis(pygame.sprite.Sprite):
                     self.game.player.lasttaketimer = pygame.time.get_ticks()
 
 class Necklace_saphir(pygame.sprite.Sprite):
+    nom = "Necklace Saphir"
+    attribut = "Vision : x1.5"
     IDimage = (157,129,29,30)
     def __init__(self,game, x, y):
 
@@ -2419,7 +2431,7 @@ class Necklace_saphir(pygame.sprite.Sprite):
         pygame.sprite.Sprite.__init__(self, self.groups)
 
         self.ID = Necklace_saphir
-        self.image = self.game.armor_spritesheet.get_sprite(157,129,29,30)
+        self.image = self.game.armor_spritesheet.get_sprite(321,129,29,30)
 
         self.x = x
         self.y = y
@@ -2445,16 +2457,31 @@ class Necklace_saphir(pygame.sprite.Sprite):
 
 
     def collide(self):
-            hits = pygame.sprite.spritecollide(self, self.game.playerhitbox, False)
-            keys = pygame.key.get_pressed()
-            if hits and keys[pygame.K_e]:
-                if self.game.player.take_timer() == False:
-                    if self.game.player.necklace.ID != None:
-                        self.game.player.necklace.ID(self.game,self.game.player.rect.x,self.game.player.rect.y)
-                    self.game.player.necklace.ID = Necklace_saphir
-                    self.game.player.necklace.image = self.image
-                    self.kill()
-                    self.game.player.lasttaketimer = pygame.time.get_ticks()
+        hits = pygame.sprite.spritecollide(self, self.game.playerhitbox, False)
+        keys = pygame.key.get_pressed()
+        if hits:
+            self.game.player.afficheitem.trueorfalse = True
+            self.game.player.afficheitem.nom = self.nom
+            self.game.player.afficheitem.attribut1 = self.attribut
+        if (hits) and (self.game.player.necklace.ID != None):
+            self.game.player.afficheequipped.trueorfalse = True
+            self.game.player.afficheequipped.nom = self.game.player.necklace.ID.nom
+            self.game.player.afficheequipped.attribut1 = self.game.player.necklace.ID.attribut
+        if not hits:
+            self.game.player.afficheitem.trueorfalse = False
+            self.game.player.afficheequipped.trueorfalse = False
+                
+        if hits and keys[pygame.K_e]:
+            if self.game.player.take_timer() == False:
+                if self.game.player.necklace.ID != None:
+                    necklace_instance = self.game.player.necklace.ID(self.game,self.game.player.rect.x,self.game.player.rect.y)
+                    self.game.player.puissance -= necklace_instance.puissance
+                self.game.player.necklace.ID = Necklace_saphir
+                self.game.player.necklace.image = self.image
+                self.game.player.afficheitem.trueorfalse = False
+                self.game.player.afficheequipped.trueorfalse = False
+                self.kill()
+                self.game.player.lasttaketimer = pygame.time.get_ticks()
 
 class Necklace_emerald(pygame.sprite.Sprite):
     nom = "Necklace Emerald"
@@ -3004,7 +3031,7 @@ class Supernova_Scepter(pygame.sprite.Sprite):
 
 class Flamestrike_Mallet(pygame.sprite.Sprite):
     nom = "Flamestrike Mallet"
-    attribut = "Puissance : 8"
+    attribut = "Puissance : 10"
     IDimage = "self.weapon_spritesheet.get_sprite(198,0,42,57)"
     IDattack = ("self.impactblue_spritesheet.get_sprite(0, 1088, 64, 64)",
                                   "self.impactblue_spritesheet.get_sprite(64, 1088, 64, 64)",
@@ -3062,7 +3089,7 @@ class Flamestrike_Mallet(pygame.sprite.Sprite):
         self.x_change = 0
         self.y_change = 0
 
-        self.puissance = 8
+        self.puissance = 10
 
         self.rect = self.image.get_rect() 
         self.rect.x = self.x
@@ -3155,7 +3182,7 @@ class Flamestrike_Mallet(pygame.sprite.Sprite):
 
 class Crimson_Blade(pygame.sprite.Sprite):
     nom = "Crimson Blade"
-    attribut = "Puissance : 6"
+    attribut = "Puissance : 7"
     IDimage = "self.weapon3_spritesheet.get_sprite(116,102,13,31)"
     IDattack = ("self.bloodslash_spritesheet.get_sprite(0, 24, 24, 64)",
 "self.bloodslash_spritesheet.get_sprite(24, 24, 24, 64)",
@@ -3224,7 +3251,7 @@ class Crimson_Blade(pygame.sprite.Sprite):
         self.x_change = 0
         self.y_change = 0
 
-        self.puissance = 6
+        self.puissance = 7
 
         self.rect = self.image.get_rect() 
         self.rect.x = self.x
@@ -3344,7 +3371,7 @@ self.game.bloodslash_spritesheet.get_sprite(216, 112, 24, 64),]
 
 class Celestial_Scepter(pygame.sprite.Sprite):
     nom = "Celestial Scepter"
-    attribut = "Puissance : 6"
+    attribut = "Puissance : 3"
     IDimage = "self.weapon4_spritesheet.get_sprite(58,54,22,40)"
     IDattack = ("self.fallingstar_spritesheet.get_sprite(0, 170, 60, 110)",
 "self.fallingstar_spritesheet.get_sprite(60, 170, 60, 110)",
@@ -3433,7 +3460,7 @@ class Celestial_Scepter(pygame.sprite.Sprite):
         self.x_change = 0
         self.y_change = 0
 
-        self.puissance = 6
+        self.puissance = 3
 
         self.rect = self.image.get_rect() 
         self.rect.x = self.x
@@ -3573,7 +3600,7 @@ self.game.fallingstar_spritesheet.get_sprite(840, 0, 60, 110),]
 
 class Nebula_GreatSword(pygame.sprite.Sprite):
     nom = "Nebula Greatsword"
-    attribut = "Puissance : 8"
+    attribut = "Puissance : 5"
     IDimage = "self.weapon_spritesheet.get_sprite(148,33,16,40)"
     IDattack = ("self.nebulaattacks_spritesheet.get_sprite(0, 0, 32, 32)",
 "self.nebulaattacks_spritesheet.get_sprite(32, 0, 32, 32)",
@@ -3698,7 +3725,7 @@ class Nebula_GreatSword(pygame.sprite.Sprite):
         self.x_change = 0
         self.y_change = 0
 
-        self.puissance = 6
+        self.puissance = 5
 
         self.rect = self.image.get_rect() 
         self.rect.x = self.x
@@ -3807,7 +3834,7 @@ self.game.nebulaattacks_spritesheet.get_sprite(96, 0, 32, 32),]
 
 class Seraphic_Blade(pygame.sprite.Sprite):
     nom = "Seraphic Blade"
-    attribut = "Puissance : 5"
+    attribut = "Puissance : 4"
     IDimage = "self.weapon_spritesheet.get_sprite(110,75,16,40)"
     IDattack = ("self.whitecircleattacks_spritesheet.get_sprite(0, 0, 35, 32)",
 "self.whitecircleattacks_spritesheet.get_sprite(35, 0, 35, 32)",
@@ -3856,7 +3883,7 @@ class Seraphic_Blade(pygame.sprite.Sprite):
         self.x_change = 0
         self.y_change = 0
 
-        self.puissance = 5
+        self.puissance = 4
 
         self.rect = self.image.get_rect() 
         self.rect.x = self.x
@@ -3960,7 +3987,7 @@ self.game.whitecircleattacks_spritesheet.get_sprite(128, 99, 32, 35),]
 
 class Azure_Blade(pygame.sprite.Sprite):
     nom = "Azure Blade"
-    attribut = "Puissance : 5"
+    attribut = "Puissance : 4"
     IDimage = "self.weapon_spritesheet.get_sprite(146,75,16,40)"
     IDattack = ("self.bluecircleattacks_spritesheet.get_sprite(0, 0, 35, 32)",
 "self.bluecircleattacks_spritesheet.get_sprite(35, 0, 35, 32)",
@@ -4009,7 +4036,7 @@ class Azure_Blade(pygame.sprite.Sprite):
         self.x_change = 0
         self.y_change = 0
 
-        self.puissance = 5
+        self.puissance = 4
 
         self.rect = self.image.get_rect() 
         self.rect.x = self.x
@@ -4113,7 +4140,7 @@ self.game.bluecircleattacks_spritesheet.get_sprite(128, 99, 32, 35),]
 
 class Lustrous_Blade(pygame.sprite.Sprite):
     nom = "Lustrous Blade"
-    attribut = "Puissance : 5"
+    attribut = "Puissance : 2"
     IDimage = "self.weapon_spritesheet.get_sprite(128,75,16,40)"
     IDattack = ("self.yellowcircle_spritesheet.get_sprite(0, 0, 35, 32)",
 "self.yellowcircle_spritesheet.get_sprite(35, 0, 35, 32)",
@@ -4162,7 +4189,7 @@ class Lustrous_Blade(pygame.sprite.Sprite):
         self.x_change = 0
         self.y_change = 0
 
-        self.puissance = 5
+        self.puissance = 2
 
         self.rect = self.image.get_rect() 
         self.rect.x = self.x
@@ -4264,7 +4291,7 @@ self.game.yellowcircle_spritesheet.get_sprite(128, 99, 32, 35),]
 
 class Heavenly_Wand(pygame.sprite.Sprite):
     nom = "Heavenly Wand"
-    attribut = "Puissance : 9"
+    attribut = "Puissance : 2"
     IDimage = "self.weapon4_spritesheet.get_sprite(121,4,20,46)"
     IDattack = ("self.bluething_spritesheet.get_sprite(0, 0, 36, 32)",
 "self.bluething_spritesheet.get_sprite(36, 0, 36, 32)",
@@ -4321,7 +4348,7 @@ class Heavenly_Wand(pygame.sprite.Sprite):
         self.x_change = 0
         self.y_change = 0
 
-        self.puissance = 9
+        self.puissance = 2
 
         self.rect = self.image.get_rect() 
         self.rect.x = self.x

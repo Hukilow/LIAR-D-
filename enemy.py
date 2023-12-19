@@ -108,31 +108,39 @@ class AttackEnemy(pygame.sprite.Sprite):
 
     def dropchest(self,DROPCHEST):
         if DROPCHEST == "DROPCHEST1": # couloir commun
-            DROPCHEST = [Boots_leather,Boots_iron,Potion]
+            DROPCHEST = [Potion,Potion,Potion,Scythe,Lustrous_Blade,Heavenly_Wand,Boots_leather,Chest_leather,Pants_leather,Helmet_leather,Ring_copper,Necklace_copper]
             return random.choice(DROPCHEST)
+        
         elif DROPCHEST == "DROPCHEST2": # couloir peu commun
-            DROPCHEST = [Helmet_chainmail,Chest_chainmail,Boots_chainmail,Pants_chainmail,Potion,Scythe]
+            DROPCHEST = [Boots_leather,Chest_leather,Helmet_leather,Pants_leather,Potion,Potion,Potion,Boots_chainmail,Helmet_chainmail,Heavenly_Wand,Celestial_Scepter,Seraphic_Blade,Azure_Blade,Ring_copper,Necklace_copper]
             return random.choice(DROPCHEST)
+        
         elif DROPCHEST == "DROPCHEST3": # couloir rare
-            DROPCHEST = [Boots_iron,Chest_iron,Helmet_iron,Pants_iron,Scythe]
+            DROPCHEST = [Boots_leather,Chest_leather,Helmet_leather,Pants_leather,Potion,Potion,Potion,Boots_chainmail,Chest_chainmail,Pants_chainmail,Helmet_chainmail,Seraphic_Blade,Azure_Blade,Nebula_GreatSword,WintersBallad,Ring_copper,Necklace_copper]
             return random.choice(DROPCHEST)
+        
         elif DROPCHEST == "DROPCHEST4": # couloir epic
-            DROPCHEST = [SnakeSword]
+            DROPCHEST = [Potion,Potion,Potion,Boots_chainmail,Chest_chainmail,Pants_chainmail,Helmet_chainmail,Boots_iron,Helmet_iron,WintersBallad,Crimson_Blade,HellScythe,Ring_emerald,Ring_rubis,Ring_saphir]
             return random.choice(DROPCHEST)
-        elif DROPCHEST == "DROPCHEST5": # salle rares
-            DROPCHEST = [Necklace_copper,Ring_copper]
+        
+        elif DROPCHEST == "DROPCHEST5": # couloir légendaire
+            DROPCHEST = [Potion,Potion,Potion,Chest_chainmail,Pants_chainmail,Boots_iron,Helmet_iron,Chest_iron,Pants_iron,HellScythe,Hematite_Blade,Flamestrike_Mallet,Ring_emerald,Ring_rubis,Ring_saphir]
             return random.choice(DROPCHEST)
-        elif DROPCHEST == "DROPCHEST6": # couloir légendaire
-            DROPCHEST = [Necklace_rubis,Ring_rubis]
+        
+        elif DROPCHEST == "DROPCHEST6": # couloir ???
+            DROPCHEST = [Boots_Lava,Chest_Lava,Pants_Lava,Helmet_Lava,Supernova_Scepter]
             return random.choice(DROPCHEST)
+        
         elif DROPCHEST == "DROPCHEST7": # salle commun
-            DROPCHEST = [Necklace_rubis,Ring_rubis]
+            DROPCHEST = [Potion,Necklace_emerald,Necklace_rubis,Necklace_saphir,Boots_iron,Chest_iron,Pants_iron,Helmet_iron,GreatSword]
             return random.choice(DROPCHEST)
-        elif DROPCHEST == "DROPCHEST8":  # salle légendaire
-            DROPCHEST = [Necklace_emerald]
+        
+        elif DROPCHEST == "DROPCHEST8":  # salle épique
+            DROPCHEST = [Potion,Necklace_emerald,Necklace_rubis,Necklace_saphir,Chest_iron,Pants_iron,GreatSword,SnakeSword]
             return random.choice(DROPCHEST)
-        elif DROPCHEST == "DROPCHEST9": # couloir ???
-            DROPCHEST = [Ring_emerald]
+        
+        elif DROPCHEST == "DROPCHEST9": # salle légendaire
+            DROPCHEST = [Potion,Necklace_emerald,Necklace_rubis,Necklace_saphir,Chest_iron,SnakeSword,Potion,Necklace_emerald,Necklace_rubis,Necklace_saphir,Chest_iron,SnakeSword,Potion,Necklace_emerald,Necklace_rubis,Necklace_saphir,Chest_iron,SnakeSword,Boots_Lava,Chest_Lava,Pants_Lava,Helmet_Lava]
             return random.choice(DROPCHEST)
         
     def animate(self):
@@ -365,7 +373,7 @@ class Enemy(pygame.sprite.Sprite):
             self.vitesse = 0.5
 
     def invincibility(self):
-        return self.derniertemps > pygame.time.get_ticks() - 1500
+        return self.derniertemps > pygame.time.get_ticks() - 750
     
 class Knight(pygame.sprite.Sprite):
     def __init__(self,game,x,y,tilemap):
@@ -654,7 +662,7 @@ class Knight(pygame.sprite.Sprite):
             self.game.all_maps.tilemap6[1][self.__coortilemap[0]][self.__coortilemap[1]] = '.'
 
     def invincibility(self):
-        return self.derniertemps > pygame.time.get_ticks() - 1500
+        return self.derniertemps > pygame.time.get_ticks() - 750
     
     def attacktime(self):
         return self.derniertemps1 > pygame.time.get_ticks() - 200
@@ -989,7 +997,7 @@ class AngryMaid(pygame.sprite.Sprite):
             self.game.all_maps.tilemap6[1][self.__coortilemap[0]][self.__coortilemap[1]] = '.'
 
     def invincibility(self):
-        return self.derniertemps > pygame.time.get_ticks() - 1500
+        return self.derniertemps > pygame.time.get_ticks() - 750
     
     def attacktime(self):
         return self.derniertemps1 > pygame.time.get_ticks() - 200
@@ -1307,7 +1315,7 @@ class Slime(pygame.sprite.Sprite):
             self.game.all_maps.tilemap6[1][self.__coortilemap[0]][self.__coortilemap[1]] = '.'
 
     def invincibility(self):
-        return self.derniertemps > pygame.time.get_ticks() - 1500
+        return self.derniertemps > pygame.time.get_ticks() - 750
     
     def attacktime(self):
         return self.derniertemps1 > pygame.time.get_ticks() - 200
@@ -1683,7 +1691,7 @@ self.game.greencircle_spritesheet.get_sprite(600, 560, 200, 160),]
             self.game.all_maps.tilemap6[1][self.__coortilemap[0]][self.__coortilemap[1]] = '.'
 
     def invincibility(self):
-        return self.derniertemps > pygame.time.get_ticks() - 1500
+        return self.derniertemps > pygame.time.get_ticks() - 750
     
     def attacktime(self):
         return self.derniertemps1 > pygame.time.get_ticks() - 200
@@ -2285,7 +2293,7 @@ self.game.impactpurple_spritesheet.get_sprite(320, 704, 64, 64),]
 
 
     def invincibility(self):
-        return self.derniertemps > pygame.time.get_ticks() - 1500
+        return self.derniertemps > pygame.time.get_ticks() - 750
     
     def clicktime(self):
         return self.derniertemps2 > pygame.time.get_ticks() - 2000
@@ -2831,7 +2839,7 @@ self.game.fireground_spritesheet.get_sprite(144, 0, 48, 32),]
             self.game.all_maps.tilemap6[1][self.__coortilemap[0]][self.__coortilemap[1]] = '.'
 
     def invincibility(self):
-        return self.derniertemps > pygame.time.get_ticks() - 1500
+        return self.derniertemps > pygame.time.get_ticks() - 750
     
     def attacktime(self):
         return self.derniertemps1 > pygame.time.get_ticks() - 200
@@ -3310,7 +3318,7 @@ self.game.shortadventurerattack_spritesheet.get_sprite(402, 99, 67, 32),]
             self.game.all_maps.tilemap6[1][self.__coortilemap[0]][self.__coortilemap[1]] = '.'
 
     def invincibility(self):
-        return self.derniertemps > pygame.time.get_ticks() - 1500
+        return self.derniertemps > pygame.time.get_ticks() - 750
     
     def attacktime(self):
         return self.derniertemps1 > pygame.time.get_ticks() - 200
@@ -3754,7 +3762,7 @@ class Zombie(pygame.sprite.Sprite):
             self.game.all_maps.tilemap6[1][self.__coortilemap[0]][self.__coortilemap[1]] = '.'
 
     def invincibility(self):
-        return self.derniertemps > pygame.time.get_ticks() - 1500
+        return self.derniertemps > pygame.time.get_ticks() - 750
     
     def attacktime(self):
         return self.derniertemps1 > pygame.time.get_ticks() - 200
@@ -4098,7 +4106,7 @@ class Gardener(pygame.sprite.Sprite):
             self.game.all_maps.tilemap6[1][self.__coortilemap[0]][self.__coortilemap[1]] = '.'
 
     def invincibility(self):
-        return self.derniertemps > pygame.time.get_ticks() - 1500
+        return self.derniertemps > pygame.time.get_ticks() - 750
     
     def attacktime(self):
         return self.derniertemps1 > pygame.time.get_ticks() - 200
@@ -4112,7 +4120,7 @@ class Gardener(pygame.sprite.Sprite):
                 if self.attacktime() == False:
                     self.derniertemps2 = pygame.time.get_ticks()
                     self.derniertemps1 = pygame.time.get_ticks()
-                    self.game.player.enemyattacks = 2 +self.game.multiplicateur_difficulte_attack_enemies 
+                    self.game.player.enemyattacks = 9 +self.game.multiplicateur_difficulte_attack_enemies 
                     if self.facing == 'up':
                         xatt = self.rect.x - 128
                         yatt = self.rect.y - 80

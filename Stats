@@ -2,12 +2,12 @@
 
 Vitesse : 3
 Puissance : 1
-Health : 10
+Health : 15
 Vision : 125 Radius; RGB : 255,167,38 ; 50 Opacité
 
                                             ITEMS
 
-Potion De Heal : +2 HP
+Potion De Heal : +5 HP
 
                                             WEAPONS
 
@@ -58,7 +58,7 @@ Enemy : 1.5 ; 3 ; 1 # Très rarement dans les couloirs car nul
 
 Slime : 1.5 ; 3 ; 2
 Zombie : 0.5 ; 10 ; 2
-Lost Adventurer : 3 ; 15 ; (5;2)
+Lost Adventurer : 2.8 ; 15 ; (5;2)
 Knight : 1 ; 30 ; 3
 Beetle : 2.5 ; 15 ; (2;3)
 Multicolor Man : 3 ; 25 ; (4;3)
