@@ -723,7 +723,6 @@ class Game():
                     intro = False
                     self.running = False
                 elif event.type == pygame.VIDEORESIZE:
-                    print(event.w, event.h)
                     self.WIN_WIDTH, self.WIN_HEIGHT = event.w, event.h
                     quotient,quotient2 = (self.WIN_WIDTH // 32),(self.WIN_HEIGHT // 32)
                     closest_multiple,closest_multiple2 = (quotient * 32),(quotient2 * 32)
@@ -732,7 +731,6 @@ class Game():
                     if self.WIN_HEIGHT - closest_multiple2 > 16:
                         closest_multiple2 += 32 
                     self.WIN_WIDTH,self.WIN_HEIGHT = closest_multiple,closest_multiple2
-                    print(self.WIN_WIDTH, self.WIN_HEIGHT)
                     self.text = f'{self.WIN_WIDTH}x{self.WIN_HEIGHT}'
                     self.screen = pygame.display.set_mode((self.WIN_WIDTH, self.WIN_HEIGHT),pygame.RESIZABLE)
                 if self.writing:

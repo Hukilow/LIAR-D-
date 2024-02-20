@@ -209,7 +209,9 @@ class AfficheItem(pygame.sprite.Sprite):
 
         self.nom = None
         self.attribut1 = None
-        self.attribut2 = None
+
+        self.partie1 = None
+        self.partie2 = None
 
         self.x_change = 0
         self.y_change = 0
@@ -248,14 +250,26 @@ class AfficheItem(pygame.sprite.Sprite):
 
     def affichage(self,affichage):
         if affichage == True:
+            i = 0
+            if self.attribut1 != None:
+                for lettre in self.attribut1:
+                    i += 1
+                    if lettre == "/":
+                        self.partie1 = self.attribut1[:i-1]
+                        self.partie2 = self.attribut1[i+1:]
+                        break
+
             self.spriteaffiche = self.game.affiche_spritesheet.get_sprite(0,0,225,145)
             self.font = pygame.font.Font('mandalorelasertitle.ttf', 23)
             self.draw_text(self.spriteaffiche,self.nom,self.font,BLUE,25,25)
             self.font = pygame.font.Font('mandalorelasertitle.ttf', 18)
-            self.draw_text(self.spriteaffiche,self.attribut1,self.font,BLUE,25,65)
-            if self.attribut2 != None:
-                self.draw_text(self.spriteaffiche,self.attribut2,self.font,BLUE,25,85)
-                self.attribut2 = None
+            if self.partie2 != None:
+                self.draw_text(self.spriteaffiche,self.partie1,self.font,BLUE,25,65)
+                self.draw_text(self.spriteaffiche,self.partie2,self.font,BLUE,25,85)
+            else:
+                self.draw_text(self.spriteaffiche,self.attribut1,self.font,BLUE,25,65)
+            self.partie1 = None
+            self.partie2 = None
             self.image = self.spriteaffiche
             return self.image
         if affichage == False:
@@ -279,7 +293,9 @@ class AfficheEquipped(pygame.sprite.Sprite):
 
         self.nom = None
         self.attribut1 = None
-        self.attribut2 = None
+
+        self.partie1 = None
+        self.partie2 = None
 
         self.x_change = 0
         self.y_change = 0
@@ -318,14 +334,26 @@ class AfficheEquipped(pygame.sprite.Sprite):
 
     def affichage(self,affichage):
         if affichage == True:
+            i = 0
+            if self.attribut1 != None:
+                for lettre in self.attribut1:
+                    i += 1
+                    if lettre == "/":
+                        self.partie1 = self.attribut1[:i-1]
+                        self.partie2 = self.attribut1[i+1:]
+                        break
+
             self.spriteaffiche = self.game.affiche_spritesheet.get_sprite(0,0,225,145)
             self.font = pygame.font.Font('mandalorelasertitle.ttf', 23)
-            self.draw_text(self.spriteaffiche,self.nom,self.font,LIMEGREEN,25,25)
+            self.draw_text(self.spriteaffiche,self.nom,self.font,BLUE,25,25)
             self.font = pygame.font.Font('mandalorelasertitle.ttf', 18)
-            self.draw_text(self.spriteaffiche,self.attribut1,self.font,LIMEGREEN,25,65)
-            if self.attribut2 != None:
-                self.draw_text(self.spriteaffiche,self.attribut2,self.font,LIMEGREEN,25,85)
-                self.attribut2 = None
+            if self.partie2 != None:
+                self.draw_text(self.spriteaffiche,self.partie1,self.font,BLUE,25,65)
+                self.draw_text(self.spriteaffiche,self.partie2,self.font,BLUE,25,85)
+            else:
+                self.draw_text(self.spriteaffiche,self.attribut1,self.font,BLUE,25,65)
+            self.partie1 = None
+            self.partie2 = None
             self.image = self.spriteaffiche
             return self.image
         if affichage == False:
@@ -734,8 +762,7 @@ class PlayerHitbox(pygame.sprite.Sprite):
             if self.game.player.invincibility() == False:
                 self.game.player.healthbar.take_damage(1+self.game.multiplicateur_difficulte_attack_enemies)
                 self.game.player.derniertemps = pygame.time.get_ticks()
-                print(self.derniertemps)
-            
+  
             if self.game.player.healthbar.health <= 0 :
                 self.kill()
                 self.game.playing = False
@@ -743,11 +770,9 @@ class PlayerHitbox(pygame.sprite.Sprite):
     def collide_enemyattacks(self):
         hits = pygame.sprite.spritecollide(self, self.game.attacksenemy, False)
         if hits:
-            print("hit")
             if self.game.player.invincibility() == False:
                 self.game.player.healthbar.take_damage(self.game.player.enemyattacks)
                 self.game.player.derniertemps = pygame.time.get_ticks()
-                print(self.derniertemps)
             
             if self.game.player.healthbar.health <= 0 :
                 self.kill()
@@ -760,7 +785,6 @@ class PlayerHitbox(pygame.sprite.Sprite):
             if self.invincibility_lava() == False:
                 self.game.player.healthbar.take_damage(2)
                 self.derniertemps2 = pygame.time.get_ticks()
-                print(self.derniertemps2)
             
             if self.game.player.healthbar.health < 0 :
                 self.kill()
@@ -770,7 +794,6 @@ class PlayerHitbox(pygame.sprite.Sprite):
             if self.invincibility_trap() == False:
                 self.game.player.healthbar.take_damage(2)
                 self.derniertemps2 = pygame.time.get_ticks()
-                print(self.derniertemps2)
             
             if self.game.player.healthbar.health < 0 :
                 self.kill()
@@ -781,7 +804,6 @@ class PlayerHitbox(pygame.sprite.Sprite):
         if hits:
             if self.invincibility_lava() == False:
                 self.derniertemps2 = pygame.time.get_ticks()
-                print(self.derniertemps2)
         
 
     def collide_blocks(self, direction):
@@ -905,12 +927,17 @@ class PlayerHitbox(pygame.sprite.Sprite):
         keys = pygame.key.get_pressed()
 
         if hit and keys[pygame.K_SPACE]:
-            if self.monter_descendretime() == False:
+            """if self.monter_descendretime() == False:
                 for sprite in self.game.all_sprites:
                     if (self.game.player.spritedujoueur != sprite) and (self.game.player.light.spritedelalumiere != sprite) and (self.game.player.healthbar.spriteduhealthbar != sprite) and (self.game.player.etage.spriteduetage != sprite) and (self.game.player.potion.spriteduhubpotion!= sprite) and (self.game.player.epee.spriteduEpeeHUD != sprite) and (self.game.player.helmet.spriteduCasqueHUD != sprite) and (self.game.player.chest.spriteduChestHUD != sprite) and (self.game.player.pants.spriteduPantsHUD != sprite) and (self.game.player.boots.spritedesBootsHUD != sprite) and (self.game.player.necklace.spriteNecklaceHUD != sprite) and (self.game.player.ring.spriteRingHUD != sprite) and (self.game.player.ranged.spriteRangeHUD != sprite) and (self.game.player.afficheequipped.spriteduafficheequipped != sprite) and (self.game.player.afficheitem.spriteduafficheitem != sprite) and (self.spriteduplayerhitbox != sprite):
                         sprite.kill()
                 self.descendre_etage()
-                self.derniertempsechelle = pygame.time.get_ticks()
+                self.derniertempsechelle = pygame.time.get_ticks()"""
+            self.game.player.etage.descendre()
+            for sprite in self.game.all_sprites:
+                if (self.game.player.spritedujoueur != sprite) and (self.game.player.light.spritedelalumiere != sprite) and (self.game.player.healthbar.spriteduhealthbar != sprite) and (self.game.player.etage.spriteduetage != sprite) and (self.game.player.potion.spriteduhubpotion!= sprite) and (self.game.player.epee.spriteduEpeeHUD != sprite) and (self.game.player.helmet.spriteduCasqueHUD != sprite) and (self.game.player.chest.spriteduChestHUD != sprite) and (self.game.player.pants.spriteduPantsHUD != sprite) and (self.game.player.boots.spritedesBootsHUD != sprite) and (self.game.player.necklace.spriteNecklaceHUD != sprite) and (self.game.player.ring.spriteRingHUD != sprite) and (self.game.player.ranged.spriteRangeHUD != sprite) and (self.game.player.afficheequipped.spriteduafficheequipped != sprite) and (self.game.player.afficheitem.spriteduafficheitem != sprite) and (self.spriteduplayerhitbox != sprite):
+                    sprite.kill()
+            self.game.createTilemapboss(tilemap_boss, False)
 
         if hit2 and keys[pygame.K_SPACE]:
             if self.monter_descendretime() == False:

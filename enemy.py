@@ -346,7 +346,6 @@ class Enemy(pygame.sprite.Sprite):
             if self.invincibility() == False:
                 self.healthbar.take_damage(self.game.player.puissance)
                 self.derniertemps = pygame.time.get_ticks()
-                print(self.healthbar.health)
             if self.healthbar.health <= 0:
                 self.game.totalenemykill += 1
                 self.modify_tilemap()
@@ -641,7 +640,6 @@ class Knight(pygame.sprite.Sprite):
             if self.invincibility() == False:
                 self.healthbar.take_damage(self.game.player.puissance)
                 self.derniertemps = pygame.time.get_ticks()
-                print(self.healthbar.health)
             if self.healthbar.health <= 0:
                 self.game.totalenemykill += 1
                 self.modify_tilemap()
@@ -974,7 +972,6 @@ class AngryMaid(pygame.sprite.Sprite):
             if self.invincibility() == False:
                 self.healthbar.take_damage(self.game.player.puissance)
                 self.derniertemps = pygame.time.get_ticks()
-                print(self.healthbar.health)
             if self.healthbar.health < self.healthbar.maxhealth:
                 self.angry = True
             if self.healthbar.health <= 0:
@@ -1293,10 +1290,8 @@ class Slime(pygame.sprite.Sprite):
             if self.invincibility() == False:
                 self.healthbar.take_damage(self.game.player.puissance)
                 self.derniertemps = pygame.time.get_ticks()
-                print(self.healthbar.health)
             if self.healthbar.health <= 0:
                 self.game.totalenemykill += 1
-                print(self.game.totalenemykill)
                 self.modify_tilemap()
                 self.kill()
 
@@ -1670,7 +1665,6 @@ self.game.greencircle_spritesheet.get_sprite(600, 560, 200, 160),]
             if self.invincibility() == False:
                 self.healthbar.take_damage(self.game.player.puissance)
                 self.derniertemps = pygame.time.get_ticks()
-                print(self.healthbar.health)
             if self.healthbar.health <= 0:
                 self.game.totalenemykill += 1
                 self.modify_tilemap()
@@ -1979,6 +1973,38 @@ self.game.impactwhite_spritesheet.get_sprite(192, 1408, 64, 64),
 self.game.impactwhite_spritesheet.get_sprite(256, 1408, 64, 64),
 self.game.impactwhite_spritesheet.get_sprite(320, 1408, 64, 64),
 self.game.impactwhite_spritesheet.get_sprite(384, 1408, 64, 64),
+self.game.impactwhite_spritesheet.get_sprite(448, 1408, 64, 64),
+self.game.impactwhite_spritesheet.get_sprite(0, 1408, 64, 64),
+self.game.impactwhite_spritesheet.get_sprite(64, 1408, 64, 64),
+self.game.impactwhite_spritesheet.get_sprite(128, 1408, 64, 64),
+self.game.impactwhite_spritesheet.get_sprite(192, 1408, 64, 64),
+self.game.impactwhite_spritesheet.get_sprite(256, 1408, 64, 64),
+self.game.impactwhite_spritesheet.get_sprite(320, 1408, 64, 64),
+self.game.impactwhite_spritesheet.get_sprite(384, 1408, 64, 64),
+self.game.impactwhite_spritesheet.get_sprite(448, 1408, 64, 64),
+self.game.impactwhite_spritesheet.get_sprite(0, 1408, 64, 64),
+self.game.impactwhite_spritesheet.get_sprite(64, 1408, 64, 64),
+self.game.impactwhite_spritesheet.get_sprite(128, 1408, 64, 64),
+self.game.impactwhite_spritesheet.get_sprite(192, 1408, 64, 64),
+self.game.impactwhite_spritesheet.get_sprite(256, 1408, 64, 64),
+self.game.impactwhite_spritesheet.get_sprite(320, 1408, 64, 64),
+self.game.impactwhite_spritesheet.get_sprite(384, 1408, 64, 64),
+self.game.impactwhite_spritesheet.get_sprite(448, 1408, 64, 64),
+self.game.impactwhite_spritesheet.get_sprite(0, 1408, 64, 64),
+self.game.impactwhite_spritesheet.get_sprite(64, 1408, 64, 64),
+self.game.impactwhite_spritesheet.get_sprite(128, 1408, 64, 64),
+self.game.impactwhite_spritesheet.get_sprite(192, 1408, 64, 64),
+self.game.impactwhite_spritesheet.get_sprite(256, 1408, 64, 64),
+self.game.impactwhite_spritesheet.get_sprite(320, 1408, 64, 64),
+self.game.impactwhite_spritesheet.get_sprite(384, 1408, 64, 64),
+self.game.impactwhite_spritesheet.get_sprite(448, 1408, 64, 64),
+self.game.impactwhite_spritesheet.get_sprite(0, 1408, 64, 64),
+self.game.impactwhite_spritesheet.get_sprite(64, 1408, 64, 64),
+self.game.impactwhite_spritesheet.get_sprite(128, 1408, 64, 64),
+self.game.impactwhite_spritesheet.get_sprite(192, 1408, 64, 64),
+self.game.impactwhite_spritesheet.get_sprite(256, 1408, 64, 64),
+self.game.impactwhite_spritesheet.get_sprite(320, 1408, 64, 64),
+self.game.impactwhite_spritesheet.get_sprite(384, 1408, 64, 64),
 self.game.impactwhite_spritesheet.get_sprite(448, 1408, 64, 64),]
 
         self.teleportation_down = self.teleportation
@@ -2038,7 +2064,7 @@ self.game.impactpurple_spritesheet.get_sprite(320, 704, 64, 64),]
         if self.wait == False:
             if self.player:
                 distance_to_player = math.dist((self.rect.centerx, self.rect.centery), (self.player.rect.centerx, self.player.rect.centery)) 
-                if distance_to_player <= self.detect_range-500:
+                if distance_to_player <= self.detect_range-550:
                     self.attackclose()
                     
                 elif distance_to_player <= self.detect_range-400:
@@ -2055,7 +2081,6 @@ self.game.impactpurple_spritesheet.get_sprite(320, 704, 64, 64),]
         if self.wait == True:
             self.change_map()
                     
-
 
         self.rect.x += self.x_change
         self.collide_blocks('x')
@@ -2088,7 +2113,6 @@ self.game.impactpurple_spritesheet.get_sprite(320, 704, 64, 64),]
     def collide_lava(self):
         hits = pygame.sprite.spritecollide(self, self.game.lava, False)
         if hits:
-            print("hit")
             if self.facing == 'up':
                 xatt = self.rect.x 
                 yatt = self.rect.y 
@@ -2194,30 +2218,16 @@ self.game.impactpurple_spritesheet.get_sprite(320, 704, 64, 64),]
             if self.invincibility() == False:
                 self.healthbar.take_damage(self.game.player.puissance)
                 self.derniertemps = pygame.time.get_ticks()
-                print(self.healthbar.health)
             if self.healthbar.health <= 187:
                 if self.phase1 == True:
                     self.wait = True
-                    if self.facing == 'up':
-                        xatt = self.rect.x 
-                        yatt = self.rect.y 
-
-                    if self.facing == 'down':
-                        xatt = self.rect.x
-                        yatt = self.rect.y
-
-                    if self.facing == 'left':
-                        xatt = self.rect.x -200
-                        yatt = self.rect.y
-
-                    if self.facing == 'right':
-                        xatt = self.rect.x + TILESIZE
-                        yatt = self.rect.y
+                    xatt = self.rect.x
+                    yatt = self.rect.y+22
                     self.derniertemps4 = pygame.time.get_ticks()
                     self.derniertemps1 = pygame.time.get_ticks() 
                     self.game.player.enemyattacks = 2+self.game.multiplicateur_difficulte_attack_enemies 
                     self.derniertempsloading = pygame.time.get_ticks()
-                    AttackEnemy(self.game,xatt,yatt,64,64,32,self.facing,self.teleportation_right,self.teleportation_left,self.teleportation_up,self.teleportation_down)
+                    AttackEnemy(self.game,xatt,yatt,64,64,64,self.facing,self.teleportation_right,self.teleportation_left,self.teleportation_up,self.teleportation_down)
                     self.invocation_times = pygame.time.get_ticks()
                     self.phase2 = True
                     self.phase1 = False
@@ -2225,52 +2235,26 @@ self.game.impactpurple_spritesheet.get_sprite(320, 704, 64, 64),]
             if self.healthbar.health <= 125:
                 if self.phase2 == True:
                     self.wait = True
-                    if self.facing == 'up':
-                        xatt = self.rect.x 
-                        yatt = self.rect.y 
-
-                    if self.facing == 'down':
-                        xatt = self.rect.x
-                        yatt = self.rect.y
-
-                    if self.facing == 'left':
-                        xatt = self.rect.x -200
-                        yatt = self.rect.y
-
-                    if self.facing == 'right':
-                        xatt = self.rect.x + TILESIZE
-                        yatt = self.rect.y
+                    xatt = self.rect.x
+                    yatt = self.rect.y+22
                     self.derniertemps4 = pygame.time.get_ticks()
                     self.derniertemps1 = pygame.time.get_ticks() 
                     self.game.player.enemyattacks = 2+self.game.multiplicateur_difficulte_attack_enemies 
                     self.derniertempsloading = pygame.time.get_ticks()
-                    AttackEnemy(self.game,xatt,yatt,64,64,32,self.facing,self.teleportation_right,self.teleportation_left,self.teleportation_up,self.teleportation_down)
+                    AttackEnemy(self.game,xatt,yatt,64,64,64,self.facing,self.teleportation_right,self.teleportation_left,self.teleportation_up,self.teleportation_down)
                     self.invocation_times = pygame.time.get_ticks()
                     self.phase2 = False
 
             if self.healthbar.health <= 62:
                 if self.phase2 == True:
                     self.wait = True
-                    if self.facing == 'up':
-                        xatt = self.rect.x 
-                        yatt = self.rect.y 
-
-                    if self.facing == 'down':
-                        xatt = self.rect.x
-                        yatt = self.rect.y
-
-                    if self.facing == 'left':
-                        xatt = self.rect.x -200
-                        yatt = self.rect.y
-
-                    if self.facing == 'right':
-                        xatt = self.rect.x + TILESIZE
-                        yatt = self.rect.y
+                    xatt = self.rect.x
+                    yatt = self.rect.y+22
                     self.derniertemps4 = pygame.time.get_ticks()
                     self.derniertemps1 = pygame.time.get_ticks() 
                     self.game.player.enemyattacks = 2+self.game.multiplicateur_difficulte_attack_enemies 
                     self.derniertempsloading = pygame.time.get_ticks()
-                    AttackEnemy(self.game,xatt,yatt,64,64,32,self.facing,self.teleportation_right,self.teleportation_left,self.teleportation_up,self.teleportation_down)
+                    AttackEnemy(self.game,xatt,yatt,64,64,64,self.facing,self.teleportation_right,self.teleportation_left,self.teleportation_up,self.teleportation_down)
                     self.invocation_times = pygame.time.get_ticks()
                     self.phase2 = False
 
@@ -2284,13 +2268,12 @@ self.game.impactpurple_spritesheet.get_sprite(320, 704, 64, 64),]
             for sprite in self.game .all_sprites:
                 if (self.game.player.spritedujoueur != sprite) and (self.spriteduboss != sprite) and (self.game.player.light.spritedelalumiere != sprite) and (self.game.player.healthbar.spriteduhealthbar != sprite) and (self.game.player.etage.spriteduetage != sprite) and (self.game.player.potion.spriteduhubpotion!= sprite) and (self.game.player.epee.spriteduEpeeHUD != sprite) and (self.game.player.helmet.spriteduCasqueHUD != sprite) and (self.game.player.chest.spriteduChestHUD != sprite) and (self.game.player.pants.spriteduPantsHUD != sprite) and (self.game.player.boots.spritedesBootsHUD != sprite) and (self.game.player.necklace.spriteNecklaceHUD != sprite) and (self.game.player.ring.spriteRingHUD != sprite) and (self.game.player.ranged.spriteRangeHUD != sprite) and (self.game.player.afficheequipped.spriteduafficheequipped != sprite) and (self.game.player.afficheitem.spriteduafficheitem != sprite) and (self.game.hitbox.spriteduplayerhitbox != sprite):
                     sprite.kill()
-            self.newmap = self.pop(random.choice(allbossmaps))
+            self.newmap = allbossmaps.pop(allbossmaps.index(random.choice(allbossmaps)))
             self.game.createTilemapboss(self.newmap,True)
             self.wait = False
 
     def invocation_time(self):
         return self.invocation_times > pygame.time.get_ticks() - 2500
-
 
     def invincibility(self):
         return self.derniertemps > pygame.time.get_ticks() - 750
@@ -2306,18 +2289,18 @@ self.game.impactpurple_spritesheet.get_sprite(320, 704, 64, 64),]
             self.derniertemps2 = pygame.time.get_ticks()
             self.game.player.enemyattacks = 2+self.game.multiplicateur_difficulte_attack_enemies 
             if self.facing == 'up':
-                xatt = self.rect.x +5
-                yatt = self.rect.y - 200
+                xatt = self.rect.x
+                yatt = self.rect.y - 100
             if self.facing == 'down':
-                xatt = self.rect.x +5
-                yatt = self.rect.y + 45
+                xatt = self.rect.x
+                yatt = self.rect.y + 50
 
             if self.facing == 'left':
-                xatt = self.rect.x -200
+                xatt = self.rect.x -50
                 yatt = self.rect.y
 
             if self.facing == 'right':
-                xatt = self.rect.x + TILESIZE
+                xatt = self.rect.x + 50
                 yatt = self.rect.y
 
             AttackEnemy(self.game,xatt,yatt,50,50,6,self.facing,self.attack_close_right,self.attack_close_left,self.attack_close_up,self.attack_close_down)
@@ -2817,10 +2800,8 @@ self.game.fireground_spritesheet.get_sprite(144, 0, 48, 32),]
             if self.invincibility() == False:
                 self.healthbar.take_damage(self.game.player.puissance)
                 self.derniertemps = pygame.time.get_ticks()
-                print(self.healthbar.health)
             if self.healthbar.health <= 0:
                 self.game.totalenemykill += 1
-                print(self.game.totalenemykill)
                 self.modify_tilemap()
                 self.kill()
 
@@ -3296,10 +3277,8 @@ self.game.shortadventurerattack_spritesheet.get_sprite(402, 99, 67, 32),]
             if self.invincibility() == False:
                 self.healthbar.take_damage(self.game.player.puissance)
                 self.derniertemps = pygame.time.get_ticks()
-                print(self.healthbar.health)
             if self.healthbar.health <= 0:
                 self.game.totalenemykill += 1
-                print(self.game.totalenemykill)
                 self.modify_tilemap()
                 self.kill()
 
@@ -3740,10 +3719,8 @@ class Zombie(pygame.sprite.Sprite):
             if self.invincibility() == False:
                 self.healthbar.take_damage(self.game.player.puissance)
                 self.derniertemps = pygame.time.get_ticks()
-                print(self.healthbar.health)
             if self.healthbar.health <= 0:
                 self.game.totalenemykill += 1
-                print(self.game.totalenemykill)
                 self.modify_tilemap()
                 self.kill()
 
@@ -4084,10 +4061,8 @@ class Gardener(pygame.sprite.Sprite):
             if self.invincibility() == False:
                 self.healthbar.take_damage(self.game.player.puissance)
                 self.derniertemps = pygame.time.get_ticks()
-                print(self.healthbar.health)
             if self.healthbar.health <= 0:
                 self.game.totalenemykill += 1
-                print(self.game.totalenemykill)
                 self.modify_tilemap()
                 self.kill()
 

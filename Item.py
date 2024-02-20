@@ -45,8 +45,6 @@ class Potion(pygame.sprite.Sprite):
                 self.game.player.afficheitem.trueorfalse = True
                 self.game.player.afficheitem.nom = self.nom
                 self.game.player.afficheitem.attribut1 = self.attribut
-            if not hits:
-                self.game.player.afficheitem.trueorfalse = False
             if hits and keys[pygame.K_e]:
                 self.game.player.potion.item_pris()
                 self.game.player.afficheitem.trueorfalse = False
@@ -164,13 +162,10 @@ class Scythe(pygame.sprite.Sprite):
                 self.game.player.afficheitem.trueorfalse = True
                 self.game.player.afficheitem.nom = self.nom
                 self.game.player.afficheitem.attribut1 = self.attribut
-            if (hits) and (self.game.player.epee.ID != None):
-                self.game.player.afficheequipped.trueorfalse = True
-                self.game.player.afficheequipped.nom = self.game.player.epee.ID.nom
-                self.game.player.afficheequipped.attribut1 = self.game.player.epee.ID.attribut
-            if not hits:
-                self.game.player.afficheitem.trueorfalse = False
-                self.game.player.afficheequipped.trueorfalse = False
+                if (self.game.player.epee.ID != None):
+                    self.game.player.afficheequipped.trueorfalse = True
+                    self.game.player.afficheequipped.nom = self.game.player.epee.ID.nom
+                    self.game.player.afficheequipped.attribut1 = self.game.player.epee.ID.attribut
 
 
             if hits and keys[pygame.K_e]:
@@ -387,13 +382,10 @@ class Hematite_Blade(pygame.sprite.Sprite):
                 self.game.player.afficheitem.trueorfalse = True
                 self.game.player.afficheitem.nom = self.nom
                 self.game.player.afficheitem.attribut1 = self.attribut
-            if (hits) and (self.game.player.epee.ID != None):
-                self.game.player.afficheequipped.trueorfalse = True
-                self.game.player.afficheequipped.nom = self.game.player.epee.ID.nom
-                self.game.player.afficheequipped.attribut1 = self.game.player.epee.ID.attribut
-            if not hits:
-                self.game.player.afficheitem.trueorfalse = False
-                self.game.player.afficheequipped.trueorfalse = False
+                if (self.game.player.epee.ID != None):
+                    self.game.player.afficheequipped.trueorfalse = True
+                    self.game.player.afficheequipped.nom = self.game.player.epee.ID.nom
+                    self.game.player.afficheequipped.attribut1 = self.game.player.epee.ID.attribut
 
 
             if hits and keys[pygame.K_e]:
@@ -536,13 +528,10 @@ class HellScythe(pygame.sprite.Sprite):
                 self.game.player.afficheitem.trueorfalse = True
                 self.game.player.afficheitem.nom = self.nom
                 self.game.player.afficheitem.attribut1 = self.attribut
-            if (hits) and (self.game.player.epee.ID != None):
-                self.game.player.afficheequipped.trueorfalse = True
-                self.game.player.afficheequipped.nom = self.game.player.epee.ID.nom
-                self.game.player.afficheequipped.attribut1 = self.game.player.epee.ID.attribut
-            if not hits:
-                self.game.player.afficheitem.trueorfalse = False
-                self.game.player.afficheequipped.trueorfalse = False
+                if (self.game.player.epee.ID != None):
+                    self.game.player.afficheequipped.trueorfalse = True
+                    self.game.player.afficheequipped.nom = self.game.player.epee.ID.nom
+                    self.game.player.afficheequipped.attribut1 = self.game.player.epee.ID.attribut
 
 
             if hits and keys[pygame.K_e]:
@@ -733,13 +722,10 @@ class WintersBallad(pygame.sprite.Sprite):
                 self.game.player.afficheitem.trueorfalse = True
                 self.game.player.afficheitem.nom = self.nom
                 self.game.player.afficheitem.attribut1 = self.attribut
-            if (hits) and (self.game.player.epee.ID != None):
-                self.game.player.afficheequipped.trueorfalse = True
-                self.game.player.afficheequipped.nom = self.game.player.epee.ID.nom
-                self.game.player.afficheequipped.attribut1 = self.game.player.epee.ID.attribut
-            if not hits:
-                self.game.player.afficheitem.trueorfalse = False
-                self.game.player.afficheequipped.trueorfalse = False
+                if (self.game.player.epee.ID != None):
+                    self.game.player.afficheequipped.trueorfalse = True
+                    self.game.player.afficheequipped.nom = self.game.player.epee.ID.nom
+                    self.game.player.afficheequipped.attribut1 = self.game.player.epee.ID.attribut
 
 
             if hits and keys[pygame.K_e]:
@@ -935,13 +921,10 @@ class SnakeSword(pygame.sprite.Sprite):
                 self.game.player.afficheitem.trueorfalse = True
                 self.game.player.afficheitem.nom = self.nom
                 self.game.player.afficheitem.attribut1 = self.attribut
-            if (hits) and (self.game.player.epee.ID != None):
-                self.game.player.afficheequipped.trueorfalse = True
-                self.game.player.afficheequipped.nom = self.game.player.epee.ID.nom
-                self.game.player.afficheequipped.attribut1 = self.game.player.epee.ID.attribut
-            if not hits:
-                self.game.player.afficheitem.trueorfalse = False
-                self.game.player.afficheequipped.trueorfalse = False
+                if (self.game.player.epee.ID != None):
+                    self.game.player.afficheequipped.trueorfalse = True
+                    self.game.player.afficheequipped.nom = self.game.player.epee.ID.nom
+                    self.game.player.afficheequipped.attribut1 = self.game.player.epee.ID.attribut
 
             if hits and keys[pygame.K_e]:
                 if self.game.player.take_timer() == False:
@@ -1138,13 +1121,10 @@ class GreatSword(pygame.sprite.Sprite):
                 self.game.player.afficheitem.trueorfalse = True
                 self.game.player.afficheitem.nom = self.nom
                 self.game.player.afficheitem.attribut1 = self.attribut
-            if (hits) and (self.game.player.epee.ID != None):
-                self.game.player.afficheequipped.trueorfalse = True
-                self.game.player.afficheequipped.nom = self.game.player.epee.ID.nom
-                self.game.player.afficheequipped.attribut1 = self.game.player.epee.ID.attribut
-            if not hits:
-                self.game.player.afficheitem.trueorfalse = False
-                self.game.player.afficheequipped.trueorfalse = False
+                if (self.game.player.epee.ID != None):
+                    self.game.player.afficheequipped.trueorfalse = True
+                    self.game.player.afficheequipped.nom = self.game.player.epee.ID.nom
+                    self.game.player.afficheequipped.attribut1 = self.game.player.epee.ID.attribut
 
             if hits and keys[pygame.K_e]:
                 if self.game.player.take_timer() == False:
@@ -1176,8 +1156,7 @@ class GreatSword(pygame.sprite.Sprite):
 
 class Helmet_leather(pygame.sprite.Sprite):
     nom = "Leather Helmet"
-    attribut = "Max health : +1"
-    attribut1 = "Vision : +75"
+    attribut = "Max health : +1 / Vision : +75"
     IDimage = (37,35,24,26)
     def __init__(self,game, x, y):
 
@@ -1221,12 +1200,10 @@ class Helmet_leather(pygame.sprite.Sprite):
                 self.game.player.afficheitem.trueorfalse = True
                 self.game.player.afficheitem.nom = self.nom
                 self.game.player.afficheitem.attribut1 = self.attribut
-                self.game.player.afficheitem.attribut2 = self.attribut1
-            if (hits) and (self.game.player.helmet.ID != None):
-                self.game.player.afficheequipped.trueorfalse = True
-                self.game.player.afficheequipped.nom = self.game.player.helmet.ID.nom
-                self.game.player.afficheequipped.attribut1 = self.game.player.helmet.ID.attribut
-                self.game.player.afficheequipped.attribut2 = self.game.player.helmet.ID.attribut1
+                if (self.game.player.helmet.ID != None):
+                    self.game.player.afficheequipped.trueorfalse = True
+                    self.game.player.afficheequipped.nom = self.game.player.helmet.ID.nom
+                    self.game.player.afficheequipped.attribut1 = self.game.player.helmet.ID.attribut
             if not hits:
                 self.game.player.afficheitem.trueorfalse = False
                 self.game.player.afficheequipped.trueorfalse = False
@@ -1250,8 +1227,7 @@ class Helmet_leather(pygame.sprite.Sprite):
 
 class Helmet_chainmail(pygame.sprite.Sprite):
     nom = "Chainmail Helmet"
-    attribut = "Max health : +2"
-    attribut1 = "Vision : +25"
+    attribut = "Max health : +2 / Vision : +25"
     IDimage = (35,96,27,32)
     def __init__(self,game, x, y):
 
@@ -1296,12 +1272,10 @@ class Helmet_chainmail(pygame.sprite.Sprite):
                 self.game.player.afficheitem.trueorfalse = True
                 self.game.player.afficheitem.nom = self.nom
                 self.game.player.afficheitem.attribut1 = self.attribut
-                self.game.player.afficheitem.attribut2 = self.attribut1
-            if (hits) and (self.game.player.helmet.ID != None):
-                self.game.player.afficheequipped.trueorfalse = True
-                self.game.player.afficheequipped.nom = self.game.player.helmet.ID.nom
-                self.game.player.afficheequipped.attribut1 = self.game.player.helmet.ID.attribut
-                self.game.player.afficheequipped.attribut2 = self.game.player.helmet.ID.attribut1
+                if (self.game.player.helmet.ID != None):
+                    self.game.player.afficheequipped.trueorfalse = True
+                    self.game.player.afficheequipped.nom = self.game.player.helmet.ID.nom
+                    self.game.player.afficheequipped.attribut1 = self.game.player.helmet.ID.attribut
             if not hits:
                 self.game.player.afficheitem.trueorfalse = False
                 self.game.player.afficheequipped.trueorfalse = False
@@ -1325,8 +1299,7 @@ class Helmet_chainmail(pygame.sprite.Sprite):
 
 class Helmet_iron(pygame.sprite.Sprite):
     nom = "Iron Helmet"
-    attribut = "Max health : +3"
-    attribut1 = "Vision : -25"
+    attribut = "Max health : +3 / Vision : -25"
     IDimage = (37,129,23,30)
     def __init__(self,game, x, y):
 
@@ -1370,12 +1343,10 @@ class Helmet_iron(pygame.sprite.Sprite):
                 self.game.player.afficheitem.trueorfalse = True
                 self.game.player.afficheitem.nom = self.nom
                 self.game.player.afficheitem.attribut1 = self.attribut
-                self.game.player.afficheitem.attribut2 = self.attribut1
-            if (hits) and (self.game.player.helmet.ID != None):
-                self.game.player.afficheequipped.trueorfalse = True
-                self.game.player.afficheequipped.nom = self.game.player.helmet.ID.nom
-                self.game.player.afficheequipped.attribut1 = self.game.player.helmet.ID.attribut
-                self.game.player.afficheequipped.attribut2 = self.game.player.helmet.ID.attribut1
+                if (self.game.player.helmet.ID != None):
+                    self.game.player.afficheequipped.trueorfalse = True
+                    self.game.player.afficheequipped.nom = self.game.player.helmet.ID.nom
+                    self.game.player.afficheequipped.attribut1 = self.game.player.helmet.ID.attribut
             if not hits:
                 self.game.player.afficheitem.trueorfalse = False
                 self.game.player.afficheequipped.trueorfalse = False
@@ -1383,7 +1354,6 @@ class Helmet_iron(pygame.sprite.Sprite):
 
             if hits and keys[pygame.K_e]:
                 if self.game.player.take_timer() == False:
-                    print(self.game.player.light.light_radius)     
                     if self.game.player.helmet.ID != None:
                         helmet_instance = self.game.player.helmet.ID(self.game,self.game.player.rect.x,self.game.player.rect.y)
                         self.game.player.healthbar.maxhealth -= helmet_instance.addhealth
@@ -1399,8 +1369,7 @@ class Helmet_iron(pygame.sprite.Sprite):
 
 class Helmet_Lava(pygame.sprite.Sprite):
     nom = "Lava Helmet"
-    attribut = "Max health : +5"
-    attribut1 = "Vision : 500"
+    attribut = "Max health : +5 / Vision : 500"
     IDimage = (37,129,23,30)
     def __init__(self,game, x, y):
 
@@ -1444,20 +1413,14 @@ class Helmet_Lava(pygame.sprite.Sprite):
                 self.game.player.afficheitem.trueorfalse = True
                 self.game.player.afficheitem.nom = self.nom
                 self.game.player.afficheitem.attribut1 = self.attribut
-                self.game.player.afficheitem.attribut2 = self.attribut1
-            if (hits) and (self.game.player.helmet.ID != None):
-                self.game.player.afficheequipped.trueorfalse = True
-                self.game.player.afficheequipped.nom = self.game.player.helmet.ID.nom
-                self.game.player.afficheequipped.attribut1 = self.game.player.helmet.ID.attribut
-                self.game.player.afficheequipped.attribut2 = self.game.player.helmet.ID.attribut1
-            if not hits:
-                self.game.player.afficheitem.trueorfalse = False
-                self.game.player.afficheequipped.trueorfalse = False
+                if (self.game.player.helmet.ID != None):
+                    self.game.player.afficheequipped.trueorfalse = True
+                    self.game.player.afficheequipped.nom = self.game.player.helmet.ID.nom
+                    self.game.player.afficheequipped.attribut1 = self.game.player.helmet.ID.attribut
                  
 
             if hits and keys[pygame.K_e]:
-                if self.game.player.take_timer() == False:
-                    print(self.game.player.light.light_radius)     
+                if self.game.player.take_timer() == False:   
                     if self.game.player.helmet.ID != None:
                         helmet_instance = self.game.player.helmet.ID(self.game,self.game.player.rect.x,self.game.player.rect.y)
                         self.game.player.healthbar.maxhealth -= helmet_instance.addhealth
@@ -1712,13 +1675,10 @@ class Pants_Lava(pygame.sprite.Sprite):
                 self.game.player.afficheitem.trueorfalse = True
                 self.game.player.afficheitem.nom = self.nom
                 self.game.player.afficheitem.attribut1 = self.attribut
-            if (hits) and (self.game.player.pants.ID != None):
-                self.game.player.afficheequipped.trueorfalse = True
-                self.game.player.afficheequipped.nom = self.game.player.pants.ID.nom
-                self.game.player.afficheequipped.attribut1 = self.game.player.pants.ID.attribut
-            if not hits:
-                self.game.player.afficheitem.trueorfalse = False
-                self.game.player.afficheequipped.trueorfalse = False
+                if (self.game.player.pants.ID != None):
+                    self.game.player.afficheequipped.trueorfalse = True
+                    self.game.player.afficheequipped.nom = self.game.player.pants.ID.nom
+                    self.game.player.afficheequipped.attribut1 = self.game.player.pants.ID.attribut
                  
             if hits and keys[pygame.K_e]:
                 if self.game.player.take_timer() == False:
@@ -2039,15 +1999,10 @@ class Boots_leather(pygame.sprite.Sprite):
                 self.game.player.afficheitem.trueorfalse = True
                 self.game.player.afficheitem.nom = self.nom
                 self.game.player.afficheitem.attribut1 = self.attribut
-                self.game.player.afficheitem.attribut2 = self.attribut1
-            if (hits) and (self.game.player.boots.ID != None):
-                self.game.player.afficheequipped.trueorfalse = True
-                self.game.player.afficheequipped.nom = self.game.player.boots.ID.nom
-                self.game.player.afficheequipped.attribut1 = self.game.player.boots.ID.attribut
-                self.game.player.afficheequipped.attribut2 = self.game.player.boots.ID.attribut1
-            if not hits:
-                self.game.player.afficheitem.trueorfalse = False
-                self.game.player.afficheequipped.trueorfalse = False
+                if (self.game.player.boots.ID != None):
+                    self.game.player.afficheequipped.trueorfalse = True
+                    self.game.player.afficheequipped.nom = self.game.player.boots.ID.nom
+                    self.game.player.afficheequipped.attribut1 = self.game.player.boots.ID.attribut
                  
             if hits and keys[pygame.K_e]:
                 if self.game.player.take_timer() == False:
@@ -2056,7 +2011,6 @@ class Boots_leather(pygame.sprite.Sprite):
                         self.game.player.healthbar.maxhealth -= boots_instance.addhealth
                     self.game.player.healthbar.maxhealth += self.addhealth
                     self.game.player.vitesse3 = self.vitesse
-                    print(self.game.player.vitesse3)
                     self.game.player.boots.ID = Boots_leather
                     self.game.player.boots.image = self.image
                     self.game.player.afficheitem.trueorfalse = False
@@ -2109,15 +2063,10 @@ class Boots_chainmail(pygame.sprite.Sprite):
                 self.game.player.afficheitem.trueorfalse = True
                 self.game.player.afficheitem.nom = self.nom
                 self.game.player.afficheitem.attribut1 = self.attribut
-                self.game.player.afficheitem.attribut2 = self.attribut1
-            if (hits) and (self.game.player.boots.ID != None):
-                self.game.player.afficheequipped.trueorfalse = True
-                self.game.player.afficheequipped.nom = self.game.player.boots.ID.nom
-                self.game.player.afficheequipped.attribut1 = self.game.player.boots.ID.attribut
-                self.game.player.afficheequipped.attribut2 = self.game.player.boots.ID.attribut1
-            if not hits:
-                self.game.player.afficheitem.trueorfalse = False
-                self.game.player.afficheequipped.trueorfalse = False
+                if (self.game.player.boots.ID != None):
+                    self.game.player.afficheequipped.trueorfalse = True
+                    self.game.player.afficheequipped.nom = self.game.player.boots.ID.nom
+                    self.game.player.afficheequipped.attribut1 = self.game.player.boots.ID.attribut
                  
             if hits and keys[pygame.K_e]:
                 if self.game.player.take_timer() == False:
@@ -2178,14 +2127,11 @@ class Boots_iron(pygame.sprite.Sprite):
                 self.game.player.afficheitem.trueorfalse = True
                 self.game.player.afficheitem.nom = self.nom
                 self.game.player.afficheitem.attribut1 = self.attribut
-                self.game.player.afficheitem.attribut2 = self.attribut1
             if (hits) and (self.game.player.boots.ID != None):
                 self.game.player.afficheequipped.trueorfalse = True
                 self.game.player.afficheequipped.nom = self.game.player.boots.ID.nom
                 self.game.player.afficheequipped.attribut1 = self.game.player.boots.ID.attribut
                 self.game.player.afficheequipped.attribut2 = self.game.player.boots.ID.attribut1
-            if not hits:
-                self.game.player.afficheitem.trueorfalse = False
                 self.game.player.afficheequipped.trueorfalse = False
                  
             if hits and keys[pygame.K_e]:
@@ -2195,7 +2141,6 @@ class Boots_iron(pygame.sprite.Sprite):
                         self.game.player.healthbar.maxhealth -= boots_instance.addhealth
                     self.game.player.healthbar.maxhealth += self.addhealth
                     self.game.player.vitesse3 = self.vitesse
-                    print(self.game.player.vitesse3)
                     self.game.player.boots.ID = Boots_iron
                     self.game.player.boots.image = self.image
                     self.game.player.afficheitem.trueorfalse = False
@@ -2266,7 +2211,6 @@ class Boots_Lava(pygame.sprite.Sprite):
                         self.game.player.healthbar.maxhealth -= boots_instance.addhealth
                     self.game.player.healthbar.maxhealth += self.addhealth
                     self.game.player.vitesse3 = self.vitesse
-                    print(self.game.player.vitesse3)
                     self.game.player.boots.ID = Boots_Lava
                     self.game.player.boots.image = self.image
                     self.game.player.afficheitem.trueorfalse = False
