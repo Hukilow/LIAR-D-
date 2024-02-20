@@ -1240,10 +1240,7 @@ class Helmet_leather(pygame.sprite.Sprite):
                     self.game.player.healthbar.maxhealth += self.addhealth
                     self.game.player.light.kill()
                     self.game.player.light = None
-                    if self.game.player.necklace.ID == Necklace_saphir:                 
-                        self.game.player.light = Light(self.game,self.game.player.x,self.game.player.y,self.vision*1.5,(255,167,38,40))
-                    else:
-                        self.game.player.light = Light(self.game,self.game.player.x,self.game.player.y,self.vision,(255,167,38,40))
+                    self.game.player.light = Light(self.game,self.game.player.x,self.game.player.y,self.vision,(255,167,38,40))
                     self.game.player.helmet.ID = Helmet_leather
                     self.game.player.helmet.image = self.image
                     self.game.player.afficheitem.trueorfalse = False
@@ -1318,10 +1315,7 @@ class Helmet_chainmail(pygame.sprite.Sprite):
                     self.game.player.healthbar.maxhealth += self.addhealth
                     self.game.player.light.kill()
                     self.game.player.light = None
-                    if self.game.player.necklace.ID == Necklace_saphir:
-                        self.game.player.light = Light(self.game,self.game.player.x,self.game.player.y,self.vision*1.5,(255,167,38,25))
-                    else:
-                        self.game.player.light = Light(self.game,self.game.player.x,self.game.player.y,self.vision,(255,167,38,25))
+                    self.game.player.light = Light(self.game,self.game.player.x,self.game.player.y,self.vision,(255,167,38,25))
                     self.game.player.helmet.ID = Helmet_chainmail
                     self.game.player.helmet.image = self.image
                     self.game.player.afficheitem.trueorfalse = False
@@ -1395,11 +1389,7 @@ class Helmet_iron(pygame.sprite.Sprite):
                         self.game.player.healthbar.maxhealth -= helmet_instance.addhealth
                     self.game.player.light.kill()
                     self.game.player.light = None
-                    if self.game.player.necklace.ID == Necklace_saphir:
-                        self.game.player.light = Light(self.game,self.game.player.x,self.game.player.y,self.vision*1.5,(255,255,255,65))
-                    else:
-                        self.game.player.light = Light(self.game,self.game.player.x,self.game.player.y,self.vision,(255,255,255,65))
-                    print(self.game.player.light.light_radius)
+                    self.game.player.light = Light(self.game,self.game.player.x,self.game.player.y,self.vision,(255,255,255,65))
                     self.game.player.helmet.ID = Helmet_iron
                     self.game.player.helmet.image = self.image
                     self.game.player.afficheitem.trueorfalse = False
@@ -1473,10 +1463,7 @@ class Helmet_Lava(pygame.sprite.Sprite):
                         self.game.player.healthbar.maxhealth -= helmet_instance.addhealth
                     self.game.player.light.kill()
                     self.game.player.light = None
-                    if self.game.player.necklace.ID == Necklace_saphir:
-                        self.game.player.light = Light(self.game,self.game.player.x,self.game.player.y,self.vision*1.5,(255,0,0,25))
-                    else:
-                        self.game.player.light = Light(self.game,self.game.player.x,self.game.player.y,self.vision,(255,0,0,25))
+                    self.game.player.light = Light(self.game,self.game.player.x,self.game.player.y,self.vision,(255,0,0,25))
                     self.game.player.helmet.ID = Helmet_Lava
                     self.game.player.helmet.image = self.image
                     self.game.player.afficheitem.trueorfalse = False
@@ -2420,7 +2407,7 @@ class Necklace_rubis(pygame.sprite.Sprite):
 
 class Necklace_saphir(pygame.sprite.Sprite):
     nom = "Necklace Saphir"
-    attribut = "Vision : x1.5"
+    attribut = "+300 ms invulnérabilité"
     IDimage = (157,129,29,30)
     def __init__(self,game, x, y):
 
@@ -2572,6 +2559,72 @@ class Ring_copper(pygame.sprite.Sprite):
         self.rect.x = self.x
         self.rect.y = self.y
         self.pos = (x,y)
+        self.puissance = 0
+
+    def update(self):
+        self.game.screen.blit(self.image,self.pos)
+        self.collide()
+
+        self.rect.x += self.x_change
+        self.rect.y += self.y_change
+
+        self.x_change = 0
+        self.y_change = 0
+
+
+    def collide(self):
+        hits = pygame.sprite.spritecollide(self, self.game.playerhitbox, False)
+        keys = pygame.key.get_pressed()
+        if hits:
+            self.game.player.afficheitem.trueorfalse = True
+            self.game.player.afficheitem.nom = self.nom
+            self.game.player.afficheitem.attribut1 = self.attribut
+        if (hits) and (self.game.player.ring.ID != None):
+            self.game.player.afficheequipped.trueorfalse = True
+            self.game.player.afficheequipped.nom = self.game.player.ring.ID.nom
+            self.game.player.afficheequipped.attribut1 = self.game.player.ring.ID.attribut
+        if not hits:
+            self.game.player.afficheitem.trueorfalse = False
+            self.game.player.afficheequipped.trueorfalse = False
+                
+        if hits and keys[pygame.K_e]:
+            if self.game.player.take_timer() == False:
+                if self.game.player.ring.ID != None:
+                    ring_instance = self.game.player.ring.ID(self.game,self.game.player.rect.x,self.game.player.rect.y)
+                    self.game.player.puissance -= ring_instance.puissance
+                self.game.player.ring.ID = Ring_copper
+                self.game.player.ring.image = self.image
+                self.game.player.afficheitem.trueorfalse = False
+                self.game.player.afficheequipped.trueorfalse = False
+                self.kill()
+                self.game.player.lasttaketimer = pygame.time.get_ticks()
+
+class Ring_rubis(pygame.sprite.Sprite):
+    nom = "Ring Rubis"
+    attribut = "+1 puissance"
+    IDimage = (230,103,22,18)
+    def __init__(self,game, x, y):
+
+        self.game = game
+        self._layer = ITEM_LAYER
+
+        self.groups = self.game.all_sprites, self.game.item
+        pygame.sprite.Sprite.__init__(self, self.groups)
+
+        self.ID = Ring_rubis
+        self.image = self.game.armor_spritesheet.get_sprite(230,103,22,18)
+
+        self.x = x
+        self.y = y
+        self.x_change = 0
+        self.y_change = 0
+
+        self.rect = self.image.get_rect() 
+        self.rect.x = self.x
+        self.rect.y = self.y
+        self.pos = (x,y)
+
+        self.puissance = 1
 
 
     def update(self):
@@ -2603,62 +2656,19 @@ class Ring_copper(pygame.sprite.Sprite):
         if hits and keys[pygame.K_e]:
             if self.game.player.take_timer() == False:
                 if self.game.player.ring.ID != None:
-                    self.game.player.ring.ID(self.game,self.game.player.rect.x,self.game.player.rect.y)
-                self.game.player.ring.ID = Ring_copper
+                    ring_instance = self.game.player.ring.ID(self.game,self.game.player.rect.x,self.game.player.rect.y)
+                    self.game.player.puissance -= ring_instance.puissance
+                self.game.player.puissance += self.puissance
+                self.game.player.ring.ID = Ring_rubis
                 self.game.player.ring.image = self.image
                 self.game.player.afficheitem.trueorfalse = False
                 self.game.player.afficheequipped.trueorfalse = False
                 self.kill()
                 self.game.player.lasttaketimer = pygame.time.get_ticks()
 
-class Ring_rubis(pygame.sprite.Sprite):
-    IDimage = (230,103,22,18)
-    def __init__(self,game, x, y):
-
-        self.game = game
-        self._layer = ITEM_LAYER
-
-        self.groups = self.game.all_sprites, self.game.item
-        pygame.sprite.Sprite.__init__(self, self.groups)
-
-        self.ID = Ring_rubis
-        self.image = self.game.armor_spritesheet.get_sprite(230,103,22,18)
-
-        self.x = x
-        self.y = y
-        self.x_change = 0
-        self.y_change = 0
-
-        self.rect = self.image.get_rect() 
-        self.rect.x = self.x
-        self.rect.y = self.y
-        self.pos = (x,y)
-
-
-    def update(self):
-        self.game.screen.blit(self.image,self.pos)
-        self.collide()
-
-        self.rect.x += self.x_change
-        self.rect.y += self.y_change
-
-        self.x_change = 0
-        self.y_change = 0
-
-
-    def collide(self):
-            hits = pygame.sprite.spritecollide(self, self.game.playerhitbox, False)
-            keys = pygame.key.get_pressed()
-            if hits and keys[pygame.K_e]:
-                if self.game.player.take_timer() == False:
-                    if self.game.player.ring.ID != None:
-                        self.game.player.ring.ID(self.game,self.game.player.rect.x,self.game.player.rect.y)
-                    self.game.player.ring.ID = Ring_rubis
-                    self.game.player.ring.image = self.image
-                    self.kill()
-                    self.game.player.lasttaketimer = pygame.time.get_ticks()
-
 class Ring_saphir(pygame.sprite.Sprite):
+    nom = "Ring Saphir"
+    attribut = "+150 ms invulnérabilité"
     IDimage = (292,101,24,22)
     def __init__(self,game, x, y):
 
@@ -2681,6 +2691,7 @@ class Ring_saphir(pygame.sprite.Sprite):
         self.rect.y = self.y
         self.pos = (x,y)
 
+        self.puissance = 0
 
     def update(self):
         self.game.screen.blit(self.image,self.pos)
@@ -2694,18 +2705,35 @@ class Ring_saphir(pygame.sprite.Sprite):
 
 
     def collide(self):
-            hits = pygame.sprite.spritecollide(self, self.game.playerhitbox, False)
-            keys = pygame.key.get_pressed()
-            if hits and keys[pygame.K_e]:
-                if self.game.player.take_timer() == False:
-                    if self.game.player.ring.ID != None:
-                        self.game.player.ring.ID(self.game,self.game.player.rect.x,self.game.player.rect.y)
-                    self.game.player.ring.ID = Ring_saphir
-                    self.game.player.ring.image = self.image
-                    self.kill()
-                    self.game.player.lasttaketimer = pygame.time.get_ticks()
+        hits = pygame.sprite.spritecollide(self, self.game.playerhitbox, False)
+        keys = pygame.key.get_pressed()
+        if hits:
+            self.game.player.afficheitem.trueorfalse = True
+            self.game.player.afficheitem.nom = self.nom
+            self.game.player.afficheitem.attribut1 = self.attribut
+        if (hits) and (self.game.player.ring.ID != None):
+            self.game.player.afficheequipped.trueorfalse = True
+            self.game.player.afficheequipped.nom = self.game.player.ring.ID.nom
+            self.game.player.afficheequipped.attribut1 = self.game.player.ring.ID.attribut
+        if not hits:
+            self.game.player.afficheitem.trueorfalse = False
+            self.game.player.afficheequipped.trueorfalse = False
+                
+        if hits and keys[pygame.K_e]:
+            if self.game.player.take_timer() == False:
+                if self.game.player.ring.ID != None:
+                    ring_instance = self.game.player.ring.ID(self.game,self.game.player.rect.x,self.game.player.rect.y)
+                    self.game.player.puissance -= ring_instance.puissance
+                self.game.player.ring.ID = Ring_saphir
+                self.game.player.ring.image = self.image
+                self.game.player.afficheitem.trueorfalse = False
+                self.game.player.afficheequipped.trueorfalse = False
+                self.kill()
+                self.game.player.lasttaketimer = pygame.time.get_ticks()
 
 class Ring_emerald(pygame.sprite.Sprite):
+    nom = "Ring Emerald"
+    attribut = "+1 PV toutes les 60 sec"
     IDimage = (262,103,22,19)
     def __init__(self,game, x, y):
 
@@ -2728,6 +2756,7 @@ class Ring_emerald(pygame.sprite.Sprite):
         self.rect.y = self.y
         self.pos = (x,y)
 
+        self.puissance = 0
 
     def update(self):
         self.game.screen.blit(self.image,self.pos)
@@ -2740,21 +2769,37 @@ class Ring_emerald(pygame.sprite.Sprite):
         self.y_change = 0
 
 
+
     def collide(self):
-            hits = pygame.sprite.spritecollide(self, self.game.playerhitbox, False)
-            keys = pygame.key.get_pressed()
-            if hits and keys[pygame.K_e]:
-                if self.game.player.take_timer() == False:
-                    if self.game.player.ring.ID != None:
-                        self.game.player.ring.ID(self.game,self.game.player.rect.x,self.game.player.rect.y)
-                    self.game.player.ring.ID = Ring_emerald
-                    self.game.player.ring.image = self.image
-                    self.kill()
-                    self.game.player.lasttaketimer = pygame.time.get_ticks()
+        hits = pygame.sprite.spritecollide(self, self.game.playerhitbox, False)
+        keys = pygame.key.get_pressed()
+        if hits:
+            self.game.player.afficheitem.trueorfalse = True
+            self.game.player.afficheitem.nom = self.nom
+            self.game.player.afficheitem.attribut1 = self.attribut
+        if (hits) and (self.game.player.ring.ID != None):
+            self.game.player.afficheequipped.trueorfalse = True
+            self.game.player.afficheequipped.nom = self.game.player.ring.ID.nom
+            self.game.player.afficheequipped.attribut1 = self.game.player.ring.ID.attribut
+        if not hits:
+            self.game.player.afficheitem.trueorfalse = False
+            self.game.player.afficheequipped.trueorfalse = False
+                
+        if hits and keys[pygame.K_e]:
+            if self.game.player.take_timer() == False:
+                if self.game.player.ring.ID != None:
+                    ring_instance = self.game.player.ring.ID(self.game,self.game.player.rect.x,self.game.player.rect.y)
+                    self.game.player.puissance -= ring_instance.puissance
+                self.game.player.ring.ID = Ring_emerald
+                self.game.player.ring.image = self.image
+                self.game.player.afficheitem.trueorfalse = False
+                self.game.player.afficheequipped.trueorfalse = False
+                self.kill()
+                self.game.player.lasttaketimer = pygame.time.get_ticks()
 
 class Earth_Shatter(pygame.sprite.Sprite):
     nom = "Earth Shatter"
-    attribut = "Puissance : +13 \n ça fais boum boum quand tu tape hihihi"
+    attribut = "Puissance : +13 \n ça fais boum boum quand tu tapes hihihi"
     IDimage = "self.weapon2_spritesheet.get_sprite(215,4,26,68)"
     IDattack = ("self.earthshatter_spritesheet.get_sprite(0, 0, 110, 90)",
         "self.earthshatter_spritesheet.get_sprite(110, 0, 110, 90)",

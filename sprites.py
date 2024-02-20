@@ -116,9 +116,11 @@ class Player(pygame.sprite.Sprite):
         self.afficheitem = AfficheItem(game,self.x-(self.game.WIN_WIDTH/2)+10,self.y-(self.game.WIN_HEIGHT/2)+395)
         self.afficheequipped = AfficheEquipped(game,self.x-(self.game.WIN_WIDTH/2)+10,self.y-(self.game.WIN_HEIGHT/2)+240)
 
+
+        self.derniertemps = pygame.time.get_ticks()
         self.lasttaketimer = pygame.time.get_ticks()
         self.lastdrinktimer = pygame.time.get_ticks()
-        self.lasttrentesec = pygame.time.get_ticks()
+        self.timeaccesories = pygame.time.get_ticks()
         self.time = pygame.time.get_ticks()
 
         self.facing= 'down'
@@ -169,8 +171,7 @@ class Player(pygame.sprite.Sprite):
         self.movement()
         self.animate()
         self.necklaceemerald()
-
-        print(self.puissance)
+        self.ringemerald()
 
         self.rect.x += self.x_change
         self.rect.y += self.y_change
@@ -178,12 +179,27 @@ class Player(pygame.sprite.Sprite):
         self.x_change = 0
         self.y_change = 0
 
-    def trentesectime(self):
-        return self.lasttrentesec > pygame.time.get_ticks() - 30000
+    def invincibility(self):
+        if self.necklace.ID == Necklace_saphir and self.ring.ID == Ring_saphir:
+            return self.derniertemps > pygame.time.get_ticks() - 1550
+        elif self.necklace.ID == Necklace_saphir and self.ring.ID != Ring_saphir:
+            return self.derniertemps > pygame.time.get_ticks() - 1700
+        elif self.necklace.ID != Necklace_saphir and self.ring.ID == Ring_saphir:
+            return self.derniertemps > pygame.time.get_ticks() - 1850
+        elif self.necklace.ID != Necklace_saphir and self.ring.ID != Ring_saphir:
+            return self.derniertemps > pygame.time.get_ticks() - 2000
+
+    def timeaccesorie(self,time):
+        return self.timeaccesories > pygame.time.get_ticks() - time
     def necklaceemerald(self):
         if self.necklace.ID == Necklace_emerald:
-            if self.trentesectime() == False:
-                self.lasttrentesec = pygame.time.get_ticks()
+            if self.timeaccesorie(30000) == False:
+                self.timeaccesories = pygame.time.get_ticks()
+                self.healthbar.heal2(1)
+    def ringemerald(self):
+        if self.ring.ID == Ring_emerald:
+            if self.timeaccesorie(60000) == False:
+                self.timeaccesories = pygame.time.get_ticks()
                 self.healthbar.heal2(1)
                 
     def movement(self):

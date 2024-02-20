@@ -706,11 +706,9 @@ class PlayerHitbox(pygame.sprite.Sprite):
         self.x_change = 0
         self.y_change = 0
 
-    def invincibility(self):
-        return self.derniertemps > pygame.time.get_ticks() - 2000
     
     def speed(self):
-        if self.invincibility() == False:
+        if self.game.player.invincibility() == False:
             self.game.player.vitesse = 1
         else:
             if self.game.player.vitesse3 >= 1.2:
@@ -733,9 +731,9 @@ class PlayerHitbox(pygame.sprite.Sprite):
     def collide_enemy(self):
         hits = pygame.sprite.spritecollide(self, self.game.enemies, False)
         if hits:
-            if self.invincibility() == False:
+            if self.game.player.invincibility() == False:
                 self.game.player.healthbar.take_damage(1+self.game.multiplicateur_difficulte_attack_enemies)
-                self.derniertemps = pygame.time.get_ticks()
+                self.game.player.derniertemps = pygame.time.get_ticks()
                 print(self.derniertemps)
             
             if self.game.player.healthbar.health <= 0 :
@@ -746,9 +744,9 @@ class PlayerHitbox(pygame.sprite.Sprite):
         hits = pygame.sprite.spritecollide(self, self.game.attacksenemy, False)
         if hits:
             print("hit")
-            if self.invincibility() == False:
+            if self.game.player.invincibility() == False:
                 self.game.player.healthbar.take_damage(self.game.player.enemyattacks)
-                self.derniertemps = pygame.time.get_ticks()
+                self.game.player.derniertemps = pygame.time.get_ticks()
                 print(self.derniertemps)
             
             if self.game.player.healthbar.health <= 0 :

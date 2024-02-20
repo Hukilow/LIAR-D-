@@ -72,13 +72,14 @@ Boss : 2 ; 250 ; (2;2;2)
 
 Necklace_copper : Il est cassé
 Necklace_rubis : +2 puissance
-Necklace_saphir : vision x1.5
+Necklace_saphir : +300 ms invulnérabilité
 Necklace_emerald : recup 1 pv toutes les 30 secondes
 
 Ring_copper : a capout
 Ring_rubis : +1 puissance
-Ring_saphir : vision + 50
-Ring_emerald : +3pv
+Ring_saphir : +150 ms invulnérabilité
+Ring_emerald : recup 1 pv toutes les 60 secondes
+
 
                                         SPAWN DE COFFRES
 
