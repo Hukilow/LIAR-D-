@@ -927,17 +927,14 @@ class PlayerHitbox(pygame.sprite.Sprite):
         keys = pygame.key.get_pressed()
 
         if hit and keys[pygame.K_SPACE]:
-            """if self.monter_descendretime() == False:
+            if self.monter_descendretime() == False:
                 for sprite in self.game.all_sprites:
                     if (self.game.player.spritedujoueur != sprite) and (self.game.player.light.spritedelalumiere != sprite) and (self.game.player.healthbar.spriteduhealthbar != sprite) and (self.game.player.etage.spriteduetage != sprite) and (self.game.player.potion.spriteduhubpotion!= sprite) and (self.game.player.epee.spriteduEpeeHUD != sprite) and (self.game.player.helmet.spriteduCasqueHUD != sprite) and (self.game.player.chest.spriteduChestHUD != sprite) and (self.game.player.pants.spriteduPantsHUD != sprite) and (self.game.player.boots.spritedesBootsHUD != sprite) and (self.game.player.necklace.spriteNecklaceHUD != sprite) and (self.game.player.ring.spriteRingHUD != sprite) and (self.game.player.ranged.spriteRangeHUD != sprite) and (self.game.player.afficheequipped.spriteduafficheequipped != sprite) and (self.game.player.afficheitem.spriteduafficheitem != sprite) and (self.spriteduplayerhitbox != sprite):
                         sprite.kill()
                 self.descendre_etage()
-                self.derniertempsechelle = pygame.time.get_ticks()"""
+                self.derniertempsechelle = pygame.time.get_ticks()
             self.game.player.etage.descendre()
-            for sprite in self.game.all_sprites:
-                if (self.game.player.spritedujoueur != sprite) and (self.game.player.light.spritedelalumiere != sprite) and (self.game.player.healthbar.spriteduhealthbar != sprite) and (self.game.player.etage.spriteduetage != sprite) and (self.game.player.potion.spriteduhubpotion!= sprite) and (self.game.player.epee.spriteduEpeeHUD != sprite) and (self.game.player.helmet.spriteduCasqueHUD != sprite) and (self.game.player.chest.spriteduChestHUD != sprite) and (self.game.player.pants.spriteduPantsHUD != sprite) and (self.game.player.boots.spritedesBootsHUD != sprite) and (self.game.player.necklace.spriteNecklaceHUD != sprite) and (self.game.player.ring.spriteRingHUD != sprite) and (self.game.player.ranged.spriteRangeHUD != sprite) and (self.game.player.afficheequipped.spriteduafficheequipped != sprite) and (self.game.player.afficheitem.spriteduafficheitem != sprite) and (self.spriteduplayerhitbox != sprite):
-                    sprite.kill()
-            self.game.createTilemapboss(tilemap_boss, False)
+
 
         if hit2 and keys[pygame.K_SPACE]:
             if self.monter_descendretime() == False:
@@ -952,7 +949,7 @@ class PlayerHitbox(pygame.sprite.Sprite):
             for sprite in self.game.all_sprites:
                 if (self.game.player.spritedujoueur != sprite) and (self.game.player.light.spritedelalumiere != sprite) and (self.game.player.healthbar.spriteduhealthbar != sprite) and (self.game.player.etage.spriteduetage != sprite) and (self.game.player.potion.spriteduhubpotion!= sprite) and (self.game.player.epee.spriteduEpeeHUD != sprite) and (self.game.player.helmet.spriteduCasqueHUD != sprite) and (self.game.player.chest.spriteduChestHUD != sprite) and (self.game.player.pants.spriteduPantsHUD != sprite) and (self.game.player.boots.spritedesBootsHUD != sprite) and (self.game.player.necklace.spriteNecklaceHUD != sprite) and (self.game.player.ring.spriteRingHUD != sprite) and (self.game.player.ranged.spriteRangeHUD != sprite) and (self.game.player.afficheequipped.spriteduafficheequipped != sprite) and (self.game.player.afficheitem.spriteduafficheitem != sprite) and (self.spriteduplayerhitbox != sprite):
                     sprite.kill()
-            self.game.createTilemapboss(tilemap_boss, False)
+            self.game.createTilemapboss(tilemap_boss_phase1, False)
 
     def descendre_etage(self):
             if self.game.player.etage.etageici == 1:

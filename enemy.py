@@ -2218,7 +2218,7 @@ self.game.impactpurple_spritesheet.get_sprite(320, 704, 64, 64),]
             if self.invincibility() == False:
                 self.healthbar.take_damage(self.game.player.puissance)
                 self.derniertemps = pygame.time.get_ticks()
-            if self.healthbar.health <= 187:
+            if self.healthbar.health <= 175:
                 if self.phase1 == True:
                     self.wait = True
                     xatt = self.rect.x
@@ -2232,20 +2232,8 @@ self.game.impactpurple_spritesheet.get_sprite(320, 704, 64, 64),]
                     self.phase2 = True
                     self.phase1 = False
 
-            if self.healthbar.health <= 125:
-                if self.phase2 == True:
-                    self.wait = True
-                    xatt = self.rect.x
-                    yatt = self.rect.y+22
-                    self.derniertemps4 = pygame.time.get_ticks()
-                    self.derniertemps1 = pygame.time.get_ticks() 
-                    self.game.player.enemyattacks = 2+self.game.multiplicateur_difficulte_attack_enemies 
-                    self.derniertempsloading = pygame.time.get_ticks()
-                    AttackEnemy(self.game,xatt,yatt,64,64,64,self.facing,self.teleportation_right,self.teleportation_left,self.teleportation_up,self.teleportation_down)
-                    self.invocation_times = pygame.time.get_ticks()
-                    self.phase2 = False
 
-            if self.healthbar.health <= 62:
+            if self.healthbar.health <= 90:
                 if self.phase2 == True:
                     self.wait = True
                     xatt = self.rect.x
@@ -2268,7 +2256,10 @@ self.game.impactpurple_spritesheet.get_sprite(320, 704, 64, 64),]
             for sprite in self.game .all_sprites:
                 if (self.game.player.spritedujoueur != sprite) and (self.spriteduboss != sprite) and (self.game.player.light.spritedelalumiere != sprite) and (self.game.player.healthbar.spriteduhealthbar != sprite) and (self.game.player.etage.spriteduetage != sprite) and (self.game.player.potion.spriteduhubpotion!= sprite) and (self.game.player.epee.spriteduEpeeHUD != sprite) and (self.game.player.helmet.spriteduCasqueHUD != sprite) and (self.game.player.chest.spriteduChestHUD != sprite) and (self.game.player.pants.spriteduPantsHUD != sprite) and (self.game.player.boots.spritedesBootsHUD != sprite) and (self.game.player.necklace.spriteNecklaceHUD != sprite) and (self.game.player.ring.spriteRingHUD != sprite) and (self.game.player.ranged.spriteRangeHUD != sprite) and (self.game.player.afficheequipped.spriteduafficheequipped != sprite) and (self.game.player.afficheitem.spriteduafficheitem != sprite) and (self.game.hitbox.spriteduplayerhitbox != sprite):
                     sprite.kill()
-            self.newmap = allbossmaps.pop(allbossmaps.index(random.choice(allbossmaps)))
+            if self.healthbar.health <= 187:
+                self.newmap = MapsBossPhase2.pop(MapsBossPhase2.index(random.choice(MapsBossPhase2)))
+            if self.healthbar.health <= 90 and self.phase2:
+                self.newmap = MapsBossPhase3.pop(MapsBossPhase3.index(random.choice(MapsBossPhase3)))
             self.game.createTilemapboss(self.newmap,True)
             self.wait = False
 

@@ -486,7 +486,7 @@ class Game():
         elif EtageSave > 1 < 7:
             self.createTilemap2(tilemap,"monter")
         elif EtageSave == 7:
-            self.createTilemapboss(tilemap_boss,False)
+            self.createTilemapboss(tilemap_boss_phase1,False)
 
         self.player.healthbar.health = load_data[7]
         self.player.healthbar.maxhealth = load_data[8]
