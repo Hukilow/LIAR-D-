@@ -720,10 +720,12 @@ class Game():
             #Crédits
             Credits = self.font.render("Crédits", True, WHITE)
             Credits_rect = title.get_rect(x = self.WIN_WIDTH/2-50, y = self.WIN_HEIGHT/4)
-            MainDevelopper = self.font.render("Main Developper : Hukilow", True, WHITE)
-            MainDevelopper_rect = title.get_rect(x = self.WIN_WIDTH/3, y = self.WIN_HEIGHT/3)
-            SideDevelopper = self.font.render("Side Developper : Midori", True, WHITE)
-            SideDevelopper_rect = title.get_rect(x = self.WIN_WIDTH/3, y = self.WIN_HEIGHT/3+50)
+            Developper1 = self.font.render("Developper : Hukilow", True, WHITE)
+            Developper1_rect = title.get_rect(x = self.WIN_WIDTH/3, y = self.WIN_HEIGHT/3)
+            Developper2 = self.font.render("Developper : Midori", True, WHITE)
+            Developper2_rect = title.get_rect(x = self.WIN_WIDTH/3, y = self.WIN_HEIGHT/3+50)
+            Music = self.font.render("Music : Slidup", True, WHITE)
+            Music_rect = title.get_rect(x = self.WIN_WIDTH/3, y = self.WIN_HEIGHT/3+100)
 
             Rectangle = pygame.Surface((210,60),pygame.SRCALPHA)
             pygame.draw.rect(Rectangle, WHITE, pygame.Rect(0, 0, 210, 60))
@@ -863,8 +865,9 @@ class Game():
                 self.screen.blit(self.blackscreen,(0,0))
                 self.screen.blit(Credits, Credits_rect)
                 self.screen.blit(quit_button.image, quit_button.rect)
-                self.screen.blit(MainDevelopper, MainDevelopper_rect)
-                self.screen.blit(SideDevelopper, SideDevelopper_rect)
+                self.screen.blit(Developper1, Developper1_rect)
+                self.screen.blit(Developper2, Developper2_rect)
+                self.screen.blit(Music, Music_rect)
 
 
             if self.screen_option:
