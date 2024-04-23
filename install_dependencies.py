@@ -1,5 +1,5 @@
 import subprocess
-from pkg_resources import parse_version
+
 
 def verify_requirements():
     try:

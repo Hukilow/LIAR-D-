@@ -8,10 +8,12 @@ class Game():
     def __init__(self):
         pygame.init()
         pygame.display.set_caption("LIAR(D)")
-        
+        pygame.mixer.init()
+        pygame.mixer.music.load("musique/Faint_glow.mp3")
+        pygame.mixer.music.play(99)
         if os.stat("Saves/config.dat").st_size == 0:   
             self.WIN_WIDTH = 1200
-            self.WIN_HEIGHT = 800
+            self.WIN_HEIGHT = 675
             self.screen_size = (self.WIN_WIDTH,self.WIN_HEIGHT)
             self.screen = pygame.display.set_mode((self.screen_size[0],self.screen_size[1]),pygame.RESIZABLE)
             self.fullscreen = False
@@ -65,7 +67,7 @@ class Game():
         self.attackwintersballad_spritesheet = Spritesheet('img/Attacks/wintersballadattacks.png')
         self.attackmaid_spritesheet = Spritesheet('img/Attacks/whiteslashesgroup.png')
         self.intro_background = pygame.image.load('img/introbackground.jpg')
-        self.game_overbackground = pygame.image.load('img/gameover.jpg')
+        self.game_overbackground = pygame.image.load('img/mario.jpg')
         self.health_spritesheet = Spritesheet('img/Health/chaises.png')
         self.allchests_spritesheet = Spritesheet('img/coffres/allchests.png')
         self.etage_spritesheet = Spritesheet('img/Etage/Floor4.png')
@@ -360,7 +362,7 @@ class Game():
         if change == True:
             self.boss.rect.x = coordonnesboss[0] * TILESIZE
             self.boss.rect.y = (coordonnesboss[1] * TILESIZE)
-        self.player.healthbar.rect.x = (coordonnes[0] * TILESIZE) -(self.WIN_WIDTH/2)+10
+        self.player.    bar.rect.x = (coordonnes[0] * TILESIZE) -(self.WIN_WIDTH/2)+10
         self.player.healthbar.rect.y = (coordonnes[1] * TILESIZE) +(self.WIN_HEIGHT/2)-40
         self.player.etage.rect.x = (coordonnes[0] * TILESIZE) +(self.WIN_WIDTH/2)-180
         self.player.etage.rect.y = (coordonnes[1] * TILESIZE) -(self.WIN_HEIGHT/2)+20
@@ -438,6 +440,9 @@ class Game():
             pickle.dump(data, fichier)
 
     def loadsave(self):
+        pygame.mixer.music.stop()
+        pygame.mixer.music.load("musique/princess_quest.mp3")
+        pygame.mixer.music.play(99)
         with open('Saves/save1.dat', 'rb') as fichier:
             load_data = pickle.load(fichier)
 
@@ -546,6 +551,7 @@ class Game():
 
 
     def new(self):
+        
         self.playing = True
         self.win = False
         self.all_sprites = pygame.sprite.LayeredUpdates() #toutes les apparences
@@ -575,10 +581,10 @@ class Game():
         self.escaliercasse = pygame.sprite.LayeredUpdates()
         self.lave = pygame.sprite.LayeredUpdates()
         self.caillouxgroup = pygame.sprite.LayeredUpdates()
-
         self.all_maps = All_maps()      
         self.createTilemap(self.all_maps.tilemap1)
         self.save()
+        
     
     def events(self):
         for event in pygame.event.get():
@@ -588,6 +594,7 @@ class Game():
                 self.running = False
 
             if event.type == pygame.MOUSEBUTTONDOWN and event.button == 1:
+                pygame.mixer.Channel(0).play(pygame.mixer.Sound('musique/sword.mp3'))
                 Attack(self)
 
         
@@ -639,6 +646,10 @@ class Game():
         for sprite in self.all_sprites:
             sprite.kill()
 
+        pygame.mixer.music.stop()
+        pygame.mixer.music.load("musique/aaaaa.mp3")
+        pygame.mixer.music.play()
+
         while self.running:
             for event in pygame.event.get():
                 if event.type == pygame.QUIT:
@@ -648,6 +659,9 @@ class Game():
                 mouse_pressed = pygame.mouse.get_pressed()
 
                 if restart_button.is_pressed(mouse_pos, mouse_pressed):
+                    pygame.mixer.music.stop()
+                    pygame.mixer.music.load("musique/princess_quest.mp3")
+                    pygame.mixer.music.play(99)
                     self.new()
                     self.main()
                 
@@ -800,6 +814,9 @@ class Game():
                         intro = False
                         self.new()
                         self.confirmation = False
+                        pygame.mixer.music.stop()
+                        pygame.mixer.music.load("musique/princess_quest.mp3")
+                        pygame.mixer.music.play(99)
                     elif no_button.is_pressed(mouse_pos, mouse_pressed):
                         self.confirmation = False
 
@@ -808,6 +825,7 @@ class Game():
                     self.screen.blit(continue_button.image, continue_button.rect)
                                                     
                     if continue_button.is_pressed(mouse_pos, mouse_pressed):
+                        pygame.mixer.music.stop()
                         intro = False
                         self.loadsave()
                         self.continueanimation = True
