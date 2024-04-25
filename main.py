@@ -13,7 +13,7 @@ class Game():
         self.la_musique = "musique/" + les_musique[random.randint(0,len(les_musique)-1)]
         pygame.mixer.Channel(0).set_volume(0.3)
         pygame.mixer.music.load("musique/Faint_glow.mp3")
-        pygame.mixer.music.play(99)
+        pygame.mixer.music.play(98)
         if os.stat("Saves/config.dat").st_size == 0:   
             self.WIN_WIDTH = 1200
             self.WIN_HEIGHT = 675
