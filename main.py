@@ -9,6 +9,9 @@ class Game():
         pygame.init()
         pygame.display.set_caption("LIAR(D)")
         pygame.mixer.init()
+        les_musique = ["princess_quest.mp3","princess_quest.mp3","princess_quest.mp3","princess_quest.mp3","gros_banger2", "gros_banger.mp3"]
+        self.la_musique = "musique/" + les_musique[random.randint(0,len(les_musique)-1)]
+        pygame.mixer.Channel(0).set_volume(0.3)
         pygame.mixer.music.load("musique/Faint_glow.mp3")
         pygame.mixer.music.play(99)
         if os.stat("Saves/config.dat").st_size == 0:   
@@ -51,6 +54,8 @@ class Game():
         self.continueanimation = False
         self.writing = False
         self.screen_credits = False
+        self.musique = True
+        self.bruitage = True
 
         self.derniertemps = pygame.time.get_ticks()
         self.derniertemps1 = pygame.time.get_ticks()
@@ -66,8 +71,11 @@ class Game():
         self.attackgreatsword_spritesheet = Spritesheet('img/Attacks/yellowslashesgroup.png')
         self.attackwintersballad_spritesheet = Spritesheet('img/Attacks/wintersballadattacks.png')
         self.attackmaid_spritesheet = Spritesheet('img/Attacks/whiteslashesgroup.png')
-        self.intro_background = pygame.image.load('img/introbackground.jpg')
-        self.game_overbackground = pygame.image.load('img/mario.jpg')
+        self.intro_background = pygame.image.load('img/introbackground2.gif')
+        self.game_overbackground = Image.open('img/gameover2.jpg')
+        self.game_overbackground = self.game_overbackground.resize((self.WIN_WIDTH, self.WIN_HEIGHT))
+        self.game_overbackground.save('img/gameover2.jpg')
+        self.game_overbackground = pygame.image.load('img/gameover2.jpg')
         self.health_spritesheet = Spritesheet('img/Health/chaises.png')
         self.allchests_spritesheet = Spritesheet('img/coffres/allchests.png')
         self.etage_spritesheet = Spritesheet('img/Etage/Floor4.png')
@@ -441,7 +449,7 @@ class Game():
 
     def loadsave(self):
         pygame.mixer.music.stop()
-        pygame.mixer.music.load("musique/princess_quest.mp3")
+        pygame.mixer.music.load(self.la_musique)
         pygame.mixer.music.play(99)
         with open('Saves/save1.dat', 'rb') as fichier:
             load_data = pickle.load(fichier)
@@ -492,6 +500,12 @@ class Game():
             self.createTilemap2(tilemap,"monter")
         elif EtageSave == 7:
             self.createTilemapboss(tilemap_boss_phase1,False)
+            if self.musique:
+                pygame.mixer.music.stop()
+                pygame.mixer.music.set_volume(1)
+                pygame.mixer.music.load("sonic.mp3")
+                pygame.mixer.music.play(99)
+
 
         self.player.healthbar.health = load_data[7]
         self.player.healthbar.maxhealth = load_data[8]
@@ -594,7 +608,8 @@ class Game():
                 self.running = False
 
             if event.type == pygame.MOUSEBUTTONDOWN and event.button == 1:
-                pygame.mixer.Channel(0).play(pygame.mixer.Sound('musique/sword.mp3'))
+                if self.bruitage:
+                    pygame.mixer.Channel(0).play(pygame.mixer.Sound('musique/sword.mp3'))
                 Attack(self)
 
         
@@ -645,10 +660,11 @@ class Game():
 
         for sprite in self.all_sprites:
             sprite.kill()
-
-        pygame.mixer.music.stop()
-        pygame.mixer.music.load("musique/aaaaa.mp3")
-        pygame.mixer.music.play()
+        if self.musique:
+            pygame.mixer.music.stop()
+            pygame.mixer.music.set_volume(0.7)
+            pygame.mixer.music.load("musique/game_over.mp3")
+            pygame.mixer.music.play()
 
         while self.running:
             for event in pygame.event.get():
@@ -659,14 +675,16 @@ class Game():
                 mouse_pressed = pygame.mouse.get_pressed()
 
                 if restart_button.is_pressed(mouse_pos, mouse_pressed):
-                    pygame.mixer.music.stop()
-                    pygame.mixer.music.load("musique/princess_quest.mp3")
-                    pygame.mixer.music.play(99)
+                    if self.musique:
+                        pygame.mixer.music.stop()
+                        pygame.mixer.music.set_volume(1)
+                        pygame.mixer.music.load(self.la_musique)
+                        pygame.mixer.music.play(99)
                     self.new()
                     self.main()
                 
                 self.screen.blit(self.game_overbackground, (0,0))
-                self.screen.blit(text, text_rect)
+                #self.screen.blit(text, text_rect) car le background le dis déjàdq
                 self.screen.blit(restart_button.image, restart_button.rect)
                 self.all_stats_screen()
                 self.clock.tick(FPS)
@@ -679,10 +697,10 @@ class Game():
             self.blackscreen = pygame.Surface((self.WIN_WIDTH,self.WIN_HEIGHT))
             self.WIN_WIDTH = pygame.display.get_surface().get_width()
             self.WIN_HEIGHT = pygame.display.get_surface().get_height()
-            self.intro_background = Image.open('img/introbackground.jpg')
+            self.intro_background = Image.open('img/introbackground2.gif')
             self.intro_background = self.intro_background.resize((self.WIN_WIDTH, self.WIN_HEIGHT))
-            self.intro_background.save('img/introbackground.jpg')
-            self.intro_background = pygame.image.load('img/introbackground.jpg')
+            self.intro_background.save('img/introbackground2.gif')
+            self.intro_background = pygame.image.load('img/introbackground2.gif')
             title = self.font.render('Lost In A Random (dungeon)', True, BLACK)
             title_rect = title.get_rect(x = 100, y = 30)
             Screen_size = self.font.render('Screen size :', True, WHITE)
@@ -716,7 +734,10 @@ class Game():
             pygame.draw.rect(ConfirmationRectangle, WHITE, pygame.Rect(0, 0, 110, 60))
             ConfirmationRectangleYes_rect = title.get_rect(x = self.WIN_WIDTH/2-130, y = self.WIN_HEIGHT/2+65)
             ConfirmationRectangleNo_rect = title.get_rect(x = self.WIN_WIDTH/2+30, y = self.WIN_HEIGHT/2+65)
-
+            musique = self.font.render("Musique :", True, WHITE)
+            musique_rect = title.get_rect(x = self.WIN_WIDTH/2-225, y = self.WIN_HEIGHT/2+5 )
+            bruitage = self.font.render("Bruitage :", True, WHITE)
+            bruitage_rect = title.get_rect(x = self.WIN_WIDTH/2-225, y = self.WIN_HEIGHT/1.5+5 )
             #Crédits
             Credits = self.font.render("Crédits", True, WHITE)
             Credits_rect = title.get_rect(x = self.WIN_WIDTH/2-50, y = self.WIN_HEIGHT/4)
@@ -730,6 +751,14 @@ class Game():
             Rectangle = pygame.Surface((210,60),pygame.SRCALPHA)
             pygame.draw.rect(Rectangle, WHITE, pygame.Rect(0, 0, 210, 60))
             Screen_size_button = Button(self.WIN_WIDTH/2, self.WIN_HEIGHT/3-8 , 200,50 ,WHITE ,WHITE ,'' ,32)
+            if self.musique:
+                musique_button = Button(self.WIN_WIDTH/2+5, self.WIN_HEIGHT/2 ,40 ,40 ,WHITE, WHITE,'V' ,32)
+            else:
+                musique_button = Button(self.WIN_WIDTH/2+5, self.WIN_HEIGHT/2 ,40 ,40 ,WHITE, BLACK,'X' ,32)
+            if self.bruitage:
+                bruitage_button = Button(self.WIN_WIDTH/2+5, self.WIN_HEIGHT/1.5 ,40 ,40 ,WHITE, WHITE,'V' ,32)
+            else:
+                bruitage_button = Button(self.WIN_WIDTH/2+5, self.WIN_HEIGHT/1.5 ,40 ,40 ,WHITE, BLACK,'X' ,32)
             if self.fullscreen:
                 Fullscreen_button = Button(self.WIN_WIDTH/2+5, self.WIN_HEIGHT/2-220 ,40 ,40 ,WHITE, WHITE,'' ,32)
             else:
@@ -816,9 +845,10 @@ class Game():
                         intro = False
                         self.new()
                         self.confirmation = False
-                        pygame.mixer.music.stop()
-                        pygame.mixer.music.load("musique/princess_quest.mp3")
-                        pygame.mixer.music.play(99)
+                        if self.musique:
+                            pygame.mixer.music.stop()
+                            pygame.mixer.music.load(self.la_musique)
+                            pygame.mixer.music.play(99)
                     elif no_button.is_pressed(mouse_pos, mouse_pressed):
                         self.confirmation = False
 
@@ -894,6 +924,24 @@ class Game():
                     self.WIN_WIDTH,self.WIN_HEIGHT = 1280,800
                     self.text = f'{self.WIN_WIDTH}x{self.WIN_HEIGHT}' 
                     self.screen = pygame.display.set_mode((self.WIN_WIDTH,self.WIN_HEIGHT),pygame.RESIZABLE)
+                if musique_button.is_pressed(mouse_pos, mouse_pressed):
+                    if self.clicktime() == False:
+                        if self.musique:
+                            self.musique = False
+                            pygame.mixer.music.pause()
+                        else:
+                            self.musique = True
+                            pygame.mixer.music.unpause()
+                        self.derniertemps = pygame.time.get_ticks()
+                if bruitage_button.is_pressed(mouse_pos, mouse_pressed):
+                    if self.clicktime() == False:
+                        if self.bruitage:
+                            self.bruitage = False
+                            pygame.mixer.Channel(0).set_volume(0)
+                        else:
+                            self.bruitage = True
+                            pygame.mixer.Channel(0).set_volume(0.3)
+                        self.derniertemps = pygame.time.get_ticks()
                 self.screen.blit(self.blackscreen,(0,0))
                 self.screen.blit(reset_button.image, reset_button.rect)
                 self.screen.blit(save_button.image, save_button.rect)
@@ -901,6 +949,10 @@ class Game():
                 self.screen.blit(Fullscreen, Fullscreen_rect)
                 self.screen.blit(Fullscreen_button.image, Fullscreen_button.rect)
                 self.screen.blit(quit_button.image, quit_button.rect)
+                self.screen.blit(musique, musique_rect)
+                self.screen.blit(musique_button.image, musique_button.rect)
+                self.screen.blit(bruitage, bruitage_rect)
+                self.screen.blit(bruitage_button.image, bruitage_button.rect)
 
             if not self.fullscreen and self.screen_option:
                 if Screen_size_button.is_pressed(mouse_pos, mouse_pressed):
@@ -981,6 +1033,10 @@ class Game():
 
     def win_screen(self):
         if self.win == True:
+            if self.musique:
+                pygame.mixer.music.stop()
+                pygame.mixer.music.load("win.mp3")
+                pygame.mixer.music.play(99)
             text = self.font.render('You won lol', True, WHITE)
             text_rect = text.get_rect(center=(self.WIN_WIDTH/2, 100))
 
@@ -1003,6 +1059,10 @@ class Game():
                         self.multiplicateur_difficulte_hp -= 0.3
                         self.difficulty_upgrade = True
                         self.nombre_de_win += 1
+                        if self.musique:
+                            pygame.mixer.music.stop()
+                            pygame.mixer.music.load(self.la_musique)
+                            pygame.mixer.music.play(99)
                         self.new()
                         self.main()
 
@@ -1010,6 +1070,10 @@ class Game():
                         self.multiplicateur_difficulte_hp_enemies += 0.3
                         self.difficulty_upgrade = True
                         self.nombre_de_win += 1
+                        if self.musique:
+                            pygame.mixer.music.stop()
+                            pygame.mixer.music.load(self.la_musique)
+                            pygame.mixer.music.play(99)
                         self.new()
                         self.main()
 
@@ -1017,6 +1081,10 @@ class Game():
                         self.multiplicateur_difficulte_attack_enemies += 1
                         self.difficulty_upgrade = True
                         self.nombre_de_win += 1
+                        if self.musique:
+                            pygame.mixer.music.stop()
+                            pygame.mixer.music.load(self.la_musique)
+                            pygame.mixer.music.play(99)
                         self.new()
                         self.main()
                         
