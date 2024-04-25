@@ -9,9 +9,11 @@ class Game():
         pygame.init()
         pygame.display.set_caption("LIAR(D)")
         pygame.mixer.init()
-        les_musique = ["princess_quest.mp3","princess_quest.mp3","princess_quest.mp3","princess_quest.mp3","gros_banger2", "gros_banger.mp3"]
+        les_musique = ["princess_quest.mp3","princess_quest.mp3","princess_quest.mp3","princess_quest.mp3","cold spaghetti.mp3","hot spaghetti.mp3","gros_banger2.mp3", "gros_banger.mp3"]
         self.la_musique = "musique/" + les_musique[random.randint(0,len(les_musique)-1)]
         pygame.mixer.Channel(0).set_volume(0.3)
+        pygame.mixer.Channel(1).set_volume(0.7)
+        pygame.mixer.music.set_volume(0.7)
         pygame.mixer.music.load("musique/Faint_glow.mp3")
         pygame.mixer.music.play(98)
         if os.stat("Saves/config.dat").st_size == 0:   
@@ -938,9 +940,11 @@ class Game():
                         if self.bruitage:
                             self.bruitage = False
                             pygame.mixer.Channel(0).set_volume(0)
+                            pygame.mixer.Channel(1).set_volume(0)
                         else:
                             self.bruitage = True
                             pygame.mixer.Channel(0).set_volume(0.3)
+                            pygame.mixer.Channel(1).set_volume(0.5)
                         self.derniertemps = pygame.time.get_ticks()
                 self.screen.blit(self.blackscreen,(0,0))
                 self.screen.blit(reset_button.image, reset_button.rect)
