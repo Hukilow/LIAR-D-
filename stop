@@ -1,0 +1,206 @@
+[33mcommit c9207506dc14140012690f06107d799d71bf9a58[m[33m ([m[1;36mHEAD[m[33m -> [m[1;32mmain[m[33m, [m[1;31morigin/main[m[33m, [m[1;31morigin/HEAD[m[33m)[m
+Author: slidup <bisiauxambroise@gmail.com>
+Date:   Thu Apr 25 03:30:51 2024 +0200
+
+    bha là le jeu et enfin jouable
+
+[33mcommit 89f062143d3f621f94b361e5fa1dcb9d6c8e1e39[m
+Author: Hukilow <yazox.vitaly@gmail.com>
+Date:   Tue Apr 23 23:08:32 2024 +0200
+
+    modif credits
+
+[33mcommit b0ea9a899cdc0a1d66b4eaf29b31fc8895bd3081[m
+Author: slidup <bisiauxambroise@gmail.com>
+Date:   Tue Apr 23 22:16:39 2024 +0200
+
+    ajout musique
+
+[33mcommit d83fad056000ee0340433453c9aa03d40934f1b0[m
+Author: Hukilow <yazox.vitaly@gmail.com>
+Date:   Wed Apr 17 11:57:41 2024 +0200
+
+    save before music
+
+[33mcommit 20089e5e6364c39a5bfce44114064ac0682c5d1b[m
+Author: Hukilow <yazox.vitaly@gmail.com>
+Date:   Tue Feb 20 19:21:49 2024 +0100
+
+    fin du dev
+
+[33mcommit 856488dd185adc06585a579da4cf87ad89cdaee8[m
+Author: Hukilow <yazox.vitaly@gmail.com>
+Date:   Tue Feb 20 11:34:00 2024 +0100
+
+    add rings
+
+[33mcommit c0e0c70cb0a60a42482339849134381bf6bd919b[m
+Author: Hukilow <yazox.vitaly@gmail.com>
+Date:   Tue Dec 19 16:29:54 2023 +0100
+
+    update balancing
+
+[33mcommit 4f2480a73dd87fac955c28e11d484987e8838951[m
+Author: Hukilow <yazox.vitaly@gmail.com>
+Date:   Sun Dec 10 17:20:11 2023 +0100
+
+    collier, taux de spawn ,stats
+
+[33mcommit 6b0329934ae9fd84e00566b5d581f019067a3ac6[m
+Author: Hukilow <yazox.vitaly@gmail.com>
+Date:   Sat Dec 9 20:34:13 2023 +0100
+
+    add 3 enemy and random
+
+[33mcommit 528ae337eba3f2851464254d30056400f26b4d8e[m
+Author: Hukilow <yazox.vitaly@gmail.com>
+Date:   Sat Dec 2 17:01:32 2023 +0100
+
+    adding multicolor_man enemy
+
+[33mcommit 539fae510296b2629bab3531a12020bb529f0bad[m
+Author: Hukilow <yazox.vitaly@gmail.com>
+Date:   Fri Dec 1 21:11:55 2023 +0100
+
+    adding crédits + lots of weapons
+
+[33mcommit 1628755abfa9e34b44a04a4c7c49d6b31c64a32c[m
+Author: Hukilow <yazox.vitaly@gmail.com>
+Date:   Fri Dec 1 09:29:36 2023 +0100
+
+    MAJ ANGRYMAID
+
+[33mcommit 45b96e177fba74e9d1ef6885368a17954f44934c[m
+Author: Hukilow <yazox.vitaly@gmail.com>
+Date:   Thu Nov 30 14:44:55 2023 +0100
+
+    add verify requirements.txt
+
+[33mcommit 01e7c6c62c4a50b1526e28c9d9b163a1f837ef1c[m
+Author: Hukilow <yazox.vitaly@gmail.com>
+Date:   Thu Nov 30 13:46:06 2023 +0100
+
+    ALL Stats in OVER & WIN screen
+
+[33mcommit 8b0e6357af0e5574cef262424c0ab47b7c739f6a[m
+Author: Hukilow <yazox.vitaly@gmail.com>
+Date:   Wed Nov 29 16:27:18 2023 +0100
+
+    ADD ALL STATS
+
+[33mcommit 5efc5e71b156cea8c575fdcf1bb50a41c1cc4c57[m
+Merge: 9564408 edb73c0
+Author: Hukilow <yazox.vitaly@gmail.com>
+Date:   Mon Nov 27 13:53:40 2023 +0100
+
+    ADD Crimson
+
+[33mcommit 95644080915fc02743abb3e8f61df4011f7e3049[m
+Author: Hukilow <yazox.vitaly@gmail.com>
+Date:   Mon Nov 27 13:46:49 2023 +0100
+
+    ADD CrimsonBlade
+
+[33mcommit edb73c06709b33ccf7ea2d8ea507e0e346609877[m
+Author: Hukilow <138042141+Hukilow@users.noreply.github.com>
+Date:   Thu Nov 23 21:46:18 2023 +0100
+
+    test
+
+[33mcommit b82fcc6ffe50f3b6ff9163c70b64e513f014efd0[m
+Author: slidup <bisiauxambroise@gmail.com>
+Date:   Thu Nov 23 21:21:02 2023 +0100
+
+    les ennemies la et le drop
+
+[33mcommit 6639e90e3b4286eb653180ac685a1397312fa0a4[m
+Author: Ambroise Bisiaux <106353965+slidup@users.noreply.github.com>
+Date:   Thu Nov 23 20:35:37 2023 +0100
+
+    Update enemy.py
+    
+    dfxdvbbdsrxfgvdxgvxbvdfxgbvdxrgbvdgvr
+
+[33mcommit 1aae152ee4ae0a93deba3d38f7947457fab564f5[m
+Author: Hukilow <138042141+Hukilow@users.noreply.github.com>
+Date:   Thu Nov 23 20:03:13 2023 +0100
+
+    Update main.py
+
+[33mcommit ce75b22c56a3baf5c32fcce37dce5f2526f02efc[m
+Author: Hukilow <138042141+Hukilow@users.noreply.github.com>
+Date:   Thu Nov 23 20:01:43 2023 +0100
+
+    Test bot main.py
+
+[33mcommit 39253f0667b01391a3d19f73024999591b23e553[m
+Author: Hukilow <138042141+Hukilow@users.noreply.github.com>
+Date:   Thu Nov 23 19:24:03 2023 +0100
+
+    Update main.py
+
+[33mcommit 9f925749b60275fe04ac17772717f1b4e6bc3b4a[m
+Author: Hukilow <138042141+Hukilow@users.noreply.github.com>
+Date:   Wed Nov 22 15:10:03 2023 +0100
+
+    Update main.py
+
+[33mcommit c110ffebb3a57b2fb7615b9f64af012196932eb6[m
+Author: Hukilow <138042141+Hukilow@users.noreply.github.com>
+Date:   Wed Nov 22 14:09:32 2023 +0100
+
+    Test Update main.py
+
+[33mcommit 7d1ec9d530407ab946d5d99cf64e5075e3a895df[m
+Author: Hukilow <138042141+Hukilow@users.noreply.github.com>
+Date:   Wed Nov 22 14:07:27 2023 +0100
+
+    Test update webhook
+
+[33mcommit 8b6fa601c068cadee85037fc185547ed21552e43[m
+Author: Hukilow <138042141+Hukilow@users.noreply.github.com>
+Date:   Wed Nov 22 14:04:24 2023 +0100
+
+    Update main.py
+
+[33mcommit 0bfd71516fcbcce2a054fbdd59cec28f5e814e74[m
+Author: Hukilow <138042141+Hukilow@users.noreply.github.com>
+Date:   Wed Nov 22 14:02:07 2023 +0100
+
+    Update main.py
+
+[33mcommit dedf9c9bebdb0403649999dab48af48526864570[m
+Author: Hukilow <yazox.vitaly@gmail.com>
+Date:   Wed Nov 22 13:55:38 2023 +0100
+
+    test
+
+[33mcommit 2de88963c578057f6bbf915cb96716118ea21f6d[m
+Author: Hukilow <yazox.vitaly@gmail.com>
+Date:   Sun Nov 19 00:27:02 2023 +0100
+
+    ENDDAY save
+
+[33mcommit ee27b4cc69586473ea1f48550954793cefa2e014[m
+Author: Hukilow <yazox.vitaly@gmail.com>
+Date:   Sun Nov 19 00:11:14 2023 +0100
+
+    test
+
+[33mcommit c85763d14853b49e3c526e1e66fde5f57b591f28[m
+Author: C4lliclès <eliot.midavaine@outlook.com>
+Date:   Sat Nov 18 23:53:55 2023 +0100
+
+    LIAR d-6
+
+[33mcommit 7ff99d1e5c606cdc2f0f9624492566c61f1f10bb[m
+Author: Hukilow <yazox.vitaly@gmail.com>
+Date:   Sat Nov 18 17:45:34 2023 +0100
+
+    First save with GitHub
+
+[33mcommit 2adeae06d6208dfa2440f07b2972dbad75af5176[m
+Author: Hukilow <yazox.vitaly@gmail.com>
+Date:   Sat Nov 18 17:43:36 2023 +0100
+
+    TESTT
