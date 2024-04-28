@@ -679,7 +679,6 @@ class Game():
                 if restart_button.is_pressed(mouse_pos, mouse_pressed):
                     if self.musique:
                         pygame.mixer.music.stop()
-                        pygame.mixer.music.set_volume(1)
                         pygame.mixer.music.load(self.la_musique)
                         pygame.mixer.music.play(99)
                     self.new()
@@ -944,7 +943,7 @@ class Game():
                         else:
                             self.bruitage = True
                             pygame.mixer.Channel(0).set_volume(0.3)
-                            pygame.mixer.Channel(1).set_volume(0.5)
+                            pygame.mixer.Channel(1).set_volume(0.7)
                         self.derniertemps = pygame.time.get_ticks()
                 self.screen.blit(self.blackscreen,(0,0))
                 self.screen.blit(reset_button.image, reset_button.rect)
