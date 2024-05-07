@@ -184,7 +184,7 @@ class PotionHUD(pygame.sprite.Sprite):
         self.image = self.spritenbr[self.nbrpotion]
 
     def update(self):
-
+        self.image = self.spritenbr[self.nbrpotion]
         self.game.screen.blit(self.image,self.posnbr)
 
         self.rect.x += self.x_change
@@ -934,7 +934,6 @@ class PlayerHitbox(pygame.sprite.Sprite):
                         sprite.kill()
                 self.descendre_etage()
                 self.derniertempsechelle = pygame.time.get_ticks()
-            self.game.player.etage.descendre()
 
 
         if hit2 and keys[pygame.K_SPACE]:

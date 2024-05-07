@@ -110,7 +110,7 @@ class Player(pygame.sprite.Sprite):
         self.necklace = NecklaceHUD(game,(self.x-(self.game.WIN_WIDTH/2))+100,(self.y-(self.game.WIN_HEIGHT/2))+110,self.game.equipement_spritesheet.get_sprite(108, 108, 32, 32))
         self.healthbar = HealthBar(game,(self.x-(self.game.WIN_WIDTH/2))+10,(self.y+(self.game.WIN_HEIGHT/2))-40,self.healh,self.healh,True)
         self.etage = Etage(game,self.x+(self.game.WIN_WIDTH/2)-180,self.y-(self.game.WIN_HEIGHT/2)+20,1)
-        self.potion = PotionHUD(game,self.x+(self.game.WIN_WIDTH/2)-82,self.y+(self.game.WIN_HEIGHT/2)-63,0)
+        self.potion = PotionHUD(game,self.x+(self.game.WIN_WIDTH/2)-82,self.y+(self.game.WIN_HEIGHT/2)-63,1)
 
         self.afficheitem = AfficheItem(game,self.x-(self.game.WIN_WIDTH/2)+10,self.y-(self.game.WIN_HEIGHT/2)+395)
         self.afficheequipped = AfficheEquipped(game,self.x-(self.game.WIN_WIDTH/2)+10,self.y-(self.game.WIN_HEIGHT/2)+240)
