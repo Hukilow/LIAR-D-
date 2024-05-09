@@ -2,7 +2,7 @@ from config import *
 from sprites import *
 from install_dependencies import verify_requirements
 from Blocks import Cailloux1,Cailloux2,Cailloux3,Cailloux4,Cailloux5,Cailloux6,Cailloux7,Cailloux8
-
+from HUD import Slider
 
 class Game():
     def __init__(self):
@@ -13,7 +13,6 @@ class Game():
         self.la_musique = "musique/" + les_musique[random.randint(0,len(les_musique)-1)]
         pygame.mixer.Channel(0).set_volume(0.3)
         pygame.mixer.Channel(1).set_volume(0.7)
-        pygame.mixer.music.set_volume(0.6)
         if os.stat("Saves/config.dat").st_size == 0:   
             self.WIN_WIDTH = 1200
             self.WIN_HEIGHT = 675
@@ -22,6 +21,7 @@ class Game():
             self.fullscreen = False
             self.musique = True
             self.bruitage = True
+            self.volume = 0.6
         else:
             with open('Saves/config.dat', 'rb') as fichier:
                 self.load_data = pickle.load(fichier)
@@ -34,9 +34,10 @@ class Game():
             else:
                 self.fullscreen = False
                 self.screen = pygame.display.set_mode((self.screen_size[0],self.screen_size[1]), pygame.RESIZABLE)
-            print(len(self.load_data))
             self.musique = self.load_data[2]
             self.bruitage = self.load_data[3]
+            self.volume = self.load_data[4]
+        pygame.mixer.music.set_volume(self.volume)
         pygame.mixer.music.load("musique/Faint_glow.mp3")
         pygame.mixer.music.play(98)
         if not(self.musique):
@@ -63,6 +64,7 @@ class Game():
         self.continueanimation = False
         self.writing = False
         self.screen_credits = False
+        self.slider = Slider((self.WIN_WIDTH/2+40,self.WIN_HEIGHT/1.5+65),(200,40),0.5,0,1)
 
         self.derniertemps = pygame.time.get_ticks()
         self.derniertemps1 = pygame.time.get_ticks()
@@ -454,7 +456,7 @@ class Game():
             self.screen = pygame.display.set_mode((WIDTH, HEIGHT),pygame.RESIZABLE)
             self.screen_size = (WIDTH,HEIGHT)
         
-        data = (self.screen_size,self.fullscreen,self.musique,self.bruitage)
+        data = (self.screen_size,self.fullscreen,self.musique,self.bruitage,self.volume)
 
         with open("Saves/config.dat", 'wb') as fichier:
             pickle.dump(data, fichier)
@@ -668,7 +670,6 @@ class Game():
             sprite.kill()
         if self.musique:
             pygame.mixer.music.stop()
-            pygame.mixer.music.set_volume(0.7)
             pygame.mixer.music.load("musique/game_over.mp3")
             pygame.mixer.music.play()
 
@@ -742,7 +743,9 @@ class Game():
             musique = self.font.render("Musique :", True, WHITE)
             musique_rect = title.get_rect(x = self.WIN_WIDTH/2-225, y = self.WIN_HEIGHT/2+5 )
             bruitage = self.font.render("Bruitage :", True, WHITE)
-            bruitage_rect = title.get_rect(x = self.WIN_WIDTH/2-225, y = self.WIN_HEIGHT/1.5+5 )
+            bruitage_rect = title.get_rect(x = self.WIN_WIDTH/2-225, y = self.WIN_HEIGHT/1.5-25)
+            volume = self.font.render("Volume :", True, WHITE)
+            volume_rect = title.get_rect(x = self.WIN_WIDTH/2-225, y = self.WIN_HEIGHT/1.5+50)
             #Crédits
             Credits = self.font.render("Crédits", True, WHITE)
             Credits_rect = title.get_rect(x = self.WIN_WIDTH/2-50, y = self.WIN_HEIGHT/4)
@@ -761,9 +764,9 @@ class Game():
             else:
                 musique_button = Button(self.WIN_WIDTH/2+5, self.WIN_HEIGHT/2 ,40 ,40 ,WHITE, BLACK,'X' ,32)
             if self.bruitage:
-                bruitage_button = Button(self.WIN_WIDTH/2+5, self.WIN_HEIGHT/1.5 ,40 ,40 ,WHITE, WHITE,'V' ,32)
+                bruitage_button = Button(self.WIN_WIDTH/2+5, self.WIN_HEIGHT/1.5-30 ,40 ,40 ,WHITE, WHITE,'V' ,32)
             else:
-                bruitage_button = Button(self.WIN_WIDTH/2+5, self.WIN_HEIGHT/1.5 ,40 ,40 ,WHITE, BLACK,'X' ,32)
+                bruitage_button = Button(self.WIN_WIDTH/2+5, self.WIN_HEIGHT/1.5-30 ,40 ,40 ,WHITE, BLACK,'X' ,32)
             if self.fullscreen:
                 Fullscreen_button = Button(self.WIN_WIDTH/2+5, self.WIN_HEIGHT/2-220 ,40 ,40 ,WHITE, WHITE,'' ,32)
             else:
@@ -960,6 +963,12 @@ class Game():
                 self.screen.blit(musique_button.image, musique_button.rect)
                 self.screen.blit(bruitage, bruitage_rect)
                 self.screen.blit(bruitage_button.image, bruitage_button.rect)
+                self.screen.blit(volume, volume_rect)
+                if self.slider.container_rect.collidepoint(mouse_pos) and mouse_pressed[0]:
+                    self.slider.move_slider(mouse_pos)
+                self.slider.render(self.screen)
+                self.volume = self.slider.get_value()
+                pygame.mixer.music.set_volume(self.volume)
 
             if not self.fullscreen and self.screen_option:
                 if Screen_size_button.is_pressed(mouse_pos, mouse_pressed):
@@ -1042,6 +1051,7 @@ class Game():
         if self.win == True:
             if self.musique:
                 pygame.mixer.music.stop()
+                pygame.mixer.music.set_volume(self.volume)
                 pygame.mixer.music.load("win.mp3")
                 pygame.mixer.music.play(99)
             text = self.font.render('You won lol', True, WHITE)
