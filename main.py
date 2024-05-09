@@ -9,19 +9,19 @@ class Game():
         pygame.init()
         pygame.display.set_caption("LIAR(D)")
         pygame.mixer.init()
-        les_musique = ["princess_quest.mp3","princess_quest.mp3","princess_quest.mp3","princess_quest.mp3","cold spaghetti.mp3","hot spaghetti.mp3","gros_banger2.mp3", "gros_banger.mp3"]
+        les_musique = ["princess_quest.mp3","princess_quest.mp3","princess_quest.mp3","princess_quest.mp3","princess_quest.mp3","cold spaghetti.mp3","hot spaghetti.mp3", "gros_banger.mp3"]
         self.la_musique = "musique/" + les_musique[random.randint(0,len(les_musique)-1)]
         pygame.mixer.Channel(0).set_volume(0.3)
         pygame.mixer.Channel(1).set_volume(0.7)
-        pygame.mixer.music.set_volume(0.7)
-        pygame.mixer.music.load("musique/Faint_glow.mp3")
-        pygame.mixer.music.play(98)
+        pygame.mixer.music.set_volume(0.6)
         if os.stat("Saves/config.dat").st_size == 0:   
             self.WIN_WIDTH = 1200
             self.WIN_HEIGHT = 675
             self.screen_size = (self.WIN_WIDTH,self.WIN_HEIGHT)
             self.screen = pygame.display.set_mode((self.screen_size[0],self.screen_size[1]),pygame.RESIZABLE)
             self.fullscreen = False
+            self.musique = True
+            self.bruitage = True
         else:
             with open('Saves/config.dat', 'rb') as fichier:
                 self.load_data = pickle.load(fichier)
@@ -34,6 +34,13 @@ class Game():
             else:
                 self.fullscreen = False
                 self.screen = pygame.display.set_mode((self.screen_size[0],self.screen_size[1]), pygame.RESIZABLE)
+            print(len(self.load_data))
+            self.musique = self.load_data[2]
+            self.bruitage = self.load_data[3]
+        pygame.mixer.music.load("musique/Faint_glow.mp3")
+        pygame.mixer.music.play(98)
+        if not(self.musique):
+            pygame.mixer.music.pause()
         self.clock = pygame.time.Clock()
         self.font = pygame.font.Font('mandalorelasertitle.ttf', 32)
         self.running = True
@@ -56,8 +63,6 @@ class Game():
         self.continueanimation = False
         self.writing = False
         self.screen_credits = False
-        self.musique = True
-        self.bruitage = True
 
         self.derniertemps = pygame.time.get_ticks()
         self.derniertemps1 = pygame.time.get_ticks()
@@ -372,7 +377,7 @@ class Game():
         if change == True:
             self.boss.rect.x = coordonnesboss[0] * TILESIZE
             self.boss.rect.y = (coordonnesboss[1] * TILESIZE)
-        self.player.    bar.rect.x = (coordonnes[0] * TILESIZE) -(self.WIN_WIDTH/2)+10
+        self.player.healthbar.rect.x = (coordonnes[0] * TILESIZE) -(self.WIN_WIDTH/2)+10
         self.player.healthbar.rect.y = (coordonnes[1] * TILESIZE) +(self.WIN_HEIGHT/2)-40
         self.player.etage.rect.x = (coordonnes[0] * TILESIZE) +(self.WIN_WIDTH/2)-180
         self.player.etage.rect.y = (coordonnes[1] * TILESIZE) -(self.WIN_HEIGHT/2)+20
@@ -400,6 +405,11 @@ class Game():
         self.player.afficheitem.rect.x = (coordonnes[1] * TILESIZE) -(self.WIN_WIDTH/2)+10
         self.player.afficheequipped.rect.y = (coordonnes[1] * TILESIZE)-(self.WIN_HEIGHT/2)+240
         self.player.afficheitem.rect.y = (coordonnes[1] * TILESIZE) -(self.WIN_HEIGHT/2)+395
+        if self.musique:
+            pygame.mixer.music.stop()
+            pygame.mixer.music.set_volume(0.7)
+            pygame.mixer.music.load("musique/dedede.mp3")
+            pygame.mixer.music.play(99)
     
 
         for sprite in self.all_sprites:
@@ -444,15 +454,16 @@ class Game():
             self.screen = pygame.display.set_mode((WIDTH, HEIGHT),pygame.RESIZABLE)
             self.screen_size = (WIDTH,HEIGHT)
         
-        data = (self.screen_size,self.fullscreen)
+        data = (self.screen_size,self.fullscreen,self.musique,self.bruitage)
 
         with open("Saves/config.dat", 'wb') as fichier:
             pickle.dump(data, fichier)
 
     def loadsave(self):
-        pygame.mixer.music.stop()
-        pygame.mixer.music.load(self.la_musique)
-        pygame.mixer.music.play(99)
+        if self.musique:
+            pygame.mixer.music.stop()
+            pygame.mixer.music.load(self.la_musique)
+            pygame.mixer.music.play(99)
         with open('Saves/save1.dat', 'rb') as fichier:
             load_data = pickle.load(fichier)
 
@@ -502,11 +513,6 @@ class Game():
             self.createTilemap2(tilemap,"monter")
         elif EtageSave == 7:
             self.createTilemapboss(tilemap_boss_phase1,False)
-            if self.musique:
-                pygame.mixer.music.stop()
-                pygame.mixer.music.set_volume(1)
-                pygame.mixer.music.load("sonic.mp3")
-                pygame.mixer.music.play(99)
 
 
         self.player.healthbar.health = load_data[7]
@@ -563,8 +569,6 @@ class Game():
             self.player.leftattack_animations = leftattack
             self.player.upattack_animations = upattack
             self.player.animation_number = load_data[25]
-            
-
 
     def new(self):
         

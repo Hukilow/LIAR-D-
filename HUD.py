@@ -40,7 +40,8 @@ class HealthBar(pygame.sprite.Sprite):
 
 
     def take_damage(self,damage):
-        pygame.mixer.Channel(1).play(pygame.mixer.Sound('musique/hurt.mp3'))
+        if self.game.bruitage:
+            pygame.mixer.Channel(1).play(pygame.mixer.Sound('musique/hurt.mp3'))
         self.health -= damage
     
     def heal2(self,heal):
