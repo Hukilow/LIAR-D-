@@ -64,7 +64,7 @@ class Game():
         self.continueanimation = False
         self.writing = False
         self.screen_credits = False
-        self.slider = Slider((self.WIN_WIDTH/2+40,self.WIN_HEIGHT/1.5+65),(200,40),0.5,0,1)
+        self.slider = Slider((self.WIN_WIDTH/2+40,self.WIN_HEIGHT/1.5+65),(200,40),self.volume,0,1)
 
         self.derniertemps = pygame.time.get_ticks()
         self.derniertemps1 = pygame.time.get_ticks()
@@ -786,6 +786,7 @@ class Game():
                     self.WIN_WIDTH,self.WIN_HEIGHT = closest_multiple,closest_multiple2
                     self.text = f'{self.WIN_WIDTH}x{self.WIN_HEIGHT}'
                     self.screen = pygame.display.set_mode((self.WIN_WIDTH, self.WIN_HEIGHT),pygame.RESIZABLE)
+                    self.slider = Slider((self.WIN_WIDTH/2+40,self.WIN_HEIGHT/1.5+65),(200,40),self.volume,0,1)
                 if self.writing:
                     if event.type == pygame.KEYDOWN:
                         Xkey = False
