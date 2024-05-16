@@ -64,7 +64,7 @@ class Game():
         self.continueanimation = False
         self.writing = False
         self.screen_credits = False
-        self.slider = Slider((self.WIN_WIDTH/2+40,self.WIN_HEIGHT/1.5+65),(200,40),self.volume,0,1)
+        self.slider = Slider((pygame.display.Info().current_w/2+40,pygame.display.Info().current_h/1.5+65),(200,40),self.volume,0,1)
 
         self.derniertemps = pygame.time.get_ticks()
         self.derniertemps1 = pygame.time.get_ticks()
@@ -661,6 +661,11 @@ class Game():
             self.draw()
 
     def game_over(self):
+        if self.fullscreen:
+            self.game_overbackground = Image.open('img/gameover2.jpg')
+            self.game_overbackground = self.game_overbackground.resize((self.WIN_WIDTH, self.WIN_HEIGHT))
+            self.game_overbackground.save('img/gameover2.jpg')
+            self.game_overbackground = pygame.image.load('img/gameover2.jpg')
         text = self.font.render('Game Over', True, WHITE)
         text_rect = text.get_rect(center=(self.WIN_WIDTH/2, self.WIN_HEIGHT/2))
 
@@ -718,9 +723,9 @@ class Game():
             Warning1 = self.font.render("Warning !", True, RED)
             Warning2 = self.font.render("Fullscreen can causes a lack of performance", True, WHITE)
             Warning3 = self.font.render("Recommended window size : 1600x928", True, WHITE)
-            Warning1_rect = title.get_rect(x = self.WIN_WIDTH/2-175, y = self.WIN_HEIGHT/2-50 )
-            Warning2_rect = title.get_rect(x = self.WIN_WIDTH/2-350, y = self.WIN_HEIGHT/2)
-            Warning3_rect = title.get_rect(x = self.WIN_WIDTH/2-350, y = self.WIN_HEIGHT/2+50)
+            Warning1_rect = title.get_rect(x = self.WIN_WIDTH/2-175, y = self.WIN_HEIGHT/2.3-50 )
+            Warning2_rect = title.get_rect(x = self.WIN_WIDTH/2-350, y = self.WIN_HEIGHT/2.3)
+            Warning3_rect = title.get_rect(x = self.WIN_WIDTH/2-350, y = self.WIN_HEIGHT/2.3+50)
             Fullscreen = self.font.render("Fullscreen :", True, WHITE)
             Fullscreen_rect = title.get_rect(x = self.WIN_WIDTH/2-225, y = self.WIN_HEIGHT/2-220 )
             credits_button = Button(self.WIN_WIDTH/2-75, self.WIN_HEIGHT/1.5+20 ,150 ,50 ,WHITE ,BLACK ,'Credits' ,32)
@@ -734,14 +739,16 @@ class Game():
             yes_button = Button(self.WIN_WIDTH/2-125, self.WIN_HEIGHT/2+70 ,100 ,50 ,GREEN ,BLACK ,'Yes' ,32)
             no_button = Button(self.WIN_WIDTH/2+35, self.WIN_HEIGHT/2+70 ,100 ,50 ,RED ,BLACK ,'No' ,32)
             Square = pygame.Surface((50,50),pygame.SRCALPHA)
-            pygame.draw.rect(Square, WHITE, pygame.Rect(0, 0, 50, 50))
+            pygame.draw.rect(Square, RED, pygame.Rect(0, 0, 50, 50))
             Square_rect = title.get_rect(x = self.WIN_WIDTH/2, y = self.WIN_HEIGHT/2-225)
+            Square1_rect = title.get_rect(x = self.WIN_WIDTH/2, y = self.WIN_HEIGHT/1.5-95)
+            Square2_rect = title.get_rect(x = self.WIN_WIDTH/2, y = self.WIN_HEIGHT/1.5-35)
             ConfirmationRectangle = pygame.Surface((110,60),pygame.SRCALPHA)
             pygame.draw.rect(ConfirmationRectangle, WHITE, pygame.Rect(0, 0, 110, 60))
             ConfirmationRectangleYes_rect = title.get_rect(x = self.WIN_WIDTH/2-130, y = self.WIN_HEIGHT/2+65)
             ConfirmationRectangleNo_rect = title.get_rect(x = self.WIN_WIDTH/2+30, y = self.WIN_HEIGHT/2+65)
             musique = self.font.render("Musique :", True, WHITE)
-            musique_rect = title.get_rect(x = self.WIN_WIDTH/2-225, y = self.WIN_HEIGHT/2+5 )
+            musique_rect = title.get_rect(x = self.WIN_WIDTH/2-225, y = self.WIN_HEIGHT/1.5-80)
             bruitage = self.font.render("Bruitage :", True, WHITE)
             bruitage_rect = title.get_rect(x = self.WIN_WIDTH/2-225, y = self.WIN_HEIGHT/1.5-25)
             volume = self.font.render("Volume :", True, WHITE)
@@ -760,13 +767,13 @@ class Game():
             pygame.draw.rect(Rectangle, WHITE, pygame.Rect(0, 0, 210, 60))
             Screen_size_button = Button(self.WIN_WIDTH/2, self.WIN_HEIGHT/3-8 , 200,50 ,WHITE ,WHITE ,'' ,32)
             if self.musique:
-                musique_button = Button(self.WIN_WIDTH/2+5, self.WIN_HEIGHT/2 ,40 ,40 ,WHITE, WHITE,'V' ,32)
+                musique_button = Button(self.WIN_WIDTH/2+5, self.WIN_HEIGHT/1.5-90 ,40 ,40 ,WHITE, WHITE,'' ,32)
             else:
-                musique_button = Button(self.WIN_WIDTH/2+5, self.WIN_HEIGHT/2 ,40 ,40 ,WHITE, BLACK,'X' ,32)
+                musique_button = Button(self.WIN_WIDTH/2+5, self.WIN_HEIGHT/1.5-90,40 ,40 ,WHITE, BLACK,'' ,32)
             if self.bruitage:
-                bruitage_button = Button(self.WIN_WIDTH/2+5, self.WIN_HEIGHT/1.5-30 ,40 ,40 ,WHITE, WHITE,'V' ,32)
+                bruitage_button = Button(self.WIN_WIDTH/2+5, self.WIN_HEIGHT/1.5-30 ,40 ,40 ,WHITE, WHITE,'' ,32)
             else:
-                bruitage_button = Button(self.WIN_WIDTH/2+5, self.WIN_HEIGHT/1.5-30 ,40 ,40 ,WHITE, BLACK,'X' ,32)
+                bruitage_button = Button(self.WIN_WIDTH/2+5, self.WIN_HEIGHT/1.5-30 ,40 ,40 ,WHITE, BLACK,'' ,32)
             if self.fullscreen:
                 Fullscreen_button = Button(self.WIN_WIDTH/2+5, self.WIN_HEIGHT/2-220 ,40 ,40 ,WHITE, WHITE,'' ,32)
             else:
@@ -915,12 +922,14 @@ class Game():
                         if self.fullscreen:
                             self.fullscreen = False
                             self.screen = pygame.display.set_mode((self.WIN_WIDTH,self.WIN_HEIGHT),pygame.RESIZABLE)
+                            self.slider = Slider((self.WIN_WIDTH/2+40,self.WIN_HEIGHT/1.5+65),(200,40),self.volume,0,1)
                         else:
                             self.fullscreen = True
                             self.screen_size = (640,480)
                             self.WIN_WIDTH = 640
                             self.WIN_HEIGHT = 480
-                            self.screen = pygame.display.set_mode((0,0),pygame.FULLSCREEN)    
+                            self.screen = pygame.display.set_mode((0,0),pygame.FULLSCREEN)  
+                            self.slider = Slider((pygame.display.Info().current_w/2+40,pygame.display.Info().current_h/1.5+65),(200,40),self.volume,0,1)
                         self.derniertemps = pygame.time.get_ticks()       
                 if quit_button.is_pressed(mouse_pos, mouse_pressed):
                     if self.clicktime() == False:
@@ -957,6 +966,8 @@ class Game():
                 self.screen.blit(reset_button.image, reset_button.rect)
                 self.screen.blit(save_button.image, save_button.rect)
                 self.screen.blit(Square, Square_rect)
+                self.screen.blit(Square, Square1_rect)
+                self.screen.blit(Square, Square2_rect)
                 self.screen.blit(Fullscreen, Fullscreen_rect)
                 self.screen.blit(Fullscreen_button.image, Fullscreen_button.rect)
                 self.screen.blit(quit_button.image, quit_button.rect)
@@ -965,6 +976,7 @@ class Game():
                 self.screen.blit(bruitage, bruitage_rect)
                 self.screen.blit(bruitage_button.image, bruitage_button.rect)
                 self.screen.blit(volume, volume_rect)
+            
                 if self.slider.container_rect.collidepoint(mouse_pos) and mouse_pressed[0]:
                     self.slider.move_slider(mouse_pos)
                 self.slider.render(self.screen)
@@ -1140,4 +1152,3 @@ if __name__ == "__main__":
 
     pygame.quit()
     sys.exit()
-

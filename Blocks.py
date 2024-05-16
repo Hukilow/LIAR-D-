@@ -130,7 +130,6 @@ class Trap(pygame.sprite.Sprite):
             if self.trap == True:
                 self.image = self.trapsprite[math.floor(self.animation_loop)]
                 self.animation_loop += 0.3
-                print(self.animation_loop)
                 if self.animation_loop >= 14:
                     self.trap = False
                     self.animation_loop = 0
@@ -383,8 +382,6 @@ class Coffrecasse(pygame.sprite.Sprite):
         self.rect = self.image.get_rect()
         self.rect.x = self.x
         self.rect.y = self.y
-        print("init")
-        print(self.pos)
         self.game.screen.blit(self.image,self.pos)
 
     def update(self):
