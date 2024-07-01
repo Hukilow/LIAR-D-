@@ -9,7 +9,7 @@ class Game():
         pygame.init()
         pygame.display.set_caption("LIAR(D)")
         pygame.mixer.init()
-        les_musique = ["princess_quest.mp3","princess_quest.mp3","princess_quest.mp3","princess_quest.mp3","princess_quest.mp3","cold spaghetti.mp3","hot spaghetti.mp3", "gros_banger.mp3"]
+        les_musique = ["princess_quest2.mp3","princess_quest2.mp3","princess_quest2.mp3","princess_quest.mp3","princess_quest.mp3","cold spaghetti.mp3","hot spaghetti.mp3"]
         self.la_musique = "musique/" + les_musique[random.randint(0,len(les_musique)-1)]
         pygame.mixer.Channel(0).set_volume(0.3)
         pygame.mixer.Channel(1).set_volume(0.7)
@@ -882,6 +882,10 @@ class Game():
                     if os.stat("Saves/save1.dat").st_size != 0:      
                         self.confirmation = True
                     else:
+                        if self.musique:
+                            pygame.mixer.music.stop()
+                            pygame.mixer.music.load(self.la_musique)
+                            pygame.mixer.music.play(99)
                         intro = False
                         self.new()
 
