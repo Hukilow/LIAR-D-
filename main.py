@@ -8,6 +8,8 @@ class Game():
     def __init__(self):
         pygame.init()
         pygame.display.set_caption("LIAR(D)")
+        icon = pygame.image.load("img/LIAR-D-.ico")
+        pygame.display.set_icon(icon)
         pygame.mixer.init()
         les_musique = ["princess_quest2.mp3","princess_quest2.mp3","princess_quest2.mp3","princess_quest.mp3","princess_quest.mp3","cold spaghetti.mp3","hot spaghetti.mp3"]
         self.la_musique = "musique/" + les_musique[random.randint(0,len(les_musique)-1)]
